@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-wallet);
+      }
+
+      .cls-2 {
+        fill: #1f2636;
+        stroke: #1f2636;
+      }
+
+      .cls-3, .cls-4, .cls-6 {
+        fill: none;
+      }
+
+      .cls-3, .cls-4 {
+        stroke: #fff;
+        stroke-width: 0.912px;
+      }
+
+      .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-5 {
+        stroke: none;
+      }
+    </style>
+    <clipPath id="clip-wallet">
+      <rect width="48" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="wallet" class="cls-1">
+    <g id="Ellipse_1" data-name="Ellipse 1" class="cls-2">
+      <circle class="cls-5" cx="24" cy="24" r="24"/>
+      <circle class="cls-6" cx="24" cy="24" r="23.5"/>
+    </g>
+    <g id="wallet-2" data-name="wallet" transform="translate(11.55 16.56)">
+      <path id="Path_6" data-name="Path 6" class="cls-3" d="M.45.44h25V15.319H.45Z" transform="translate(0 0)"/>
+      <path id="Path_7" data-name="Path 7" class="cls-3" d="M14.85,3.96h7.609v6.377H14.85Z" transform="translate(2.991 0.731)"/>
+      <circle id="Ellipse_4" data-name="Ellipse 4" class="cls-4" cx="1.208" cy="1.208" r="1.208" transform="translate(19.894 6.672)"/>
+      <circle id="Ellipse_5" data-name="Ellipse 5" class="cls-4" cx="1.208" cy="1.208" r="1.208" transform="translate(7.938 2.421)"/>
+      <circle id="Ellipse_6" data-name="Ellipse 6" class="cls-4" cx="1.208" cy="1.208" r="1.208" transform="translate(11.199 6.672)"/>
+      <circle id="Ellipse_7" data-name="Ellipse 7" class="cls-4" cx="1.208" cy="1.208" r="1.208" transform="translate(7.938 10.923)"/>
+      <path id="Path_8" data-name="Path 8" class="cls-3" d="M11.32,7.331H.45M8.059,3.08,5.885,5.206H.45m7.609,6.377L5.885,9.457H.45" transform="translate(0 0.548)"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,140 @@
+<app-homenavs></app-homenavs>
+<!--Main Layout-->
+<main class="main-div">
+
+  <div class="container main-container">
+      <div class="row" style="margin-top: 2%">
+          <div class="col-md-12">
+
+            <div class="card">
+              <div class="card-body">
+                <p class="body-title">MY BALANCES</p>
+                <hr>
+                <div class="row">
+                  <div class="col col-md-3">
+                    <div class="card acex-bal-card-0">
+                      <div class="card-body text-center">
+
+                        <p class="acex-p-0"><img src="assets/img/bitcoin.svg"
+                          class="bitcoin">&nbsp;&nbsp;BITCOIN</p>
+
+                        <p class="acex-p-1">
+                          {{ btcBal | number: '1.2-5'}}
+                        </p>  
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col col-md-3">
+                    <div class="card acex-bal-card-0">
+                      <div class="card-body text-center">
+                        
+                        <p class="acex-p-0"><img src="assets/img/ethereum.svg"
+                          class="ethereum">&nbsp;&nbsp;ETHEREUM</p>
+                        
+                        <p class="acex-p-1">
+                          {{ ethBal | number: '1.2-5'}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col col-md-3">
+                    <div class="card acex-bal-card-0">
+                      <div class="card-body text-center">
+                        
+                        <p class="acex-p-0"><img src="assets/img/litecoin.svg"
+                          class="litecoin">&nbsp;&nbsp;LITECOIN</p>
+                        
+                        <p class="acex-p-1">
+                          {{ ltcBal | number: '1.2-5' }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col col-md-3">
+                    <div class="card acex-bal-card-0">
+                      <div class="card-body text-center">
+                    
+                        <p class="acex-p-0"><img src="assets/img/ace-x.svg"
+                          class="ace-x">&nbsp;&nbsp;ACEX</p>
+                      
+                        <p class="acex-p-1">
+                          {{ acexBal | number: '1.2-5' }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+          </div>
+      </div>
+      <div class="row" style="margin-top: 2%;margin-bottom: 2%;">
+          <div class="col-md-12">
+
+            <div class="card">
+              <div class="card-body">
+                <p class="body-title">STEPS TO BUY ACEX
+                    <button type="button" id="buyAcex" (click)="buyAcexTokens()" class="btn waves-light acex-btn-buy-0" mdbWavesEffect>BUY TOKENS</button>
+                </p>
+                <hr>
+                <div class="row">
+                  <div class="col-2 text-right">
+                      <img src="assets/img/generate-address.svg"
+                      class="Generate-Address">
+                  </div>
+                  <div class="col-10">
+                    <p class="acex-steps-0-0">Generate Address</p>
+                    <p class="acex-steps-0-1">Go to My wallet section. Depending on the currency you wish to buy your tokens against, click  the deposit button. </p>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-2 text-right">
+                      <img src="assets/img/deposit.svg"
+                      class="deposit">
+                  </div>
+                  <div class="col-10">
+                    <p class="acex-steps-0-0">Deposit Funds</p>
+                    <p class="acex-steps-0-1">Scan/Copy the barcode/address and transfer the currency from your personal wallet to it. Wait for the balance to reflect in your account. </p>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-2 text-right">
+                      <img src="assets/img/buy-ace-x.svg"
+                      class="buy-ace-x">
+                  </div>
+                  <div class="col-10">
+                    <p class="acex-steps-0-0" (click)="buyAcexTokens()">Buy Acex</p>
+                    <p class="acex-steps-0-1">From the dashboard, select the currency you just deposited and enter the number of tokens you wish to buy. If there is sufficient balance, you can click the submit button. The number of tokens would reflect in your dashboard.</p>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-2 text-right">
+                      <img src="assets/img/withdraw.svg"
+                      class="withdraw">
+                  </div>
+                  <div class="col-10">
+                    <p class="acex-steps-0-0">Withdraw Acex</p>
+                    <p class="acex-steps-0-1">To complete this step, approved KYC is mandatory. Since ACEX is an ERC20 contract, you can withdraw it to your ethereum wallets. Withdrawals would be disabled till the crowdsale is over. </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+          </div>
+      </div>
+  </div>
+
+</main>
+<!--Main Layout-->
+
+<!-- modals -->
+<!-- <button type="button" mdbBtn color="primary" class="relative waves-light" 
+(click)="buyModal.show()" mdbWavesEffect>Launch demo modal</button> -->
+<app-buy-tokens #buyAcex (successEvent)="recievedMessage($event)"></app-buy-tokens>

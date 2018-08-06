@@ -1,0 +1,46 @@
+@import '../../assets/scss/variable.scss';
+
+.main-div {
+    margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+    padding: 0px 10px;
+    background-color: #fcfdff;
+    background-color: var(--ice-blue);
+}
+
+
+.body-title {
+    font-family: Poppins;
+  font-size: 16.2px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.22;
+  letter-spacing: 0.5px;
+  color: #232d41;
+}
+
+p.body-title.referral {
+    margin-top: 35px;
+}
+
+.body-desc {
+    width: 377px;
+  height: 83px;
+  opacity: 0.7;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  color: #272734;
+}
+  
+hr.acex-hr {
+    width: 50%;
+    text-align: left;
+    left: 0;
+    margin-left: 0px;
+}
+

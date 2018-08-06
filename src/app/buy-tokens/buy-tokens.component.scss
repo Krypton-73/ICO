@@ -1,0 +1,57 @@
+.acex-auth-row {
+    margin-top: 10%;
+}
+
+@import '../../assets/scss/variable.scss';
+
+.acex-login-text {
+    color: $welcomeNavbar;
+}
+
+// ngb-tabset ul .nav-tabs {
+//     border-bottom: 1px solid $welomeBodyColor;
+// }
+
+
+
+a.forgot-user {
+    color: slategray;
+    font-size: 14px;
+}
+
+.card-body {
+    padding: 10%;
+}
+
+// function
+@mixin acexbtnsignin() {
+    background-color: $welcomeNavbar;
+    border-radius: 50px;
+    border: 2px solid;
+    border-color: $btnBorder;
+    color: $btnBorder;
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    width: 58%;
+    padding-top: 6px;
+}
+
+@media screen and (min-width: 768px){
+    .card {
+        box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.16), 2px 2px 15px 5px rgba(0, 0, 0, 0.12);
+    }
+    .acex-btn-signin {
+        @include acexbtnsignin();
+    }
+}
+
+@media screen and (max-width: 767px){
+    .card {
+        box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.16), 2px 2px 15px 5px rgba(0, 0, 0, 0.12);
+    }
+    .acex-btn-signin {
+        @include acexbtnsignin();
+    }
+}
+

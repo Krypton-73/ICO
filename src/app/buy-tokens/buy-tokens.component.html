@@ -1,0 +1,32 @@
+<div mdbModal #buyAcex="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mybuyModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="buyAcex.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Buy AceX</h4>
+      </div>
+      <div class="modal-body">
+              <div class="md-form">
+                <select type="text" id="currency" [(ngModel)]="currency" required>
+                  <option value="btc">Bitcoin</option>
+                  <option value="eth">Ethereum</option>
+                  <option value="ltc">Litecoin</option>
+                  <option value="acex">AceX</option>
+                </select>
+                <label for="currency" class="">Currency</label>
+              </div>
+
+              <div class="md-form">
+                <input mdbInputDirective type="number" id="amountOfAcex" [(ngModel)]="amountOfAcex" required>
+                <label for="amountOfAcex" class="">Amount of AceX Tokens</label>
+              </div>
+      <div class="modal-footer text-center">
+            <button type="submit" (click)="buyAcexTokens()" class="btn btn-primary waves-light acex-btn-signin" mdbWavesEffect>Buy Tokens</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

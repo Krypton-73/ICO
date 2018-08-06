@@ -1,0 +1,58 @@
+<header class="h-100">
+    <!-- <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav" [containerInside]="false">
+        <mdb-navbar-brand>
+            <a class="logo navbar-brand" href="#"><strong>AceX Trade</strong></a>
+        </mdb-navbar-brand>
+    </mdb-navbar> -->
+    <!-- Main -->
+    <div class="acex-div">
+      <div class="acex-logo-0">  
+          <img src="assets/images/logo.svg" class="acex-logo">
+      </div>
+    </div>
+    <div class="view">
+      <div class="full-bg-img">
+          <div class="mask rgba-black-light flex-center">
+              <div class="container white-text">
+                  <div class="white-text wow fadeInUp">
+                    <div class="row justify-content-center">
+                    <div class="col-md-4 col-sm-6">
+                      <div class="card auth-card">
+                        <div class="card-body">
+                        <form [formGroup]="loginForm" (submit)="login()">
+                          <p class="h5 text-center mb-4" style="color: black">Log In</p>
+                        
+                          
+                        
+                          <div class="md-form">
+                            <i class="fa fa-envelope prefix grey-text"></i>
+                            <input type="email" id="loginFormEmail" formControlName="loginFormEmail" class="form-control" mdbInputDirective>
+                            <label for="loginFormEmail">Your email</label>
+                          </div>
+
+                          <div class="md-form">
+                            <i class="fa fa-key prefix grey-text"></i>
+                            <input type="password" formControlName="loginFormPassword" id="loginFormPassword" class="form-control" mdbInputDirective>
+                            <label for="loginFormPassword">Your password</label>
+                          </div>
+                        
+                          <div class="text-center">
+                            <button class="btn btn-indigo waves-light" mdbWavesEffect>Log In
+                              <i class="fa fa-user ml-1"></i>
+                            </button>
+                          </div>
+                        </form>
+                        <div class="text-center">
+                          <a routerLink="/auth/signup" class="new-user">Are you a new user?</a>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!-- /.Main -->
+  </header>

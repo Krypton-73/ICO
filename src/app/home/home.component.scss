@@ -1,0 +1,47 @@
+
+main.main-content {
+    margin-top: 50px;
+}
+
+@import '../../assets/scss/variable.scss';
+
+@mixin bond-text-mixin($bondText) {
+    color: $bondText;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.acex-bond-text-0 {
+    @include bond-text-mixin($bondText0);
+}
+
+.acex-bond-text-1 {
+    @include bond-text-mixin($bondText1);
+}
+
+.acex-bond-text-2 {
+    @include bond-text-mixin($bondText2);
+}
+
+.acex-balances {
+    font-size: 10px;
+}
+
+.acex-markets {
+    font-size: 16px;
+}
+
+.acex-people-selling-0, .acex-people-buying-0 {
+    color: $bondText0;
+    font-size: 10px;
+}
+
+table.table.acex-table-people-selling th, table.table.acex-table-people-selling td {
+    padding: 0px;
+    border: none;
+}
+
+table.table.acex-table-people-selling p {
+    margin-bottom: 0.85rem;
+}

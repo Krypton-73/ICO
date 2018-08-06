@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.view {
+    // background: url("/assets/images/bg.jpg")no-repeat center center;
+    // background-size: cover;
+    // height: 100vh;
+}
+
+img.acex-logo {
+    width: 200px;
+}
+
+.acex-div {
+    position: absolute;
+    z-index: 9999;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+.acex-logo-0 {
+    text-align: center;
+    margin-top: 6%;
+}
+
+
+@import 'assets/scss/variable.scss';
+
+nav.navbar.fixed-top.navbar-expand-lg.navbar-dark.acex-nav.scrolling-navbar.intro-fixed-nav {
+    background-color: $welcomeNavbar; 
+    // background: $welcomeNavbar; 
+}
+
+body::-webkit-scrollbar-track
+{
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+	border-radius: 10px;
+	background-color: transparent;
+}
+
+body::-webkit-scrollbar
+{
+	width: 6px;
+    background-color: transparent;
+    background: none;
+}
+
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 1px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.1);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.1);
+    background-color: $welcomeNavbar !important;
+}
+
+
+// nav bar
+nav.navbar.navbar-expand-lg {
+    height: 60px;
+}
+
+// login tab
+
+ul.nav.nav-tabs.nav-fill li.nav-item a.nav-link {
+    border: none;
+    border-bottom: 2px solid gray;
+    border-radius: 0px;
+}
+ul.nav.nav-tabs.nav-fill li.nav-item a.nav-link.active {
+    border: none;
+    border-bottom: 2px solid #323246;
+    border-radius: 0px;
+}
+
+a.nav-link .acex-login-text {
+    color: gray;
+}
+
+a.nav-link.active .acex-login-text {
+    color: #323246;
+}
