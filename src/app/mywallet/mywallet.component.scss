@@ -22,7 +22,7 @@
 // balances cards
 div.card.acex-bal-card-0 {
     // width: 210.6px;
-    height: 112.5px;
+    height: auto;
     border-radius: 9px;
     background-color: #242e42;
     box-shadow: -12px 13px 26px 0 rgba(25, 33, 48, 0.16);
@@ -124,4 +124,11 @@ p.acex-p-1 {
         background-image: linear-gradient(var(--white), var(--white)), linear-gradient(to bottom, #3cd1ff, #1ca5ff);
         background-origin: border-box;
         background-clip: content-box, border-box;
+      }
+      .mask-button {
+        object-fit: contain;
+        border: solid 3px;
+        border-color: #1ca5ff;
+        background: transparent;
+        border-radius: 5px;
       }

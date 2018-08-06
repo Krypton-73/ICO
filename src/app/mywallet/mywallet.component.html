@@ -10,52 +10,58 @@
               <div class="card-body">
                 <p class="body-title">MY WALLET</p>
                 <hr>
+
                 <div class="row">
-                  <div class="col col-md-3 Mask1">
+
+                  <div class="col col-md-3">
                     <div class="card acex-bal-card-0 text-center">
-                      <div class="">  
-                          <img src="../../assets/img/bitcoin.svg" class="bitcoin"> 
-                          <span class="blue-text">BITCOIN</span> 
-                          <!-- <div class="stats">                                             
-</div>                                                  -->
+                      <div (click)="getWallet('ltc')" class="card-body text-center">
+                        <p class="acex-p-0"><img src="assets/img/bitcoin.svg"
+                                                 class="bitcoin">&nbsp;&nbsp;BITCOIN</p>
+                        <hr>
+                        <p class="">
+                          <button type="button" class="mask-button btn"
+                                  (click)="getWallet('btc')">Deposit
+                          </button>
+                          <button type="button" class="mask-button btn"
+                          >Withdraw
+                          </button>
+                        </p>
                       </div>
-                      <div class="mask-button">
-                      <button type="button" class="btn btn-light "
-                      (click)="getWallet('btc')">Deposit
-                    </button>
-                      <button type="button" class="btn btn-light " 
-                      >Withdraw
-                    </button>                                             
+                    </div>
                   </div>
-                  </div>
-                  </div>
-                  <div class="col col-md-3 Mask1">
-                    <div class="card acex-bal-card-0 text-center">
-                      <div class="">  
-                          <img src="../../assets/img/ethereum.svg" class="bitcoin"> 
-                          <span class="blue-text">ETHEREUM</span> 
-                          <!-- <div class="stats">                                             
-</div>                                                  -->
+
+                  <div class="col col-md-3">
+                    <div class="card acex-bal-card-0">
+                      <div (click)="getWallet('btc')" class="card-body text-center">
+                        <p class="acex-p-0"><img src="assets/img/ethereum.svg"
+                                                 class="ethereum">&nbsp;&nbsp;ETHEREUM</p>
+                        <hr>
+                        <p class="">
+                          <button type="button" class="mask-button btn"
+                                  (click)="getWallet('eth')">Deposit
+                          </button>
+                          <button type="button" class="mask-button btn"
+                          >Withdraw
+                          </button>
+                        </p>
                       </div>
-                      <div class="mask-button">
-                      <button type="button" class="btn btn-light "
-                      (click)="getWallet('eth')">Deposit
-                    </button>
-                      <button type="button" class="btn btn-light " 
-                      >Withdraw
-                    </button>                                             
+                    </div>
                   </div>
-                  </div>
-                  </div>
+
                   <div class="col col-md-3">
                     <div class="card acex-bal-card-0">
                       <div (click)="getWallet('ltc')" class="card-body text-center">
-                        
                         <p class="acex-p-0"><img src="assets/img/litecoin.svg"
                           class="litecoin">&nbsp;&nbsp;LITECOIN</p>
                           <hr>
-                        <p class="acex-p-1">
-                          0.00031 LTC
+                        <p class="">
+                          <button type="button" class="mask-button btn"
+                                  (click)="getWallet('ltc')">Deposit
+                          </button>
+                          <button type="button" class="mask-button btn"
+                          >Withdraw
+                          </button>
                         </p>
                       </div>
                     </div>
@@ -63,12 +69,16 @@
                   <div class="col col-md-3">
                     <div class="card acex-bal-card-0">
                       <div (click)="getWallet('acex')" class="card-body text-center">
-                    
                         <p class="acex-p-0"><img src="assets/img/ace-x.svg"
                           class="ace-x">&nbsp;&nbsp;ACEX</p>
                           <hr>
-                        <p class="acex-p-1">
-                          0.00031 ACEX
+                        <p class="">
+                          <button type="button" class="mask-button btn"
+                                  (click)="getWallet('acex')">Deposit
+                          </button>
+                          <button type="button" class="mask-button btn"
+                          >Withdraw
+                          </button>
                         </p>
                       </div>
                     </div>
@@ -76,9 +86,10 @@
                 </div>
               </div>
             </div>
-              
           </div>
       </div>
+
+
       <div class="row" style="margin-top: 2%;margin-bottom: 2%;">
           <div class="col-md-12">
 
