@@ -18,10 +18,10 @@ export class AuthenticationService {
     private router: Router
   ) { }
 
-  register(email: string, password: string, refID: string) {
-    console.log();
+  register(newUser: any) {
     return this.http.post(`${baseUrl}/register`
-    , { email: email, password: sha256(password), ref_id: refID});
+    , { email: newUser.email, password: sha256(newUser.password)
+    , ref_id: newUser.refId, name: newUser.name, mobile: newUser.mobile });
   }
 
   login(email: string, password: string) {
@@ -38,6 +38,10 @@ export class AuthenticationService {
       }
       return user;
     }));
+  }
+
+  resendVerifyEmail(email: string) {
+    return this.http.get(`${baseUrl}/resend_verification_mail?email=${email}`);
   }
 
   logout() {

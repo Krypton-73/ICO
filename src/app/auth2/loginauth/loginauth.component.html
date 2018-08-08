@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="md-form">
-                  <input mdbInputDirective type="text" id="password" class="form-control" formControlName="password">
+                  <input mdbInputDirective type="password" id="password" class="form-control" formControlName="password">
                   <label for="password" class="">Password</label>
                 </div>
 
@@ -26,6 +26,10 @@
                 <div class="text-center">
                   <a routerLink="/auth/forgot-password" class="forgot-user">Forgot password?</a>
                 </div>
+
+                <div class="text-center" *ngIf="verified">
+                  <a (click)="resendVerifyEmail()" class="forgot-user">Resend Verification Email!</a>
+                </div>
                 
               </ng-template>
             </ngb-tab>
@@ -34,27 +38,27 @@
               <ng-template ngbTabContent>
                 
                 <div class="row">
-                  <div class="col col-md-6 col-12 col-sm-12">
+                  <div class="col">
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupfname" class="form-control" formControlName="fName">
-                      <label for="signupfname" class="">First Name</label>
+                      <input mdbInputDirective type="text" id="signupfname" class="form-control" formControlName="name">
+                      <label for="signupfname" class="">Name</label>
                     </div>
 
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupmobno" class="form-control" formControlName="mNo">
+                      <input mdbInputDirective type="text" id="signupmobno" class="form-control" formControlName="mobile">
                       <label for="signupmobno" class="">Mobile No</label>
                     </div>
     
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signuppassword" class="form-control" formControlName="password">
+                      <input mdbInputDirective type="password" id="signuppassword" class="form-control" formControlName="password">
                       <label for="signuppassword" class="">Password</label>
                     </div>
 
                   </div>
-                  <div class="col col-md-6 col-12 col-sm-12">
+                  <div class="col">
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signuplname" class="form-control" formControlName="lName">
-                      <label for="signuplname" class="">Last Name</label>
+                      <input mdbInputDirective type="text" id="signuprefId" class="form-control" formControlName="refId">
+                      <label for="signuprefId" class="">Referral ID(optional)</label>
                     </div>
     
                     <div class="md-form">
@@ -63,7 +67,7 @@
                     </div>
 
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupcpassword" class="form-control" formControlName="cPassword">
+                      <input mdbInputDirective type="password" id="signupcpassword" class="form-control" formControlName="cPassword">
                       <label for="signupcpassword" class="">Confirm Password</label>
                     </div>
 
@@ -76,7 +80,7 @@
                 </div>
                 
                 <div class="text-center">
-                  <button type="submit" (click)="auth('signup')" class="btn waves-light acex-btn-signin" mdbWavesEffect>SIGN UP</button>
+                  <button [disabled]="checked" type="submit" (click)="auth('signup')" class="btn waves-light acex-btn-signin" mdbWavesEffect>SIGN UP</button>
                 </div>
                 
               </ng-template>

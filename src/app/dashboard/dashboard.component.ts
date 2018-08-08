@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   acexBal: BigNumber;
   buyTokenForm: FormGroup;
   data: any;
+
   constructor(
     private userService: UserService,
     private authenticationService: AuthenticationService,

@@ -18,7 +18,8 @@ export class HomenavsComponent implements OnInit {
   ltcBal: any;
   acexBal: any;
   data: any;
-
+  user: any;
+  
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
@@ -27,6 +28,8 @@ export class HomenavsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+    console.log(this.user.msg);
     this.userService.getBalances().pipe().subscribe(
       data => {
         this.data = data;

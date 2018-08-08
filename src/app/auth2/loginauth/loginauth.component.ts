@@ -16,9 +16,11 @@ export class LoginauthComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
   submitted: any = false;
+  verified: boolean;
+  email: string;
   // loading: any = false;
   data: any;
-
+  agree: boolean;
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -28,19 +30,19 @@ export class LoginauthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const email = this.route.snapshot.paramMap.get('email');
+    this.email = this.route.snapshot.paramMap.get('email');
 
     this.loginForm = this.formBuilder.group( {
-      email: [email, [Validators.required, Validators.email]],
+      email: [this.email, [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
     this.registerForm = this.formBuilder.group( {
-      fName: [''],
-      mNo:  [''],
+      name: ['', Validators.required],
+      mobile:  ['', Validators.required],
       password: ['', Validators.required],
-      lName:  [''],
+      refId:  [''],
       email:  ['', [Validators.required, Validators.email]],
-      cPassword:  ['']
+      cPassword:  ['', Validators.required]
     });
   }
 
@@ -62,29 +64,61 @@ export class LoginauthComponent implements OnInit {
         }
       },
       error => {
-          this.toastr.warning('Invalid Password. If new user, check your registered email for verfication link');
+        this.data = error;
+        if(this.data.error.code===500 && this.data.error.msg==="user not verified"){
+          this.verified = true;
+          return this.toastr.warning('Please confirm verfication link sent to your registered email')
+        } else {
+        this.toastr.warning('Invalid Password');
+        }
       }
     );
   }
 
   if (type === 'signup') {
     if (this.registerForm.invalid) { return; }
-    this.authenticationService.register(this.t.email.value, this.t.password.value, '').pipe().subscribe(
+    if (this.t.password.value !== this.t.cPassword.value ) {
+      return this.toastr.warning('Password and Confirm Password does not match');
+    }
+    this.authenticationService.register(this.registerForm.value).pipe().subscribe(
       data => {
         this.data = data;
-        if(this.data.code===200) {
+        if(this.data.code===200 && this.data.msg==='successfully_added') {
           this.toastr.success('A verification link has been sent to your registered Email.');   
           // email input in sign-in on successful registeration. 
           this.router.navigate(['/auth/signin', this.t.email.value]);  
         }
       },
       error => {
-        this.toastr.error('User already Exists or Invalid Email', null, { timeOut: 4000 });
+        this.data = error;
+        console.log(this.data.error.code);
+        if(this.data.error.code===500 && this.data.error.msg==='already exists'){
+          return this.toastr.error('User email already Registered');
+         }
+        if(this.data.error.code===500 && this.data.error.msg==='invalid mobile'){
+          return this.toastr.error('Mobile No must be a number');
+        }
+        this.toastr.error('error', null, { timeOut: 4000 });
       }
     );
   }
     // 'signup', 'signin'
     
+  }
+
+  resendVerifyEmail() {
+    this.authenticationService.resendVerifyEmail(this.f.email.value).pipe()
+    .subscribe(
+      data => {
+        this.data = data;
+        if(this.data.code===200 && this.data.msg==='confirmation mail resent') {
+          return this.toastr.success('Verification link is sent to your email.');
+        }
+      },
+      error => {
+        return this.toastr.error('Error connecting to server');
+      }
+    )
   }
 
 }

@@ -12,11 +12,20 @@ import { ModalDirective } from 'angular-bootstrap-md';
   templateUrl: './buy-tokens.component.html',
   styleUrls: ['./buy-tokens.component.scss']
 })
-export class BuyTokensComponent implements OnInit{
+export class BuyTokensComponent implements OnInit {
   closeResult: string;
   currency: string;
-  amountOfAcex: string;
+  amountOfAcex: number;
   data: any;
+  btcBal: any;
+  ethBal: any;
+  ltcBal: any;
+  acexBal: any;
+  btcRate: any;
+  ethRate: any;
+  ltcRate: any;
+  balanceUsd: any;
+  requiredBal: any;
 
   @Output() successEvent = new EventEmitter<boolean>();
 
@@ -28,8 +37,35 @@ export class BuyTokensComponent implements OnInit{
   ) {}
 
   ngOnInit () {
+    this.load.show();
+    this.userService.getBalances().pipe().subscribe(
+      data => {
+        this.data = data;
+        if (this.data.code===200) {
+          this.btcBal = this.data.msg.btc; //Big-num & Round
+          this.ethBal = this.data.msg.eth;
+          this.ltcBal = this.data.msg.ltc;
+          this.acexBal = this.data.msg.acex;
+        }
+      },
+    error => {
+      this.toastr.error('Error connecting to server');
+      this.load.hide();
+    });
+    this.userService.getRate().pipe().subscribe(
+      data => {
+        this.data = data;
+        console.log(this.data);
+        this.btcRate = this.data.msg.btc;
+        this.ethRate = this.data.msg.eth;
+        this.ltcRate = this.data.msg.ltc;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    this.load.hide();
   }
-
 
   @ViewChild('buyAcex') buyAcex: ModalDirective;
 
@@ -51,13 +87,35 @@ export class BuyTokensComponent implements OnInit{
   //   }
   // }
 
+  balanceCheck(currency, amountOfAcex) {
+    switch (currency) {
+      case 'btc':
+      this.balanceUsd = this.btcBal * this.btcRate;
+      break;
+      case 'eth':
+      this.balanceUsd = this.ethBal * this.ethRate;
+      break;
+      case 'ltc':
+      this.balanceUsd = this.ltcBal * this.ltcRate;
+      break;
+    }
+    this.requiredBal = amountOfAcex * 0.1;
+
+    if(this.requiredBal <= this.balanceUsd) {
+      return true;
+    }
+
+    return false;
+
+  }
+
   buyAcexTokens() {
-
-    // if(this.buyTokenForm.invalid) { return; }
-
-    // Update balance check
-    if(this.currency && this.amountOfAcex) {
-    this.load.show();
+    // this.load.show();
+    const bool: boolean = this.balanceCheck(this.currency, this.amountOfAcex);
+    if(bool == false) {
+      return this.toastr.info('Not Enough funds');
+    }
+    if(bool == true) {
     this.userService.buyAcex(this.currency, this.amountOfAcex)
     .pipe().subscribe(
       data => {
@@ -76,10 +134,8 @@ export class BuyTokensComponent implements OnInit{
         this.toastr.error('Insufficient Funds');
       }
     );
-    this.load.hide();
   }
-}
-
+    // this.load.hide();
+  }
   
-
 }

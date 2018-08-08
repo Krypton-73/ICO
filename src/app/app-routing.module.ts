@@ -14,6 +14,7 @@ import { LoginauthforgotpasswordComponent } from './auth2/loginauthforgotpasswor
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MywalletComponent } from './mywallet/mywallet.component';
 import { ReferralsComponent } from './referrals/referrals.component';
+import { LoggedIn } from './guards/logged-in';
 
 
 const routes: Routes = [
@@ -70,20 +71,24 @@ const routes: Routes = [
   {
     path: 'auth',
     component: LoginauthComponent,
-    data: { title: 'Acex Auth' }
+    data: { title: 'Acex Auth' },
+    canActivate: [ LoggedIn ]
   },
   {
     path: 'auth/signin/:email',
-    component: LoginauthComponent
+    component: LoginauthComponent,
+    canActivate: [ LoggedIn ]
   },
   {
     path: 'auth/validate-otp',
-    component: VerifyotpComponent
+    component: VerifyotpComponent,
+    canActivate: [ LoggedIn ]
   },
   {
     path: 'auth/forgot-password',
     component: LoginauthforgotpasswordComponent,
-    data: { title: 'Acex Forgot Password'}
+    data: { title: 'Acex Forgot Password'},
+    canActivate: [ LoggedIn ]
   },
   {
     path: 'dashboard',
@@ -105,11 +110,9 @@ const routes: Routes = [
   },
   {
       path: '**',
-      // component: WelcomeComponent,
       pathMatch: 'full',
-      redirectTo: '/auth',
-      data: { title: 'Welcome' }
-  },
+      redirectTo: '/auth'
+  }
 ];
 
 @NgModule({

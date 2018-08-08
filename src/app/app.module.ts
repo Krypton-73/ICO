@@ -38,6 +38,8 @@ import { ReferralsComponent } from './referrals/referrals.component';
 import { HomenavsComponent } from './layouts/homenavs/homenavs.component';
 import { BuyTokensComponent } from './buy-tokens/buy-tokens.component';
 import { ModalComponent } from './modal/modal.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoggedIn } from './guards/logged-in';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { ModalComponent } from './modal/modal.component';
     LoaderService,
     KeyeventService,
     HomeService,
-    DialogService
+    DialogService,
+    AuthGuard,
+    LoggedIn
   ],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]

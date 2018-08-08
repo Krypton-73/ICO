@@ -55,9 +55,7 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     }
-    return this.http.post(`${baseUrl}/get_rate`, { email: this.yolo.msg.email }, this.httpOptions)
-    .pipe(map(data => { console.log(data); }
-  ));
+    return this.http.post(`${baseUrl}/get_rate`, { email: this.yolo.msg.email }, this.httpOptions);
   }
 
   buyAcex(currency, amount) {
