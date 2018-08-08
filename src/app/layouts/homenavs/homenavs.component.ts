@@ -4,8 +4,9 @@ import { AuthenticationService } from '../../services/authenticationService';
 import { UserService } from '../../services/user.service';
 import { LoaderService } from '../loading/loading.service';
 import { ToastrService } from 'ngx-toastr';
-import { BigNumber } from 'bignumber.js/bignumber';
+import { BigNumber } from 'bignumber.js';
 import { BuyTokensComponent } from '../../buy-tokens/buy-tokens.component';
+import { Balance } from '../../_models/balance';
 
 @Component({
   selector: 'app-homenavs',
@@ -13,10 +14,7 @@ import { BuyTokensComponent } from '../../buy-tokens/buy-tokens.component';
   styleUrls: ['./homenavs.component.scss']
 })
 export class HomenavsComponent implements OnInit {
-  btcBal: any;
-  ethBal: any;
-  ltcBal: any;
-  acexBal: any;
+  balance: Balance;
   data: any;
   user: any;
   
@@ -34,10 +32,10 @@ export class HomenavsComponent implements OnInit {
       data => {
         this.data = data;
         if (this.data.code===200) {
-          this.btcBal = this.data.msg.btc; //Big-num & Round
-          this.ethBal = this.data.msg.eth;
-          this.ltcBal = this.data.msg.ltc;
-          this.acexBal = this.data.msg.acex;
+          this.balance.btcBal = this.data.msg.btc; //Big-num & Round
+          this.balance.ethBal = this.data.msg.eth;
+          this.balance.ltcBal = this.data.msg.ltc;
+          this.balance.acexBal = this.data.msg.acex;
         }
       },
     error => {
