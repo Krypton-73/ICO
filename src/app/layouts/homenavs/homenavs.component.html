@@ -48,24 +48,24 @@
                     </div>
                   </div>
               </li>
-              <li class="nav-item waves-light acex-bal-nav" mdbWavesEffect>
+              <li *ngIf="balance" class="nav-item waves-light acex-bal-nav" mdbWavesEffect>
                   <div class="acex-bal-nav-div">
                     <ul class="mr-auto acex-bal-nav-ul">
                         <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/bitcoin.svg"
-                                    class="bitcoin"> <span> {{ btcBal | number: '1.2-5' }} BTC</span></p>
+                                    class="bitcoin"> <span> {{ balance.btc | number: '1.2-5' }} BTC</span></p>
                         </li>
                         <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/ethereum.svg"
-                                    class="ethereum">&nbsp;{{ ethBal | number: '1.2-5' }}&nbsp;ETH</p>  
+                                    class="ethereum">&nbsp;{{ balance.eth | number: '1.2-5' }}&nbsp;ETH</p>  
                         </li>
                         <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/litecoin.svg"
-                                    class="litecoin">&nbsp;&nbsp;{{ ltcBal | number: '1.2-5' }}&nbsp;&nbsp;LTC</p>
+                                    class="litecoin">&nbsp;&nbsp;{{ balance.ltc | number: '1.2-5' }}&nbsp;&nbsp;LTC</p>
                         </li>
                         <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/ace-x.svg"
-                                    class="ace-x">&nbsp;{{ acexBal | number: '1.2-2' }}&nbsp;ACEX</p>
+                                    class="ace-x">&nbsp;{{ balance.acex | number: '1.2-2' }}&nbsp;ACEX</p>
                         </li>
                     </ul>
                     </div>

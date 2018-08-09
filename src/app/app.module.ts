@@ -40,6 +40,9 @@ import { BuyTokensComponent } from './buy-tokens/buy-tokens.component';
 import { ModalComponent } from './modal/modal.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoggedIn } from './guards/logged-in';
+import { AuthenticationService } from './services/authenticationService';
+import { DataService } from './services/data.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -93,7 +96,10 @@ import { LoggedIn } from './guards/logged-in';
     HomeService,
     DialogService,
     AuthGuard,
-    LoggedIn
+    LoggedIn,
+    AuthenticationService,
+    DataService,
+    UserService
   ],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]

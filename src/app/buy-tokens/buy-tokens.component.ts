@@ -6,6 +6,9 @@ import { LoaderService } from '../layouts/loading/loading.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ModalDirective } from 'angular-bootstrap-md';
+import { DataService } from '../services/data.service';
+import { Balance } from '../_models/balance';
+import { Rate } from '../_models/rate';
 
 @Component({
   selector: 'app-buy-tokens',
@@ -13,17 +16,12 @@ import { ModalDirective } from 'angular-bootstrap-md';
   styleUrls: ['./buy-tokens.component.scss']
 })
 export class BuyTokensComponent implements OnInit {
-  closeResult: string;
   currency: string;
   amountOfAcex: number;
   data: any;
-  btcBal: any;
-  ethBal: any;
-  ltcBal: any;
+  balance: Balance;
+  rate: Rate;
   acexBal: any;
-  btcRate: any;
-  ethRate: any;
-  ltcRate: any;
   balanceUsd: any;
   requiredBal: any;
 
@@ -33,38 +31,13 @@ export class BuyTokensComponent implements OnInit {
     private userService: UserService,
     private authenticationService: AuthenticationService,
     private load: LoaderService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dataService: DataService
   ) {}
 
   ngOnInit () {
-    this.load.show();
-    this.userService.getBalances().pipe().subscribe(
-      data => {
-        this.data = data;
-        if (this.data.code===200) {
-          this.btcBal = this.data.msg.btc; //Big-num & Round
-          this.ethBal = this.data.msg.eth;
-          this.ltcBal = this.data.msg.ltc;
-          this.acexBal = this.data.msg.acex;
-        }
-      },
-    error => {
-      this.toastr.error('Error connecting to server');
-      this.load.hide();
-    });
-    this.userService.getRate().pipe().subscribe(
-      data => {
-        this.data = data;
-        console.log(this.data);
-        this.btcRate = this.data.msg.btc;
-        this.ethRate = this.data.msg.eth;
-        this.ltcRate = this.data.msg.ltc;
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    this.load.hide();
+    this.dataService.currentBalance.subscribe(balance => { this.balance = balance });
+    this.dataService.currentRate.subscribe(rate => { this.rate = rate });
   }
 
   @ViewChild('buyAcex') buyAcex: ModalDirective;
@@ -77,26 +50,16 @@ export class BuyTokensComponent implements OnInit {
     this.buyAcex.hide();
   }
 
-  // private getDismissReason(reason: any): string {
-  //   if (reason === ModalDismissReasons.ESC) {
-  //     return 'by pressing ESC';
-  //   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-  //     return 'by clicking on a backdrop';
-  //   } else {
-  //     return  `with: ${reason}`;
-  //   }
-  // }
-
   balanceCheck(currency, amountOfAcex) {
     switch (currency) {
       case 'btc':
-      this.balanceUsd = this.btcBal * this.btcRate;
+      this.balanceUsd = this.balance.btc * this.rate.btc;
       break;
       case 'eth':
-      this.balanceUsd = this.ethBal * this.ethRate;
+      this.balanceUsd = this.balance.eth * this.rate.eth;
       break;
       case 'ltc':
-      this.balanceUsd = this.ltcBal * this.ltcRate;
+      this.balanceUsd = this.balance.ltc * this.rate.ltc;
       break;
     }
     this.requiredBal = amountOfAcex * 0.1;

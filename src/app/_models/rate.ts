@@ -1,6 +1,5 @@
-export class Balance {
+export class Rate {
     btc: any;
     eth: any;
     ltc: any;
-    acex: any;
 }

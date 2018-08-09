@@ -6,7 +6,9 @@ import { LoaderService } from '../loading/loading.service';
 import { ToastrService } from 'ngx-toastr';
 import { BigNumber } from 'bignumber.js';
 import { BuyTokensComponent } from '../../buy-tokens/buy-tokens.component';
+import { DataService } from '../../services/data.service';
 import { Balance } from '../../_models/balance';
+import { Rate } from '../../_models/rate';
 
 @Component({
   selector: 'app-homenavs',
@@ -14,33 +16,47 @@ import { Balance } from '../../_models/balance';
   styleUrls: ['./homenavs.component.scss']
 })
 export class HomenavsComponent implements OnInit {
-  balance: Balance;
   data: any;
   user: any;
+  balance: Balance;
+  rate: Rate;
   
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
     private load: LoaderService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dataService: DataService
   ) { }
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-    console.log(this.user.msg);
+
+    this.load.show();
     this.userService.getBalances().pipe().subscribe(
-      data => {
-        this.data = data;
-        if (this.data.code===200) {
-          this.balance.btcBal = this.data.msg.btc; //Big-num & Round
-          this.balance.ethBal = this.data.msg.eth;
-          this.balance.ltcBal = this.data.msg.ltc;
-          this.balance.acexBal = this.data.msg.acex;
-        }
-      },
+      data => {  
+      this.data = data;
+      if (this.data.code===200) {
+        this.balance = this.data.msg;
+        this.newBalance();
+      }
+    },
     error => {
       this.toastr.error('Error connecting to server');
     });
+    this.userService.getRate().pipe().subscribe(
+      data => {
+        this.data = data;
+        if (this.data.code===200) {
+        this.rate = this.data.msg;
+        this.newRate();
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    this.load.hide();
   }
 
   @ViewChild('buyAcex') buyAcex: BuyTokensComponent;
@@ -51,6 +67,19 @@ export class HomenavsComponent implements OnInit {
 
   recievedMessage($event) {
     console.log($event);
+  }
+
+  newBalance() {
+    if (this.balance) {
+    console.log(this.balance);
+    this.dataService.newBalance(this.balance);
+    }
+  }
+
+  newRate() {
+    if (this.rate) {
+      this.dataService.newRate(this.rate);
+    }
   }
 
   logout() {
