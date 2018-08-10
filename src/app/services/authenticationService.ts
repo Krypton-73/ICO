@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { sha256 } from 'js-sha256';
 // import { User } from '../_models/user';
@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
 
   user: any;
+  yolo: any;
+  httpOptions: any;
   constructor(
     private http: HttpClient,
     private router: Router
@@ -29,7 +31,7 @@ export class AuthenticationService {
   }
 
   verifyOtp(userEmail: any, userOtp: any) {
-    return this.http.post(`${baseUrl}/validate_otp`,{ email: userEmail, otp: userOtp })
+    return this.http.post(`${baseUrl}/validate_otp`, { email: userEmail, otp: userOtp })
     .pipe(map( user => {
       this.user = user;
       if (this.user && this.user.msg.jwt) {
@@ -40,13 +42,34 @@ export class AuthenticationService {
     }));
   }
 
+  verifyEmail(email: string, verCode: string) {
+    return this.http.get(`${baseUrl}/verify_email?email=${email}&verCode=${verCode}`);
+  }
+
   resendVerifyEmail(email: string) {
     return this.http.get(`${baseUrl}/resend_verification_mail?email=${email}`);
   }
 
+  requestPassword(email: string) {
+    return this.http.get(`${baseUrl}/request_password?email=${email}`);
+  }
+
+  resetPassword(email: string, password: string, verCode: string) {
+    return this.http.post(`${baseUrl}/reset_password`
+    , { email: email, password: password, verCode: verCode });
+  }
+
   logout() {
-    window.sessionStorage.clear();
-    this.router.navigate(['/auth']);
+    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.httpOptions = { 
+      headers: new HttpHeaders({
+        'x-access-token': this.yolo.msg.jwt
+      })
+    }
+    return this.http.post(`${baseUrl}/logout`, { email: this.yolo.msg.email }, this.httpOptions)
+  //   .pipe(map(data => {
+  //     return data;
+  //   }));
   }
 
 }

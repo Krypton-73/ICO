@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ModalDirective } from 'angular-bootstrap-md';
 
 @Component({
@@ -6,7 +6,7 @@ import { ModalDirective } from 'angular-bootstrap-md';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
 
   @ViewChild('depositModal') depositModal: ModalDirective;
   currency: string;
@@ -14,6 +14,10 @@ export class ModalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+  ngOnDestroy() {
+    this.currency = '';
+    this.address = '';
   }
 
   show(currency: string, address: string) {

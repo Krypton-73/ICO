@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +20,7 @@ import { LoaderService } from './layouts/loading/loading.service';
 import { KeyeventService } from './services/keyevent.service';
 import { HomeService } from './services/home.service';
 
+// import { AppLoadingModule } from './layouts/loading/loading.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -43,6 +44,8 @@ import { LoggedIn } from './guards/logged-in';
 import { AuthenticationService } from './services/authenticationService';
 import { DataService } from './services/data.service';
 import { UserService } from './services/user.service';
+import { ResetPasswordComponent } from './auth2/reset-password/reset-password.component';
+import { VerifyEmailComponent } from './auth2/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,9 @@ import { UserService } from './services/user.service';
     ReferralsComponent,
     HomenavsComponent,
     BuyTokensComponent,
-    ModalComponent
+    ModalComponent,
+    ResetPasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +90,8 @@ import { UserService } from './services/user.service';
     }),
     HttpClientModule,
     HighchartsChartModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    // AppLoadingModule
   ],
   providers: [
     GlobalsService,
@@ -102,6 +108,6 @@ import { UserService } from './services/user.service';
     UserService
   ],
   bootstrap: [AppComponent],
-  schemas: [ NO_ERRORS_SCHEMA ]
+  schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

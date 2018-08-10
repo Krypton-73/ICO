@@ -50,25 +50,6 @@ export class MywalletComponent implements OnInit {
     );
   }
 
-  getWalletAddress(currency: string): any {
-    this.userService.getWallet(currency).pipe().subscribe(
-      data => {
-        this.data = data;
-        // if (this.data.code === 401) {
-        //   this.authenticationService.logout();
-        // }
-        // if (this.data.code === 200) {
-        //   return this.address = this.data.msg.address;
-        // }
-        this.address = this.data.msg.address;
-        this.depositModal.show(currency, this.address);
-      },
-      error => {
-        this.toastr.warning('Unable to establish connection with the server. Please try again.');
-      }
-    );
-  }
-
   getWallet(currency: string): void {
     if (sessionStorage.getItem(currency)) {
       this.address = sessionStorage.getItem(currency);
@@ -76,6 +57,21 @@ export class MywalletComponent implements OnInit {
     } else {
       this.address = this.getWalletAddress(currency);
     }
+  }
+
+  getWalletAddress(currency: string): any {
+    this.userService.getWallet(currency).pipe().subscribe(
+      data => {
+        this.data = data;
+        if (this.data.code===200) {
+          this.address = this.data.msg.address;
+          this.depositModal.show(currency, this.address);
+        }
+      },
+      error => {
+        this.toastr.warning('Unable to establish connection with the server. Please try again.');
+      }
+    );
   }
 
   logout() {

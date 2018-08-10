@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authenticationService';
 import { UserService } from '../../services/user.service';
@@ -26,7 +27,8 @@ export class HomenavsComponent implements OnInit {
     private userService: UserService,
     private load: LoaderService,
     private toastr: ToastrService,
-    public dataService: DataService
+    public dataService: DataService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -83,6 +85,8 @@ export class HomenavsComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.authenticationService.logout().pipe().subscribe();
+    window.sessionStorage.clear();
+    this.router.navigate(['/auth']);
   }
 }

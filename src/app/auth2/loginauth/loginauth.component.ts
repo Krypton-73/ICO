@@ -18,7 +18,6 @@ export class LoginauthComponent implements OnInit {
   submitted: any = false;
   verified: boolean;
   email: string;
-  // loading: any = false;
   data: any;
   agree: boolean;
   constructor(
@@ -58,7 +57,7 @@ export class LoginauthComponent implements OnInit {
     this.authenticationService.login(this.f.email.value, this.f.password.value).pipe().subscribe(
       data => {
         this.data = data;
-        if(this.data.code===200) {
+        if(this.data.code===200 && this.data.msg==='success') {
           this.toastr.success('Validate OTP sent to your Registered Email');
           this.router.navigate(['/auth/validate-otp'], { queryParams: { email: this.f.email.value } });
         }
@@ -112,7 +111,7 @@ export class LoginauthComponent implements OnInit {
       data => {
         this.data = data;
         if(this.data.code===200 && this.data.msg==='confirmation mail resent') {
-          return this.toastr.success('Verification link is sent to your email.');
+          return this.toastr.info('Verification link has been sent to your email.');
         }
       },
       error => {

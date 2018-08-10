@@ -73,10 +73,9 @@ export class BuyTokensComponent implements OnInit {
   }
 
   buyAcexTokens() {
-    // this.load.show();
     const bool: boolean = this.balanceCheck(this.currency, this.amountOfAcex);
     if(bool == false) {
-      return this.toastr.info('Not Enough funds');
+      return this.toastr.warning('Insufficient funds');
     }
     if(bool == true) {
     this.userService.buyAcex(this.currency, this.amountOfAcex)

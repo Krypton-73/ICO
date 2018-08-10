@@ -63,8 +63,6 @@ export class VerifyotpComponent implements OnInit {
             this.toastr.success('Welcome to AceX!', null, { timeOut: 4000 });
             const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
             this.router.navigate(['/dashboard']);
-          } else {
-            this.toastr.warning('Invalid OTP', null, { timeOut: 4000 });
           }
         },
         e => {
