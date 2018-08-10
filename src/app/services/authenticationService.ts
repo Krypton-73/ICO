@@ -56,7 +56,7 @@ export class AuthenticationService {
 
   resetPassword(email: string, password: string, verCode: string) {
     return this.http.post(`${baseUrl}/reset_password`
-    , { email: email, password: password, verCode: verCode });
+    , { email: email, password: sha256(password), verCode: verCode });
   }
 
   logout() {
