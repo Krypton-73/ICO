@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { GlobalsService } from './services/globals.service';
 import { AuthService } from './services/auth.service';
@@ -76,6 +77,7 @@ import { VerifyEmailComponent } from './auth2/verify-email/verify-email.componen
     FormsModule, ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     Ng2Webstorage,
+    QRCodeModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.wanderingCubes,
       backdropBackgroundColour: 'rgba(0,0,0,0.1)',

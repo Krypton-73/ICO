@@ -24,7 +24,7 @@
                             (click)="getWallet('btc')">Deposit
                           </button>
                           <button type="button" class="mask-button btn"
-                          >Withdraw
+                            (click)="withdraw('btc')">Withdraw
                           </button>
                         </p>
                       </div>
@@ -42,7 +42,7 @@
                             (click)="getWallet('eth')">Deposit
                           </button>
                           <button type="button" class="mask-button btn"
-                          >Withdraw
+                            (click)="withdraw('eth')">Withdraw
                           </button>
                         </p>
                       </div>
@@ -60,7 +60,7 @@
                            (click)="getWallet('ltc')">Deposit
                           </button>
                           <button type="button" class="mask-button btn"
-                          >Withdraw
+                            (click)="withdraw('ltc')">Withdraw
                           </button>
                         </p>
                       </div>
@@ -74,7 +74,7 @@
                           <hr>
                         <p class="">
                           <button type="button" class="mask-button btn"
-                           (click)="getWallet('acex')">Deposit
+                           >Deposit
                           </button>
                           <button type="button" class="mask-button btn"
                           >Withdraw
@@ -133,3 +133,4 @@
 </main>
 <!--Main Layout-->
 <app-modal #depositModal></app-modal>
+<app-modal #withdrawModal></app-modal>

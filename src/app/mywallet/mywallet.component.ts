@@ -7,6 +7,8 @@ import { AuthenticationService } from '../services/authenticationService';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from '../modal/modal.component';
 import { LoaderService } from '../layouts/loading/loading.service';
+import { Txn } from '../_models/txn';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-wallet',
@@ -16,7 +18,7 @@ import { LoaderService } from '../layouts/loading/loading.service';
 export class MywalletComponent implements OnInit {
 
   address: any;
-  txns = [];
+  txns: Txn[] = [];
   txnType: any = {
     '0': 'Deposit',
     '1': 'Withdrawal',
@@ -26,13 +28,15 @@ export class MywalletComponent implements OnInit {
   };
   data: any;
   @ViewChild('depositModal') depositModal: ModalComponent;
+  @ViewChild('withdrawModal') withdrawModal: ModalComponent;
 
   constructor(
     private userService: UserService,
     // private dialogService: DialogService,
     private authenticationService: AuthenticationService,
     public toastr: ToastrService,
-    public load: LoaderService
+    public load: LoaderService,
+    private dataService: DataService
   ) { }
 
   ngOnInit() {
@@ -72,6 +76,10 @@ export class MywalletComponent implements OnInit {
         this.toastr.warning('Unable to establish connection with the server. Please try again.');
       }
     );
+  }
+
+  withdraw(currency: string) {
+    this.withdrawModal.showWithdraw(currency);
   }
 
   logout() {

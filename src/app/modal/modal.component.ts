@@ -6,18 +6,25 @@ import { ModalDirective } from 'angular-bootstrap-md';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit, OnDestroy {
+export class ModalComponent implements OnInit {
 
   @ViewChild('depositModal') depositModal: ModalDirective;
+  @ViewChild('withdrawModal') withdrawModal: ModalDirective;
   currency: string;
   address: string;
-  constructor() { }
+  public QRaddress:string = '';
+
+  constructor() { 
+    this.QRcode();
+  }
 
   ngOnInit() {
   }
-  ngOnDestroy() {
-    this.currency = '';
-    this.address = '';
+
+  QRcode() {
+    if(this.address){
+    this.QRaddress = this.address;
+    }
   }
 
   show(currency: string, address: string) {
@@ -30,5 +37,14 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   hide() {
     this.depositModal.hide();
+  }
+
+  showWithdraw(currecy: string) {
+    this.currency = currecy;
+    this.withdrawModal.show();
+  }
+
+  hideWithdraw() {
+    this.withdrawModal.hide();
   }
 }
