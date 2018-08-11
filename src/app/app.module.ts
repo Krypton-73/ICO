@@ -13,6 +13,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { GlobalsService } from './services/globals.service';
 import { AuthService } from './services/auth.service';
@@ -91,7 +92,7 @@ import { VerifyEmailComponent } from './auth2/verify-email/verify-email.componen
     HttpClientModule,
     HighchartsChartModule,
     NgbModule.forRoot(),
-    // AppLoadingModule
+    ClipboardModule
   ],
   providers: [
     GlobalsService,

@@ -16,6 +16,13 @@
                       <p class="body-desc">
                           For every investor who buys ACEX tokens, your wallet gets credited with 5% of the currency with which the tokens were purchased.
                       </p>
+                      
+                      <div *ngIf="refId" class="md-form col col-md-10">
+                        <input value='http://ico.acex.trade/#/auth/{{refId}}' type="text" id="refID" class="form-control" mdbInputDirective disabled />
+                        <label for="refID">Referral Link
+                          <span style="padding: 10px"><i (click)="ref()" ngxClipboard [cbContent]="refLink" class="fa fa-clipboard" aria-hidden="true"></i>
+                        </span></label>
+                      </div> 
                    </div>
                    <div class="col-7">
                       <img src="../../assets/img/graphic.png" class="referral-img">

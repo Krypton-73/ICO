@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Txn } from '../_models/txn';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authenticationService';
-import { map, filter } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-referrals',
@@ -13,11 +13,18 @@ export class ReferralsComponent implements OnInit {
 
   txns: Txn[] = [];
   data:any;
+  yolo: any;
+  refId: any;
+  refLink:any;
 
   constructor(
   private userService: UserService,
-  private authenticationService: AuthenticationService
-  ) { }
+  private authenticationService: AuthenticationService,
+  private toastr: ToastrService 
+  ) { 
+   this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+   this.refId = this.yolo.msg.user_id;  
+  }
 
   ngOnInit() {
     this.userService.getTxns().pipe().subscribe(
@@ -34,5 +41,10 @@ export class ReferralsComponent implements OnInit {
         }
       }
     );
+  }
+
+  ref() {
+    this.refLink = `http://ico.acex.trade/#/auth/${this.refId}`;
+    this.toastr.success('Copied to Clipboard');
   }
 }
