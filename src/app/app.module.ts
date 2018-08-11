@@ -26,7 +26,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './auth/login/login.component';
-import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoadingComponent } from './layouts/loading/loading.component';
 import { VerifyotpComponent } from './auth/verifyotp/verifyotp.component';
@@ -53,7 +52,6 @@ import { VerifyEmailComponent } from './auth2/verify-email/verify-email.componen
     AppComponent,
     WelcomeComponent,
     LoginComponent,
-    HomeComponent,
     SignupComponent,
     LoadingComponent,
     VerifyotpComponent,
