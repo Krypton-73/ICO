@@ -12,19 +12,14 @@ export class ModalComponent implements OnInit {
   @ViewChild('withdrawModal') withdrawModal: ModalDirective;
   currency: string;
   address: string;
+  destAddress: string;
+  amount: string;
   public QRaddress:string = '';
 
   constructor() { 
-    this.QRcode();
   }
 
   ngOnInit() {
-  }
-
-  QRcode() {
-    if(this.address){
-    this.QRaddress = this.address;
-    }
   }
 
   show(currency: string, address: string) {
