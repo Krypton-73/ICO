@@ -16,14 +16,6 @@ import { LoggedIn } from './guards/logged-in';
 import { SettingsComponent } from './settings/settings.component';
 
 
-import {LoginauthComponent} from './auth2/loginauth/loginauth.component';
-import {LoginauthforgotpasswordComponent} from './auth2/loginauthforgotpassword/loginauthforgotpassword.component';
-import {VerifyEmailComponent} from './auth2/verify-email/verify-email.component';
-import {ResetPasswordComponent} from './auth2/reset-password/reset-password.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {MywalletComponent} from './mywallet/mywallet.component';
-import {ReferralsComponent} from './referrals/referrals.component';
-import {LoggedIn} from './guards/logged-in';
 
 
 const routes: Routes = [
