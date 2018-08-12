@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
+<<<<<<< HEAD
 import { VerifyotpComponent } from './auth/verifyotp/verifyotp.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -13,10 +14,23 @@ import { MywalletComponent } from './mywallet/mywallet.component';
 import { ReferralsComponent } from './referrals/referrals.component';
 import { LoggedIn } from './guards/logged-in';
 import { SettingsComponent } from './settings/settings.component';
+=======
+import {VerifyotpComponent} from './auth/verifyotp/verifyotp.component';
+import {AuthGuard} from './guards/auth.guard';
+>>>>>>> origin/junaidev
 
+import {LoginauthComponent} from './auth2/loginauth/loginauth.component';
+import {LoginauthforgotpasswordComponent} from './auth2/loginauthforgotpassword/loginauthforgotpassword.component';
+import {VerifyEmailComponent} from './auth2/verify-email/verify-email.component';
+import {ResetPasswordComponent} from './auth2/reset-password/reset-password.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {MywalletComponent} from './mywallet/mywallet.component';
+import {ReferralsComponent} from './referrals/referrals.component';
+import {LoggedIn} from './guards/logged-in';
 
 
 const routes: Routes = [
+
   {
     path: '',
     pathMatch: 'full',
@@ -87,10 +101,12 @@ const routes: Routes = [
       pathMatch: 'full',
       redirectTo: '/auth'
   }
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash : true })],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes, {useHash: true})],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -2,133 +2,133 @@
 <!--Main Layout-->
 <main class="main-div">
 
-  <div class="container main-container">
-      <div class="row" style="margin-top: 2%">
-          <div class="col-md-12">
+    <div class="container main-container">
+        <div class="row" style="margin-top: 2%">
+            <div class="col-md-12">
 
-            <div>
-              <div class="card-body">
-                <p class="body-title">MY WALLET</p>
-                <hr>
-
-                <div class="row">
-
-                  <div class="col col-md-3">
-                    <div class="card acex-bal-card-0 text-center">
-                      <div class="card-body text-center">
-                        <p class="acex-p-0"><img src="assets/img/bitcoin.svg"
-                        class="bitcoin">&nbsp;&nbsp;BITCOIN</p>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="body-title">MY WALLET</p>
                         <hr>
-                        <p class="">
-                          <button type="button" class="mask-button btn"
-                            (click)="getWallet('btc')">Deposit
-                          </button>
-                          <button type="button" class="mask-button btn"
-                            (click)="withdraw('btc')">Withdraw
-                          </button>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="col col-md-3">
-                    <div class="card acex-bal-card-0">
-                      <div class="card-body text-center">
-                        <p class="acex-p-0"><img src="assets/img/ethereum.svg"
-                          class="ethereum">&nbsp;&nbsp;ETHEREUM</p>
+                        <div class="row">
+
+                            <div class="col col-md-3">
+                                <div class="card acex-bal-card-0 text-center">
+                                    <div class="card-body text-center">
+                                        <p class="acex-p-0"><img src="assets/img/bitcoin.svg"
+                                                                 class="bitcoin">&nbsp;&nbsp;BITCOIN</p>
+                                        <hr>
+                                        <p class="">
+                                            <button type="button" class="mask-button btn"
+                                                    (click)="getWallet('btc')">Deposit
+                                            </button>
+                                            <button type="button" class="mask-button btn"
+                                                    (click)="withdraw('btc')">Withdraw
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-md-3">
+                                <div class="card acex-bal-card-0">
+                                    <div class="card-body text-center">
+                                        <p class="acex-p-0"><img src="assets/img/ethereum.svg"
+                                                                 class="ethereum">&nbsp;&nbsp;ETHEREUM</p>
+                                        <hr>
+                                        <p class="">
+                                            <button type="button" class="mask-button btn"
+                                                    (click)="getWallet('eth')">Deposit
+                                            </button>
+                                            <button type="button" class="mask-button btn"
+                                                    (click)="withdraw('eth')">Withdraw
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-md-3">
+                                <div class="card acex-bal-card-0">
+                                    <div class="card-body text-center">
+                                        <p class="acex-p-0"><img src="assets/img/litecoin.svg"
+                                                                 class="litecoin">&nbsp;&nbsp;LITECOIN</p>
+                                        <hr>
+                                        <p class="">
+                                            <button type="button" class="mask-button btn"
+                                                    (click)="getWallet('ltc')">Deposit
+                                            </button>
+                                            <button type="button" class="mask-button btn"
+                                                    (click)="withdraw('ltc')">Withdraw
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-3">
+                                <div class="card acex-bal-card-0">
+                                    <div class="card-body text-center">
+                                        <p class="acex-p-0"><img src="assets/img/ace-x.svg"
+                                                                 class="ace-x">&nbsp;&nbsp;ACEX</p>
+                                        <hr>
+                                        <p class="">
+                                            <button type="button" class="mask-button btn"
+                                            >Deposit
+                                            </button>
+                                            <button type="button" class="mask-button btn"
+                                            >Withdraw
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 2%;margin-bottom: 2%;">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <p class="body-title">TRANSACTION HISTORY
+                        </p>
                         <hr>
-                        <p class="">
-                          <button type="button" class="mask-button btn"
-                            (click)="getWallet('eth')">Deposit
-                          </button>
-                          <button type="button" class="mask-button btn"
-                            (click)="withdraw('eth')">Withdraw
-                          </button>
-                        </p>
-                      </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Transaction ID</th>
+                                        <th>Currency</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let txn of txns">
+                                        <td>{{ txn.createdAt }}</td>
+                                        <td>{{ txnType[txn.type] }}</td>
+                                        <th>{{ txn.txid }}</th>
+                                        <td>{{ txn.currency }}</td>
+                                        <td>{{ txn.value }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
-                  </div>
-
-                  <div class="col col-md-3">
-                    <div class="card acex-bal-card-0">
-                      <div class="card-body text-center">
-                        <p class="acex-p-0"><img src="assets/img/litecoin.svg"
-                          class="litecoin">&nbsp;&nbsp;LITECOIN</p>
-                          <hr>
-                        <p class="">
-                          <button type="button" class="mask-button btn"
-                           (click)="getWallet('ltc')">Deposit
-                          </button>
-                          <button type="button" class="mask-button btn"
-                            (click)="withdraw('ltc')">Withdraw
-                          </button>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col col-md-3">
-                    <div class="card acex-bal-card-0">
-                      <div class="card-body text-center">
-                        <p class="acex-p-0"><img src="assets/img/ace-x.svg"
-                          class="ace-x">&nbsp;&nbsp;ACEX</p>
-                          <hr>
-                        <p class="">
-                          <button type="button" class="mask-button btn"
-                           >Deposit
-                          </button>
-                          <button type="button" class="mask-button btn"
-                          >Withdraw
-                          </button>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-
-
-      <div class="row" style="margin-top: 2%;margin-bottom: 2%;">
-          <div class="col-md-12">
-
-            <div class="card">
-              <div class="card-body">
-                <p class="body-title">TRANSACTION HISTORY
-                </p>
-                <hr>
-                <div class="row">
-                  <div class="col-12">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Type</th>
-                          <th>Transaction ID</th>
-                          <th>Currency</th>
-                          <th>Amount</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let txn of txns">
-                          <td>{{ txn.createdAt }}</td>
-                          <td>{{ txnType[txn.type] }}</td>
-                          <th>{{ txn.txid }}</th>
-                          <td>{{ txn.currency }}</td>
-                          <td>{{ txn.value }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
 
-              </div>
             </div>
-              
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
 
 </main>
 <!--Main Layout-->
