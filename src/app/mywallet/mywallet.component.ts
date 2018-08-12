@@ -26,6 +26,12 @@ export class MywalletComponent implements OnInit {
     '3': 'Referral',
     '4': 'Bonus'
   };
+  currencyType: any = {
+    'btc': 'Bitcoin',
+    'eth': 'Ethereum',
+    'ltc': 'Litecoin',
+    'acex': 'Acex'
+  }
   data: any;
   @ViewChild('depositModal') depositModal: ModalComponent;
   @ViewChild('withdrawModal') withdrawModal: ModalComponent;
