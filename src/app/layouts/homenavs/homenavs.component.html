@@ -1,117 +1,95 @@
 <div class="sidenav">
-  <a class="logo navbar-brand text-center acex-a-logo">
-      <img src="assets/images/logo.svg" class="acex-main-logo">
-  </a>
+    <a class="logo navbar-brand text-center acex-a-logo">
+        <img src="assets/images/logo.svg" class="acex-main-logo">
+    </a>
 
-  <a class="acex-side-item" routerLink="/dashboard" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-snowflake-o" aria-hidden="true"></i></span>
-    Dashboard
-  </a>
-  <a class="acex-side-item" routerLink="/wallet" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
-    My Wallet
-  </a>
-  <a class="acex-side-item" routerLink="/referral" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-user-md" aria-hidden="true"></i></span>
-    Referral
-  </a>
-  <a class="acex-side-item" routerLink="/dashboard" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-sliders" aria-hidden="true"></i></span>
-    Settings
-  </a>
+    <a class="acex-side-item" routerLink="/dashboard" [routerLinkActive]="['active']">
+        <span class="Path"></span>
+        <span class="acex-sii"><i class="fa fa-snowflake-o" aria-hidden="true"></i></span>
+        Dashboard
+    </a>
+    <a class="acex-side-item" routerLink="/wallet" [routerLinkActive]="['active']">
+        <span class="Path"></span>
+        <span class="acex-sii"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
+        My Wallet
+    </a>
+    <a class="acex-side-item" routerLink="/referral" [routerLinkActive]="['active']">
+        <span class="Path"></span>
+        <span class="acex-sii"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+        Referral
+    </a>
+    <a class="acex-side-item" routerLink="/settings" [routerLinkActive]="['active']">
+        <span class="Path"></span>
+        <span class="acex-sii"><i class="fa fa-sliders" aria-hidden="true"></i></span>
+        Settings
+    </a>
 
-  <div class="text-center acex-buytokens">
-    <button type="button" (click)="buyAcexTokens()"class="btn waves-light acex-btn-buy-0" mdbWavesEffect>BUY TOKENS</button>
-  </div>
+    <div class="text-center acex-buytokens">
+        <button type="button" (click)="buyAcexTokens()" class="btn waves-light acex-btn-buy-0" mdbWavesEffect>BUY
+            TOKENS
+        </button>
+    </div>
 </div>
 
 <header class="h-100">
-  <mdb-navbar class="acex-home-navbar" SideClass="navbar navbar-expand-lg" [containerInside]="true">
-      <!-- <mdb-navbar-brand>
-          <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
-      </mdb-navbar-brand> -->
-      <links class="acex-links">
-          <ul class="navbar-nav mr-auto acex-uls">
-              <li class="nav-item active waves-light acex-user-profile" mdbWavesEffect>
-                  <!-- <a class="nav-link">Home <span class="sr-only">(current)</span></a> -->
-                  <div class="row">
-                    <div class="col-2">
-                        <img src="assets/img/profile-music.jpg" class="acex-profile-pic">
+    <mdb-navbar class="acex-home-navbar" SideClass="navbar navbar-expand-lg" [containerInside]="true">
+        <!-- <mdb-navbar-brand>
+            <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
+        </mdb-navbar-brand> -->
+        <links class="acex-links">
+            <ul class="navbar-nav mr-auto acex-uls">
+                <li class="nav-item active waves-light acex-user-profile" mdbWavesEffect>
+                    <!-- <a class="nav-link">Home <span class="sr-only">(current)</span></a> -->
+                    <div class="row">
+                        <div class="col-2">
+                            <img src="assets/img/profile-music.jpg" class="acex-profile-pic">
+                        </div>
+                        <div class="col-10">
+                            <p class="acex-user-name">{{ this.user.msg.name }}</p>
+                            <p class="acex-user-email">{{ this.user.msg.email }}</p>
+                        </div>
                     </div>
-                    <div class="col-10">
-                        <p class="acex-user-name">{{ this.user.msg.name }}</p>
-                        <p class="acex-user-email">{{ this.user.msg.email }}</p>
-                    </div>
-                  </div>
-              </li>
-              <li *ngIf="balance" class="nav-item waves-light acex-bal-nav" mdbWavesEffect>
-                  <div class="acex-bal-nav-div">
-                    <ul class="mr-auto acex-bal-nav-ul">
-                        <li>
+                </li>
+                <li *ngIf="balance" class="nav-item waves-light acex-bal-nav" mdbWavesEffect>
+                    <div class="acex-bal-nav-div">
+                        <ul class="mr-auto acex-bal-nav-ul">
+                            <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/bitcoin.svg"
-                                    class="bitcoin"> <span> {{ balance.btc | number: '1.2-5' }} BTC</span></p>
-                        </li>
-                        <li>
+                                                               class="bitcoin"> <span> {{ balance.btc | number: '1.2-5' }} BTC</span>
+                                </p>
+                            </li>
+                            <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/ethereum.svg"
-                                    class="ethereum">&nbsp;{{ balance.eth | number: '1.2-5' }}&nbsp;ETH</p>  
-                        </li>
-                        <li>
+                                                               class="ethereum">&nbsp;{{ balance.eth | number: '1.2-5'
+                                    }}&nbsp;ETH</p>
+                            </li>
+                            <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/litecoin.svg"
-                                    class="litecoin">&nbsp;&nbsp;{{ balance.ltc | number: '1.2-5' }}&nbsp;&nbsp;LTC</p>
-                        </li>
-                        <li>
+                                                               class="litecoin">&nbsp;&nbsp;{{ balance.ltc | number:
+                                    '1.2-5' }}&nbsp;&nbsp;LTC</p>
+                            </li>
+                            <li>
                                 <p class="acex-p-0">&nbsp;<img src="assets/img/ace-x.svg"
-                                    class="ace-x">&nbsp;{{ balance.acex | number: '1.2-2' }}&nbsp;ACEX</p>
-                        </li>
-                    </ul>
+                                                               class="ace-x">&nbsp;{{ balance.acex | number: '1.2-2' }}&nbsp;AceX
+                                </p>
+                            </li>
+                        </ul>
                     </div>
-              </li>
-              <!-- <li class="nav-item waves-light" mdbWavesEffect>
-                  <a class="nav-link">Link</a>
-              </li>
-              <li class="nav-item waves-light" mdbWavesEffect>
-                  <a class="nav-link">Link</a>
-              </li>
-              <li class="nav-item waves-light" mdbWavesEffect>
-                  <a class="nav-link">Link</a>
-              </li>
-              <li class="nav-item waves-light" mdbWavesEffect>
-                  <a class="nav-link">Link</a>
-              </li> -->
-              <li class="nav-item waves-light acex-li-profile" mdbWavesEffect>
-                <div class="row">
-                    <div class="col-8 text-right">
-                            <p class="nav-link logout text-right">Logout&nbsp;&nbsp;</p> 
+                </li>
+                <li class="nav-item waves-light acex-li-profile" mdbWavesEffect>
+                    <div class="row">
+                        <div class="col-8 text-right">
+                            <p class="nav-link logout text-right">Logout&nbsp;&nbsp;</p>
+                        </div>
+                        <div class="col-2 text-left">
+                            <a (click)="logout()"><img src="assets/img/logout.png" class="logouti"></a>
+                        </div>
                     </div>
-                    <div class="col-2 text-left">
-                       <a (click)="logout()"><img src="assets/img/logout.png" class="logouti"></a>
-                    </div>
-                </div>
-                
-              </li>
-          </ul>
-      </links>
-      
+
+                </li>
+            </ul>
+        </links>
+
     </mdb-navbar>
-  <!-- Main -->
-  <!-- <div class="view">
-    <div class="full-bg-img">
-        <div class="mask rgba-black-strong flex-center">
-            <div class="container">
-                <div class="white-text text-center wow fadeInUp">
-                    <h2>This Navbar isn't fixed</h2>
-                    <h5>When you scroll down it will disappear</h5>
-                    <br>
-                    <p>Full page intro with background image will be always displayed in full screen mode, regardless of device </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-  <!-- /.Main -->
 </header>
 <app-buy-tokens #buyAcex (successEvent)="recievedMessage($event)"></app-buy-tokens>

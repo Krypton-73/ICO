@@ -1,119 +1,124 @@
 @import '../../../assets/scss/variable.scss';
 
 .sidenav {
-    height: 100%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    @include homesidebar();
-    overflow-x: hidden;
-    // padding-top: 20px;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  @include homesidebar();
+  overflow-x: hidden;
+  // padding-top: 20px;
 }
 
 .sidenav a {
-    // padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 16px;
-    font-family: Poppins;
-    color: #fff;
-    display: block;
+  // padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: Poppins, sans-serif;
+  color: #fff;
+  display: block;
 }
 
 .sidenav a:hover {
-    color: $btnBorder;
+  color: $btnBorder;
 }
 
-
-
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
 }
 
 // home upper nav bar
 .acex-home-navbar {
-    background-color: $homenavbarcolor;
+  background-color: $homenavbarcolor;
 }
 
 // logo
 img.acex-main-logo {
-    width: 100px;
-    margin-top: 2%;
-    margin-bottom: 2%;
+  width: 100px;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
-
 
 // li upper
 li.nav-item.active.waves-light.acex-user-profile {
-    margin-left: 199px;
-    margin-top: 4px;
+  margin-left: 199px;
+  margin-top: 4px;
 }
+
 // main a logo
 a.acex-a-logo {
-    height: 60px;
-    width: 100%;
-    // padding: 0px;
-    // padding-top: 0px;
-    background-color: #1f2636;
-    margin-bottom: 10%;
+  height: 60px;
+  width: 100%;
+  // padding: 0px;
+  // padding-top: 0px;
+  background-color: #1f2636;
+  margin-bottom: 10%;
 }
 
 // menu items
 a.acex-side-item {
-    height: 45px;
-    width: 100%;
-    padding-left: 5%;
-    margin-top: 2%;
+  height: 45px;
+  width: 100%;
+  padding-left: 5%;
+  margin-top: 2%;
 }
+
 a.acex-side-item:hover {
-    color: $btnBorder;
-    background-color: #1f2636;
+  color: $btnBorder;
+  background-color: #1f2636;
 }
 
 a.acex-side-item.active {
-    color: $btnBorder;
-    background-color: #1f2636;
+  color: $btnBorder;
+  background-color: #1f2636;
 }
 
 @mixin pathline() {
-    width: 6px;
-    height: 45px;
-    background-color: #1f8efa;
-    /* background-color: var(--clear-blue); */
-    position: absolute;
-    left: 0;
+  width: 6px;
+  height: 45px;
+  background-color: #1f8efa;
+  /* background-color: var(--clear-blue); */
+  position: absolute;
+  left: 0;
 }
+
 .Path {
-    @include pathline();
-    display: none;
+  @include pathline();
+  display: none;
 }
-a.acex-side-item:hover .Path, a.acex-side-item.active .Path{
-    @include pathline();
-    display: inline;
+
+a.acex-side-item:hover .Path, a.acex-side-item.active .Path {
+  @include pathline();
+  display: inline;
 }
+
 a.acex-side-item i.fa {
-    border-radius: 50px;
-    background-color: #1f2636;
-    border-width: 5px;
-    display: inline-block;
-    border-radius: 60px;
-    box-shadow: 0px 0px 6px #1f2636;
-    padding: 0.8em 0.9em;
+  border-radius: 50px;
+  background-color: #1f2636;
+  border-width: 5px;
+  display: inline-block;
+  box-shadow: 0px 0px 6px #1f2636;
+  padding: 0.8em 0.9em;
 }
 
 // side btn
 .acex-btn-buy-0 {
-    // background-color: $welcomeNavbar;
-    // border-radius: 50px;
-    // border: 2px solid;
-    // border-color: $btnBorder;
-    // color: $btnBorder;
-    // font-size: 12px;
-    // font-weight: 600;
-    // height: 50px;
-    // width: 70%;
-    width: 202px;
+  // background-color: $welcomeNavbar;
+  // border-radius: 50px;
+  // border: 2px solid;
+  // border-color: $btnBorder;
+  // color: $btnBorder;
+  // font-size: 12px;
+  // font-weight: 600;
+  // height: 50px;
+  // width: 70%;
+  width: 202px;
   height: 40px;
   border-radius: 28px;
   box-shadow: 5px 0 10px 0 #222232;
@@ -122,112 +127,108 @@ a.acex-side-item i.fa {
   color: #1f8efa;
   padding-top: 10px;
   font-weight: 600;
-//   border: solid 2px var(--clear-blue);
+  //   border: solid 2px var(--clear-blue);
 }
 
 // user
 .acex-user-name {
-    width: 184px;
-//   height: 22px;
-  font-family: Poppins;
+  width: 184px;
+  //   height: 22px;
+  font-family: Poppins, sans-serif;
   font-size: 13px;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
-//   line-height: 1.69;
+  //   line-height: 1.69;
   letter-spacing: normal;
   color: #232b3d;
-  color: var(--dark);
   margin-bottom: -6px;
-    margin-top: 2px;
+  margin-top: 2px;
 }
 
 .acex-user-email {
-    width: 184px;
-    // height: 22px;
-    font-family: Poppins;
-    font-size: 13px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    // line-height: 1.69;
-    letter-spacing: normal;
-    color: #232b3d;
-    color: var(--dark);
+  width: 184px;
+  // height: 22px;
+  font-family: Poppins, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  // line-height: 1.69;
+  letter-spacing: normal;
+  color: #232b3d;
 }
-
 
 // logout
 .logout {
-    // width: 57px;
-    // height: 26px;
-    opacity: 0.5;
-    font-family: Poppins;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    // letter-spacing: 0.5px;
-    color: #242e42;
-    text-align: right;
-    margin-top: 5px;
+  // width: 57px;
+  // height: 26px;
+  opacity: 0.5;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  // letter-spacing: 0.5px;
+  color: #242e42;
+  text-align: right;
+  margin-top: 5px;
 }
+
 .logouti {
-    width: 40px;
-  height: 40px;margin-left: -25px;
+  width: 40px;
+  height: 40px;
+  margin-left: -25px;
 }
 
 li.nav-item.waves-light.acex-li-profile {
-    float: right;
-    right: 0;
-    position: absolute;
-    margin-right: 4%;
-    margin-top: 4px;
+  float: right;
+  right: 0;
+  position: absolute;
+  margin-right: 4%;
+  margin-top: 4px;
 }
-
 
 // user profile
 .acex-profile-pic {
-    width: 40px;
+  width: 40px;
   height: 40px;
   border-radius: 50px;
 }
 
-
 //  acex-buytokens
 .acex-buytokens {
-    margin-top: 15%;
+  margin-top: 15%;
 }
-
-
 
 // balance crpto
 .acex-bal-nav {
-    // width: 459.6px;
-//   height: 36px;
+  // width: 459.6px;
+  //   height: 36px;
   border-radius: 4px;
   border: solid 0.2px #1f8efa;
-  border: solid 0.2px var(--clear-blue);
 }
-// 
+
+//
 ul.acex-bal-nav-ul {
-    list-style: none;list-style-type: none;
+  list-style: none none;
 }
+
 ul.acex-bal-nav-ul li {
-    display: inline-block;
+  display: inline-block;
 }
+
 p.acex-p-0 img {
-    width: 16px;
-    margin-top: -2px;
+  width: 16px;
+  margin-top: -2px;
 }
+
 .acex-bal-nav {
-    margin-left: -40px;
-    margin-top: 6px;
-    border-radius: 4px;
-    border: solid 0.2px var(--clear-blue);
-    border: solid 1px #1f8efa;
-    margin-top: 10px;
-    height: 25px;
-    padding-right: 5px;
+  margin-left: 0;
+  border-radius: 4px;
+  border: solid 1px #1f8efa;
+  margin-top: 10px;
+  height: 25px;
+  padding-right: 5px;
 }
