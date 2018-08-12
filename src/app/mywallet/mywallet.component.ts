@@ -56,7 +56,7 @@ export class MywalletComponent implements OnInit {
 
   getWallet(currency: string): void {
     if (sessionStorage.getItem(currency)) {
-      this.address = sessionStorage.getItem(currency);
+      this.address = JSON.parse(sessionStorage.getItem(currency));
       this.depositModal.show(currency, this.address);
     } else {
       this.address = this.getWalletAddress(currency);

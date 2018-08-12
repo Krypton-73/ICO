@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ModalDirective } from 'angular-bootstrap-md';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modal',
@@ -16,7 +17,9 @@ export class ModalComponent implements OnInit {
   amount: string;
   public QRaddress:string = '';
 
-  constructor() { 
+  constructor(
+    public toastr: ToastrService
+  ) { 
   }
 
   ngOnInit() {
@@ -41,5 +44,9 @@ export class ModalComponent implements OnInit {
 
   hideWithdraw() {
     this.withdrawModal.hide();
+  }
+
+  depositClip() {
+    this.toastr.info('Copied to Clipboard');
   }
 }

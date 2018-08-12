@@ -47,6 +47,7 @@ import { DataService } from './services/data.service';
 import { UserService } from './services/user.service';
 import { ResetPasswordComponent } from './auth2/reset-password/reset-password.component';
 import { VerifyEmailComponent } from './auth2/verify-email/verify-email.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { VerifyEmailComponent } from './auth2/verify-email/verify-email.componen
     BuyTokensComponent,
     ModalComponent,
     ResetPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

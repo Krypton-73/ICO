@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authenticationService';
 import { ToastrService } from 'ngx-toastr';
-
+import { PasswordValidator } from '../../_models/PasswordValidator';
 
 @Component({
   selector: 'app-loginauth',
@@ -19,7 +19,7 @@ export class LoginauthComponent implements OnInit {
   verified: boolean;
   email: string;
   data: any;
-  agree: boolean;
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -37,11 +37,12 @@ export class LoginauthComponent implements OnInit {
     });
     this.registerForm = this.formBuilder.group( {
       name: ['', Validators.required],
-      mobile:  ['', Validators.required],
-      password: ['', Validators.required],
-      refId:  [''],
+      mobile:  ['', [Validators.required, Validators.minLength(7)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      refId:  ['', Validators.minLength(7)],
       email:  ['', [Validators.required, Validators.email]],
-      cPassword:  ['', Validators.required]
+      cPassword:  ['', [Validators.required, Validators.minLength(6)]],
+      agree: ['', Validators.required]
     });
   }
 

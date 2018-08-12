@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MywalletComponent } from './mywallet/mywallet.component';
 import { ReferralsComponent } from './referrals/referrals.component';
 import { LoggedIn } from './guards/logged-in';
+import { SettingsComponent } from './settings/settings.component';
 
 
 
@@ -74,6 +75,12 @@ const routes: Routes = [
     component: ReferralsComponent,
     canActivate: [ AuthGuard ],
     data: { title: 'Acex | Referrals'}
+  },
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [ AuthGuard ],
+    data: { title: 'Acex | Settings'}
   },
   {
       path: '**',
