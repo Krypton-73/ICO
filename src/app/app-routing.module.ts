@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-<<<<<<< HEAD
+
 import { VerifyotpComponent } from './auth/verifyotp/verifyotp.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -14,10 +14,7 @@ import { MywalletComponent } from './mywallet/mywallet.component';
 import { ReferralsComponent } from './referrals/referrals.component';
 import { LoggedIn } from './guards/logged-in';
 import { SettingsComponent } from './settings/settings.component';
-=======
-import {VerifyotpComponent} from './auth/verifyotp/verifyotp.component';
-import {AuthGuard} from './guards/auth.guard';
->>>>>>> origin/junaidev
+
 
 import {LoginauthComponent} from './auth2/loginauth/loginauth.component';
 import {LoginauthforgotpasswordComponent} from './auth2/loginauthforgotpassword/loginauthforgotpassword.component';
