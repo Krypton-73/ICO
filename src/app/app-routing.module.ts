@@ -50,6 +50,12 @@ const routes: Routes = [
     canActivate: [ LoggedIn ]
   },
   {
+    path: 'auth/referral/:refId',
+    component: LoginauthComponent,
+    data: { title: 'Acex Auth'},
+    canActivate: [ LoggedIn ]
+  },
+  {
     path: 'auth/reset-password/:email/:verCode',
     component: ResetPasswordComponent,
     data: { title: 'Acex | Reset Password' },

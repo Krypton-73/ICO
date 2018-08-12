@@ -57,7 +57,7 @@
                   </div>
                   <div class="col">
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signuprefId" class="form-control" formControlName="refId">
+                      <input mdbInputDirective type="text" id="signuprefId" [attr.disabled]="refId ? true : null" class="form-control" formControlName="refId">
                       <label for="signuprefId" class="">Referral ID(optional)</label>
                     </div>
     

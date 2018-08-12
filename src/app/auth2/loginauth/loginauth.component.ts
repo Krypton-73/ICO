@@ -18,6 +18,7 @@ export class LoginauthComponent implements OnInit {
   submitted: any = false;
   verified: boolean;
   email: string;
+  refId: string;
   data: any;
 
   constructor(
@@ -30,6 +31,10 @@ export class LoginauthComponent implements OnInit {
 
   ngOnInit() {
     this.email = this.route.snapshot.paramMap.get('email');
+    this.refId = this.route.snapshot.paramMap.get('refId');
+    if (this.refId) {
+      console.log(this.refId);
+    }
 
     this.loginForm = this.formBuilder.group( {
       email: [this.email, [Validators.required, Validators.email]],
@@ -39,7 +44,7 @@ export class LoginauthComponent implements OnInit {
       name: ['', Validators.required],
       mobile:  ['', [Validators.required, Validators.minLength(7)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      refId:  ['', Validators.minLength(7)],
+      refId:  [this.refId, Validators.minLength(7)],
       email:  ['', [Validators.required, Validators.email]],
       cPassword:  ['', [Validators.required, Validators.minLength(6)]],
       agree: ['', Validators.required]

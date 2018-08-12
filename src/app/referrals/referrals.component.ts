@@ -44,7 +44,7 @@ export class ReferralsComponent implements OnInit {
   }
 
   ref() {
-    this.refLink = `http://ico.acex.trade/#/auth/${this.refId}`;
+    this.refLink = `http://ico.acex.trade/#/auth/referral/${this.refId}`;
     this.toastr.success('Copied to Clipboard');
   }
 }
