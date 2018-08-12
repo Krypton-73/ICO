@@ -19,6 +19,7 @@ export class LoginauthComponent implements OnInit {
   verified: boolean;
   email: string;
   refId: string;
+  tab: string = 'login'
   data: any;
 
   constructor(
@@ -33,7 +34,7 @@ export class LoginauthComponent implements OnInit {
     this.email = this.route.snapshot.paramMap.get('email');
     this.refId = this.route.snapshot.paramMap.get('refId');
     if (this.refId) {
-      console.log(this.refId);
+      this.tab='register';
     }
 
     this.loginForm = this.formBuilder.group( {

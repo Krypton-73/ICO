@@ -5,8 +5,8 @@
       <div class="card">
         <div class="card-body">
           
-          <ngb-tabset [justify]="currentJustify">
-            <ngb-tab [formGroup]="loginForm">
+          <ngb-tabset [activeId]="tab" [justify]="currentJustify">
+            <ngb-tab id="login"  [formGroup]="loginForm">
               <ng-template ngbTabTitle class="acex-tab-title"><b class="acex-login-text">SIGN IN</b></ng-template>
               <ng-template ngbTabContent>
                 
@@ -33,7 +33,7 @@
                 
               </ng-template>
             </ngb-tab>
-            <ngb-tab [formGroup]="registerForm">
+            <ngb-tab id="register" [formGroup]="registerForm">
               <ng-template ngbTabTitle class="acex-tab-title"><b class="acex-login-text">SIGN UP</b></ng-template>
               <ng-template ngbTabContent>
                 
