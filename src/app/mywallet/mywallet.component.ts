@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 // import { DialogService } from "ng2-bootstrap-modal";
 
 // import { DepositModalComponent } from '../deposit-modal/deposit-modal.component';
@@ -33,6 +34,8 @@ export class MywalletComponent implements OnInit {
     'acex': 'Acex'
   }
   data: any;
+  error: any;
+
   @ViewChild('depositModal') depositModal: ModalComponent;
   @ViewChild('withdrawModal') withdrawModal: ModalComponent;
 
@@ -42,20 +45,27 @@ export class MywalletComponent implements OnInit {
     private authenticationService: AuthenticationService,
     public toastr: ToastrService,
     public load: LoaderService,
-    private dataService: DataService
+    private dataService: DataService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.userService.getTxns().pipe().subscribe(
       data => {
         this.data = data;
-        if (this.data.code===401) {
-          return this.authenticationService.logout();
+        if (this.data.code===200) {
+          let i: any;
+          for (i = 0; i < this.data.msg.length; i++) {
+            this.txns.push(this.data.msg[i]);
+          }
         }
-        let i: any;
-        for (i = 0; i < this.data.msg.length; i++) {
-          this.txns.push(this.data.msg[i]);
+      },
+      error => {
+        this.error = error;
+        if (this.error.code===401) {
+          return  this.logout();
         }
+        this.toastr.error('Error connecting to server');
       }
     );
   }
@@ -79,7 +89,11 @@ export class MywalletComponent implements OnInit {
         }
       },
       error => {
-        this.toastr.warning('Unable to establish connection with the server. Please try again.');
+        this.error = error;
+        if (this.error.code===401) {
+          this.logout();
+        }
+        this.toastr.error('Error connecting to server');
       }
     );
   }
@@ -89,7 +103,16 @@ export class MywalletComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.authenticationService.logout().pipe().subscribe(
+      data => {
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      },
+      error => {
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      }
+    );
   }
 
 }

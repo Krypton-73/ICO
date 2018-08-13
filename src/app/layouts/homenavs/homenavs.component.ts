@@ -18,6 +18,7 @@ import { Rate } from '../../_models/rate';
 })
 export class HomenavsComponent implements OnInit {
   data: any;
+  error: any;
   user: any;
   balance: Balance;
   rate: Rate;
@@ -44,6 +45,10 @@ export class HomenavsComponent implements OnInit {
       }
     },
     error => {
+      this.error = error;
+      if (this.error.code===401){
+        return this.logout();
+      }
       this.toastr.error('Error connecting to server');
     });
     this.userService.getRate().pipe().subscribe(
@@ -55,7 +60,11 @@ export class HomenavsComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
+      this.error = error;
+      if (this.error.code===401){
+        return this.logout();
+      }
+      this.toastr.error('Error connecting to server');
       }
     );
     this.load.hide();
@@ -73,7 +82,6 @@ export class HomenavsComponent implements OnInit {
 
   newBalance() {
     if (this.balance) {
-    console.log(this.balance);
     this.dataService.newBalance(this.balance);
     }
   }
@@ -85,8 +93,15 @@ export class HomenavsComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout().pipe().subscribe();
-    window.sessionStorage.clear();
-    this.router.navigate(['/auth']);
+    this.authenticationService.logout().pipe().subscribe(
+      data => {
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      },
+      error => {
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      }
+    );
   }
 }

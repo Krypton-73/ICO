@@ -67,9 +67,11 @@ export class AuthenticationService {
       })
     }
     return this.http.post(`${baseUrl}/logout`, { email: this.yolo.msg.email }, this.httpOptions)
-  //   .pipe(map(data => {
-  //     return data;
-  //   }));
+    .pipe(map(data => {
+      console.log(data);
+      return data;
+    }
+  ));
   }
 
 }

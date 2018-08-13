@@ -1,4 +1,5 @@
 import {Component, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authenticationService';
@@ -32,7 +33,8 @@ export class BuyTokensComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private load: LoaderService,
     private toastr: ToastrService,
-    public dataService: DataService
+    public dataService: DataService,
+    private router: Router
   ) {}
 
   ngOnInit () {
@@ -90,14 +92,27 @@ export class BuyTokensComponent implements OnInit {
       },
       error => {
         if (error.code===401) {
-          this.authenticationService.logout();
           this.toastr.info('Unable to connect to server. Please retry login.');
+          return this.logout();
         }
         this.toastr.error('Insufficient Funds');
       }
     );
   }
     // this.load.hide();
+  }
+
+  logout() {
+    this.authenticationService.logout().pipe().subscribe(
+      data => {
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      },
+      error => {
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      }
+    )
   }
   
 }
