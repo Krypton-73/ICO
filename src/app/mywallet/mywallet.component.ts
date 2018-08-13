@@ -28,10 +28,10 @@ export class MywalletComponent implements OnInit {
     '4': 'Bonus'
   };
   currencyType: any = {
-    'btc': 'Bitcoin',
-    'eth': 'Ethereum',
-    'ltc': 'Litecoin',
-    'acex': 'Acex'
+    'btc': 'BTC',
+    'eth': 'ETH',
+    'ltc': 'LTC',
+    'acex': 'ACEX'
   }
   data: any;
   error: any;

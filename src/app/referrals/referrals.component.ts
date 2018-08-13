@@ -18,6 +18,12 @@ export class ReferralsComponent implements OnInit {
   yolo: any;
   refId: any;
   refLink:any;
+  currencyType: any = {
+    'btc': 'BTC',
+    'eth': 'ETH',
+    'ltc': 'LTC',
+    'acex': 'ACEX'
+  }
 
   constructor(
   private userService: UserService,
