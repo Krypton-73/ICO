@@ -19,7 +19,7 @@
                     <button type="submit"  (click)="otp()" class="btn waves-light acex-btn-signin" mdbWavesEffect>Submit</button>
                   </div>
                   <div class="text-center">
-                      <a routerLink="/auth" class="forgot-user">Resend OTP?</a>
+                      <a (click)="resendOtp()" class="forgot-user">Resend OTP?</a>
                   </div>
                   
                 </ng-template>

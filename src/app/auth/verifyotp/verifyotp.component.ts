@@ -37,15 +37,6 @@ export class VerifyotpComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.userEmail = params.email;
     });
-    // // const email = this.activeroute.snapshot.paramMap.get('token');
-    // if (this.userEmail) {
-    //   const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
-    //   const cryptEmail = this.cryptostore.getCryptValue(this.userEmail);
-    //   if (getEmail === this.userEmail && this.keyevent.validateEmail(cryptEmail)) {
-    //     this.otpForm.get('otpFormEmail').setValue(cryptEmail);
-    //     // console.log(cryptEmail);
-    //   }
-    // }
   }
 
   otp() {
@@ -61,7 +52,6 @@ export class VerifyotpComponent implements OnInit {
           this.load.hide();
           if (this.data.code === 200 && this.data.msg.jwt) {
             this.toastr.success('Welcome to AceX!', null, { timeOut: 4000 });
-            const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
             this.router.navigate(['/dashboard']);
           }
         },

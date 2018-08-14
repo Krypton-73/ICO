@@ -6,7 +6,7 @@
         <button type="button" class="close pull-right" aria-label="Close" (click)="depositModal.hide()">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Your {{ currency }} address is:</h4>
+        <h4 class="modal-title w-100" id="myModalLabel">Your {{ currencyType[currency] }} address is:</h4>
       </div>
       <div *ngIf="address" class="modal-body">
         <label for="address" class="">{{ address }}
@@ -32,7 +32,7 @@
         <button type="button" class="close pull-right" aria-label="Close" (click)="withdrawModal.hide()">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Withdraw {{ currency }}</h4>
+        <h4 class="modal-title w-100" id="myModalLabel">Withdraw {{ currencyType[currency] }}</h4>
       </div>
       <div class="modal-body">
         <div class="md-form">
