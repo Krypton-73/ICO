@@ -12,7 +12,6 @@ import 'rxjs/add/operator/mergeMap';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ocgdemo';
 
   constructor(
     private activeroute: ActivatedRoute,

@@ -1,5 +1,5 @@
 export class Txn {
-    createdAt: any;
+    createdAt: number;
     txid: any;
     value: any;
     currency: any;

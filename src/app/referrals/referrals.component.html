@@ -55,7 +55,7 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let txn of txns">
-                          <td>{{ txn.createdAt }}</td>
+                          <td>{{ txn.createdAt * 1000 | date: 'yyyy-MM-dd HH:mm' }}</td>
                           <td>{{ txn.txid }}</td>
                           <td>{{ currencyType[txn.currency] }}</td>
                           <td>{{ txn.value }}</td>
