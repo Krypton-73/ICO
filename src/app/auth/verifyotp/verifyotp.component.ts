@@ -64,28 +64,8 @@ export class VerifyotpComponent implements OnInit {
     }
   }
 
-  // resend() {
-  //   this.load.show();
-  //   const data = this.cryptostore.retrieveFromLocal('AcexUserEmail');
-  //   this.auth.resend(data)
-  //   .subscribe(
-  //     d => {
-  //       // console.log(d);
-  //       this.load.hide();
-  //       if (d.code === 200) {
-  //         this.toastr.success('Link sent successfully', null, { timeOut: 4000 });
-  //         const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
-  //           this.router.navigate(['/auth/sent', getEmail]);
-  //       } else {
-  //         this.toastr.error('Unable to send request', null, { timeOut: 4000 });
-  //       }
-  //     },
-  //     e => {
-  //       // console.log(e);
-  //       this.load.hide();
-  //       this.toastr.error('Invalid request', null, { timeOut: 4000 });
-  //     }
-  //   );
-  // }
+  resendOtp() {
+    
+  }
 
 }
