@@ -40,34 +40,45 @@
                 <div class="row">
                   <div class="col">
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupfname" class="form-control" formControlName="name">
+                      <input mdbInputDirective type="text" id="signupfname" class="form-control" 
+                      formControlName="name" pattern="^[a-zA-Z\s]{2,}$" [successMessage]="' '" 
+                      [errorMessage]="registerForm.get('name').invalid ? 'Please enter valid name.':' '">
                       <label for="signupfname" class="">Full Name</label>
                     </div>
 
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupmobno" class="form-control" formControlName="mobile">
-                      <label for="signupmobno" class="">Mobile No</label>
+                      <input mdbInputDirective type="text" id="signupmobno" class="form-control" 
+                      formControlName="mobile" pattern="^[0-9]+$"
+                      [successMessage]="' '" 
+                      [errorMessage]="registerForm.get('mobile').invalid ? 'Mobile no must be number' : 'Required'">
+                      <label for="signupmobno" class="">Mobile Number</label>
                     </div>
     
                     <div class="md-form">
-                      <input mdbInputDirective type="password" id="signuppassword" class="form-control" formControlName="password">
+                      <input mdbInputDirective type="password" id="signuppassword" class="form-control" 
+                      formControlName="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"
+                      [successMessage]="' '" [errorMessage]="registerForm.get('password').invalid ? 'Must be atleast 8 characters with lc, UC, number & SC(!-*)' : '' ">
                       <label for="signuppassword" class="">Password</label>
                     </div>
 
                   </div>
                   <div class="col">
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signuprefId" [attr.disabled]="refId ? true : null" class="form-control" formControlName="refId">
-                      <label for="signuprefId" class="">Referral ID(optional)</label>
+                      <input mdbInputDirective type="text" id="signuprefId" [attr.disabled]="refId ? true : null" 
+                      class="form-control" formControlName="refId" pattern="^[0-9]{7}$" [successMessage]="' '"
+                      [errorMessage]="registerForm.get('refId').invalid ? 'Must be 7 digits.' : ' '">
+                      <label for="signuprefId" class="">Referral ID</label>
                     </div>
     
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupemail" class="form-control" formControlName="email">
+                      <input mdbInputDirective type="text" id="signupemail" class="form-control" 
+                      formControlName="email" [successMessage]="' '">
                       <label for="signupemail" class="">Email</label>
                     </div>
 
                     <div class="md-form">
-                      <input mdbInputDirective type="password" id="signupcpassword" class="form-control" formControlName="cPassword">
+                      <input mdbInputDirective type="password" id="signupcpassword" class="form-control"
+                       formControlName="cPassword" [mdbValidate]="false">
                       <label for="signupcpassword" class="">Confirm Password</label>
                     </div>
 
