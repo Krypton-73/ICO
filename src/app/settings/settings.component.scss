@@ -1,0 +1,109 @@
+@import '../../assets/scss/variable.scss';
+
+.main-div {
+    margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+    padding: 0px 10px;
+    background-color: #fcfdff;
+    background-color: var(--ice-blue);
+}
+
+// side btn
+.acex-btn-buy-0 {
+    width: 182px;
+  height: 40px;
+  border-radius: 28px;
+  box-shadow: 5px 0 10px 0 #fff;
+  background-color: #fff;
+  border: solid 2px #1f8efa;
+  color: #1f8efa;
+  padding-top: 8px;
+  font-weight: 600;
+  float: right;
+  margin-top: -10px;
+//   border: solid 2px var(--clear-blue);
+}
+
+.body-title {
+    font-family: Poppins;
+  font-size: 16.2px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.22;
+  letter-spacing: 0.5px;
+  color: #232d41;
+}
+
+
+// balances cards
+div.card.acex-bal-card-0 {
+    // width: 210.6px;
+    height: 112.5px;
+    border-radius: 9px;
+    background-color: #242e42;
+    box-shadow: -12px 13px 26px 0 rgba(25, 33, 48, 0.16);
+}
+
+p.acex-p-0 {
+    width: 100%;
+  height: 24px;
+  font-family: Poppins;
+  font-size: 14.4px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.9px;
+  color: var(--clear-blue);
+  color: #1f8efa;
+  margin-top:6px;
+  margin-left: 2.5%;
+}
+
+p.acex-p-1 {
+    width: 100%;
+    height: 41px;
+    font-family: Poppins;
+    font-size: 25.2px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    color: var(--white);
+    // margin-top: 50px;
+}
+
+
+
+// buy steps
+.acex-steps-0-0 {
+    // width: 100%;
+  height: 15px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  color: #272734;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.acex-steps-0-1 {
+    width: 100%;
+    height: 26px;
+    opacity: 0.5;
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: #272734;
+}

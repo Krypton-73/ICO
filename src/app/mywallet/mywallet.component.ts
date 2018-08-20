@@ -64,9 +64,9 @@ export class MywalletComponent implements OnInit {
         }
       },
       error => {
-        this.error = error;
+        this.error = error.error;
         if (this.error.code===401) {
-          return  this.logout();
+         return this.logout();
         }
         this.toastr.error('Error connecting to server');
       }
@@ -92,7 +92,7 @@ export class MywalletComponent implements OnInit {
         }
       },
       error => {
-        this.error = error;
+        this.error = error.error;
         if (this.error.code===401) {
           this.logout();
         }

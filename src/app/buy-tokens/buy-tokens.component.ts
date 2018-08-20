@@ -20,6 +20,7 @@ export class BuyTokensComponent implements OnInit {
   currency: string;
   amountOfAcex: number;
   data: any;
+  error: any;
   balance: Balance;
   rate: Rate;
   acexBal: any;
@@ -91,7 +92,8 @@ export class BuyTokensComponent implements OnInit {
         this.successEvent.emit(true);
       },
       error => {
-        if (error.code===401) {
+        this.error = error.error;
+        if (this.error.code===401) {
           this.toastr.info('Unable to connect to server. Please retry login.');
           return this.logout();
         }

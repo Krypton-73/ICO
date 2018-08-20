@@ -19,7 +19,7 @@
                                                                  class="bitcoin">&nbsp;&nbsp;BITCOIN</p>
 
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.btc | number: '1.2-5'}}
+                                            {{ balance.btc ? prefixNosByFix(balance.btc) : '0' }}
                                         </p>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                                                                  class="ethereum">&nbsp;&nbsp;ETHEREUM</p>
 
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.eth | number: '1.2-5'}}
+                                            {{ balance.eth ? prefixNosByFix(balance.eth) : '0' }}
                                         </p>
                                     </div>
                                 </div>
@@ -45,7 +45,7 @@
                                                                  class="litecoin">&nbsp;&nbsp;LITECOIN</p>
 
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.ltc | number: '1.2-5' }}
+                                            {{ balance.ltc ? prefixNosByFix(balance.eth) : '0' }}
                                         </p>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                                                  class="ace-x">&nbsp;&nbsp;ACEX</p>
 
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.acex | number: '1.2-5' }}
+                                            {{ balance.acex ? prefixNosByFix(balance.acex) : '0' }}
                                         </p>
                                     </div>
                                 </div>

@@ -15,7 +15,7 @@ export class ModalComponent implements OnInit {
   address: string;
   destAddress: string;
   amount: string;
-  public QRaddress:string = '';
+  QRaddress:string = '';
   currencyType: any = {
     'btc': 'BTC',
     'eth': 'ETH',

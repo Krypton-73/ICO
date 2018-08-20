@@ -49,7 +49,7 @@ export class ReferralsComponent implements OnInit {
         }
       },
       error => {
-        this.error = error;
+        this.error = error.error;
         if (this.error.code===401){
           return this.logout();
         }

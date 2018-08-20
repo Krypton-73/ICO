@@ -1,1 +1,51 @@
 <app-homenavs></app-homenavs>
+<!--Main Layout-->
+<main class="main-div">
+
+  <div class="container main-container">
+      <div class="row" style="margin-top: 2%">
+          <div class="col-md-6">
+
+            <div class="card">
+              <div class="card-body">
+                <p class="body-title">PROFILE</p>
+                <hr class="acex-hr">
+                <div class="body-desc">
+                  <label class="acex-steps-0-0">Name: {{ this.user.msg.name }}</label><br>
+                  <label class="acex-steps-0-0">Email: {{ this.user.msg.email }}</label><br>
+                  <label class="acex-steps-0-0">Mobile No: {{ this.user.msg.mobile }}</label><br>
+                </div>
+                <div class="text-center">
+                  <button disabled type="button" class="btn btn-sm btn-info btn-floating waves-effect">EDIT</button>
+                </div>
+              </div>
+            </div>
+              
+          </div>
+          <div class="col-md-6">
+
+            <div class="card">
+              <div class="card-body">
+                <p class="body-title">KYC</p>
+                <hr class="acex-hr">  
+                <div class="body-desc" [formGroup]="KycForm">
+                  <div class="row">
+                    <div class="col">
+                      <div class="md-form">
+                        <input mdbInputDirective type="text" id="signupfname" class="form-control" 
+                        formControlName="name" pattern="^[a-zA-Z\s]{2,}$" [successMessage]="' '" 
+                        [errorMessage]="registerForm.get('name').invalid ? 'Please enter valid name.':' '">
+                        <label for="signupfname" class="">Full Name</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+          </div>
+      </div>
+  </div>
+
+</main>
+<!--Main Layout-->
