@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-settings',
@@ -7,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  user: any;
+  user: User;
+  individualForm: boolean;
+  companyForm: boolean;
+
   constructor() { }
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
   }
 
+
+    addUserInformation() {
+    }
 }
