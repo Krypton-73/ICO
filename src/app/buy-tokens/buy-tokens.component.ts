@@ -1,5 +1,6 @@
 import {Component, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authenticationService';
@@ -11,14 +12,15 @@ import { DataService } from '../services/data.service';
 import { Balance } from '../_models/balance';
 import { Rate } from '../_models/rate';
 
+
 @Component({
   selector: 'app-buy-tokens',
   templateUrl: './buy-tokens.component.html',
   styleUrls: ['./buy-tokens.component.scss']
 })
 export class BuyTokensComponent implements OnInit {
-  currency: string;
-  amountOfAcex: number;
+  buyForm: FormGroup;
+  currentJustify = "fill";
   data: any;
   error: any;
   balance: Balance;
@@ -35,13 +37,21 @@ export class BuyTokensComponent implements OnInit {
     private load: LoaderService,
     private toastr: ToastrService,
     public dataService: DataService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private formBuilder: FormBuilder
+    ) {}
 
   ngOnInit () {
+    this.buyForm = this.formBuilder.group({
+      currency: ['btc', Validators.required],
+      amountOfAcex: ['', [Validators.required, Validators.min(0), Validators.pattern]]
+    });
+
     this.dataService.currentBalance.subscribe(balance => { this.balance = balance });
     this.dataService.currentRate.subscribe(rate => { this.rate = rate });
   }
+
+  get f () { return this.buyForm.controls };
 
   @ViewChild('buyAcex') buyAcex: ModalDirective;
 
@@ -51,6 +61,12 @@ export class BuyTokensComponent implements OnInit {
 
   hide() {
     this.buyAcex.hide();
+  }
+
+  amtOfAcex(tokens: number) {
+    if(this.f.amountOfAcex.errors){
+      return;
+    }
   }
 
   balanceCheck(currency, amountOfAcex) {
@@ -76,12 +92,16 @@ export class BuyTokensComponent implements OnInit {
   }
 
   buyAcexTokens() {
-    const bool: boolean = this.balanceCheck(this.currency, this.amountOfAcex);
+    console.log('Hello');
+    if (this.buyForm.invalid) {
+      return;
+    }
+    const bool: boolean = this.balanceCheck(this.f.currency, this.f.amountOfAcex);
     if(bool == false) {
       return this.toastr.warning('Insufficient funds');
     }
     if(bool == true) {
-    this.userService.buyAcex(this.currency, this.amountOfAcex)
+    this.userService.buyAcex(this.f.currency, this.f.amountOfAcex)
     .pipe().subscribe(
       data => {
         this.data = data;
@@ -97,7 +117,7 @@ export class BuyTokensComponent implements OnInit {
           this.toastr.info('Unable to connect to server. Please retry login.');
           return this.logout();
         }
-        this.toastr.error('Insufficient Funds');
+        this.toastr.error('Error');
       }
     );
   }

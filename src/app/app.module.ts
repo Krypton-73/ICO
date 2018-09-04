@@ -21,6 +21,7 @@ import { CryptostoreService } from './services/cryptostore.service';
 import { LoaderService } from './layouts/loading/loading.service';
 import { KeyeventService } from './services/keyevent.service';
 import { HomeService } from './services/home.service';
+import { InternationalPhoneModule } from 'ng4-intl-phone';
 
 // import { AppLoadingModule } from './layouts/loading/loading.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -94,7 +95,8 @@ import { SettingsComponent } from './settings/settings.component';
     HttpClientModule,
     HighchartsChartModule,
     NgbModule.forRoot(),
-    ClipboardModule
+    ClipboardModule,
+    InternationalPhoneModule
   ],
   providers: [
     GlobalsService,
