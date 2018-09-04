@@ -1,30 +1,31 @@
 <div mdbModal #buyAcex="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mybuyModalLabel"
-  aria-hidden="true">
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <b class="text-center acex-login-text" id="myModalLabel">BUY ACEX</b>
         <button type="button" class="close pull-right" aria-label="Close" (click)="buyAcex.hide()">
           <span aria-hidden="true">×</span>
         </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Buy AceX</h4>
       </div>
-      <div class="modal-body">
-              <div class="form-group">
-                <label for="currency">Currency</label>
-                <select class="form-control" id="currency" [(ngModel)]="currency" required>
-                  <!--<option value="" disabled selected>Currency</option>-->
-                  <option value="btc">Bitcoin</option>
-                  <option value="eth">Ethereum</option>
-                  <option value="ltc">Litecoin</option>
-                </select>
-              </div>
-              <div class="md-form">
-                <label for="amountOfAcex">Amount of AceX Tokens</label>
-                <input class="form-control" mdbInputDirective type="number" id="amountOfAcex" [(ngModel)]="amountOfAcex" required>
-              </div>
-      <div class="modal-footer text-center">
-            <button type="submit" (click)="buyAcexTokens()" class="btn btn-primary waves-light acex-btn-signin" mdbWavesEffect>Buy Tokens</button>
-      </div>
+      <div class="modal-body" [formGroup]="buyForm">
+        <div class="form-group">
+          <label for="currency">Currency</label>
+          <select class="form-control" id="currency" formControlName="currency">
+            <!--<option value="" disabled selected>Currency</option>-->
+            <option value="btc">Bitcoin</option>
+            <option value="eth">Ethereum</option>
+            <option value="ltc">Litecoin</option>
+          </select>
+        </div>
+        <div class="md-form">
+          <label for="amountOfAcex">Amount of AceX Tokens</label>
+          <input class="form-control" mdbInputDirective type="number" id="amountOfAcex"
+                 formControlName="amountOfAcex" [successMessage]="' '" [errorMessage]="'Invalid Input'">
+        </div>
+        <div class="modal-footer text-center">
+          <button type="submit" (click)="buyAcexTokens()" class="btn waves-light acex-btn-signin" mdbWavesEffect>Buy Tokens</button>
+        </div>
       </div>
     </div>
   </div>

@@ -32,152 +32,10 @@
 
                   <div class="row">
                       <div class="content_wrap">
-                          <div class="content_nav">
-                              <div class="blocks">
-                                  <div class="blocks_no green person_blk" id="one" data-id="#two">
-                                      1
-                                  </div>
-                                  <div class="blocks_capt">
-                                      Personal Information
-                                  </div>
-                              </div>
-                              <div class="blocks">
-                                  <div class="blocks_no req_blk" id="two">
-                                      2
-                                  </div>
-                                  <div class="blocks_capt">
-                                      Required Documents,<br>
-                                      Terms and Conditions
-                                  </div>
-                              </div>
-                          </div>
 
                           <div class="main_container">
-                              <div class="personal_wrap wraps_common" id="personal_1" >
-                                  <h2>
-                                      Personal Information
-                                  </h2>
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_left txt_bx">
-                                          <div class="text_desc">First Name</div>
-                                          <input type="text" [(ngModel)]="user.firstName">
-                                      </div>
-                                      <div class="text_box_right txt_bx">
-                                          <div class="text_desc">Last Name</div>
-                                          <input type="text" [(ngModel)]="user.lastName">
-                                      </div>
 
-                                      <div style="clear: both"></div>
-                                  </div>
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_left txt_bx">
-                                          <div class="text_desc">Gender</div>
-                                          <div class="radio_outer">
-                                              <div class="male_out">
-                                                  <div class="radio" id="1" [ngClass]="{active: user.gender == 1}">
-                                                      <div class="checked"></div>
-                                                  </div>
-                                                  Male
-                                              </div>
-                                              <div class="male_out">
-                                                  <div class="radio" id="0" [ngClass]="{active: user.gender == 0}">
-                                                      <div class="checked"></div>
-                                                  </div>
-                                                  Female
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div style="clear: both"></div>
-                                  </div>
-
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_full txt_bx">
-                                          <div class="text_desc">Address Line 1</div>
-                                          <input type="text" [(ngModel)]="user.address1">
-                                      </div>
-                                  </div>
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_full txt_bx">
-                                          <div class="text_desc">Address Line 2</div>
-                                          <input type="text" [(ngModel)]="user.address2">
-                                      </div>
-                                  </div>
-
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_left txt_bx">
-                                          <div class="text_desc">City</div>
-                                          <input type='text' [(ngModel)]="user.city">
-                                      </div>
-                                      <div class="text_box_right txt_bx">
-                                          <div class="text_desc">State/Province/Region</div>
-                                          <input type='text' [(ngModel)]="user.state">
-                                      </div>
-
-                                      <div style="clear: both"></div>
-                                  </div>
-
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_left txt_bx">
-                                          <div class="text_desc">Country of Residence</div>
-                                          <select data-ng-model="user.countryOfResidence" data-ng-options="v.name as v.name for v in countries"></select>
-                                      </div>
-                                      <div class="text_box_right txt_bx">
-                                          <div class="text_desc">Zip/Postal Code</div>
-                                          <input type='text' [(ngModel)]="user.zip" onkeypress='return (event.charCode >= 48 && event.charCode <= 57 )||event.charCode == 43 '>
-                                      </div>
-
-                                      <div style="clear: both"></div>
-                                  </div>
-
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_left txt_bx">
-                                          <div class="text_desc">Mobile (With Country Code)</div>
-                                          <input type='text' [(ngModel)]="user.mobile" onkeypress='return (event.charCode >= 48 && event.charCode <= 57 )||event.charCode == 43 '>
-                                      </div>
-                                      <div class="text_box_right txt_bx">
-                                          <div class="text_desc">Date Of Birth (YYYY-MM-DD)</div>
-                                          <input type='text' [(ngModel)]="user.dateOfBirth" id="dob" class="datepicker-here"  data-language='en'/>
-                                      </div>
-
-                                      <div style="clear: both"></div>
-                                  </div>
-
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_left txt_bx">
-                                          <div class="text_desc">ID Type</div>
-                                          <select data-ng-model="user.idType" data-ng-options="v for v in idType"></select>
-                                      </div>
-                                      <div class="text_box_right txt_bx">
-                                          <div class="text_desc">ID number</div>
-                                          <input type="text" [(ngModel)]="user.idNumber">
-                                      </div>
-
-                                      <div style="clear: both"></div>
-                                  </div>
-
-                                  <div class="text_box_wrap">
-                                      <div class="text_box_left txt_bx">
-                                          <div class="text_desc">ID Issue date (YYYY-MM-DD)</div>
-                                          <input type='text' id="issueDate" [(ngModel)]="user.idIssueDate" class="datepicker-here" data-language='en'/>
-                                      </div>
-                                      <div class="text_box_right txt_bx">
-                                          <div class="text_desc">ID Expiry date (YYYY-MM-DD)</div>
-                                          <input type='text' id="validTo" [(ngModel)]="user.idValidTo" class="datepicker-here" data-language='en'/>
-                                      </div>
-
-                                      <div style="clear: both"></div>
-                                  </div>
-
-
-                                  <div class="bottom_button_wrap">
-                                      <div class="next_button go_btn personal" (click)="addUserInformation()" data-id="#personal_2">
-                                          Next
-                                      </div>
-                                  </div>
-
-                              </div>
-
-                              <div class="documents_wrap wraps_common" id="personal_2"  data-id="#two">
+                              <div>
                                   <h2>
                                       Required Documents
                                   </h2>
@@ -257,10 +115,6 @@
                                   </div>
 
                                   <div class="bottom_button_wrap">
-
-                                      <div class="prev_button pr_doc go_btn" data-id="#personal_2">
-                                          Previous
-                                      </div>
                                       <div class="next_button company go_btn" (click)="verifyDoc()">
                                           Verify
                                       </div>
@@ -274,7 +128,7 @@
                           </div>
                           <div class="thankyou_content">
                               <h2>Thank You , {{user.firstName}}</h2>
-                              <p>Thank you for providing your details and documents. We will notify you via email with updates regarding your KYC.</p>
+                              <p>Thank you for providing your documents. We will notify you via email with updates regarding your KYC.</p>
                           </div>
                       </div>
                   </div>

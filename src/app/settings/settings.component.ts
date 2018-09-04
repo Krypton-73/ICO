@@ -9,8 +9,6 @@ import { User } from '../_models/user';
 export class SettingsComponent implements OnInit {
 
   user: User;
-  individualForm: boolean;
-  companyForm: boolean;
 
   constructor() { }
 
