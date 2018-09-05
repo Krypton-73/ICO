@@ -17,6 +17,19 @@ export class UserService {
     private http: HttpClient
   ) { }
 
+  userKYC(kyc_doc: any, kyc_selfie: any) {
+    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.httpOptions = { 
+      headers: new HttpHeaders({
+        'x-access-token': this.yolo.msg.jwt
+      })
+    }
+    console.log(kyc_doc,kyc_selfie);
+    return this.http.post(`${baseUrl}/set_kyc`, { 
+      email: this.yolo.msg.email, kyc_doc: kyc_doc, kyc_selfie: kyc_selfie
+    }, this.httpOptions);
+  }
+
 
   getBalances() {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));

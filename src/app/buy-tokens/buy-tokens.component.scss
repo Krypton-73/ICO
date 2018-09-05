@@ -12,33 +12,33 @@
 //     border-bottom: 1px solid $welomeBodyColor;
 // }
 
-.intl-tel-input { 
+.intl-tel-input {
     .form-control {
-      padding-left: 35px;
+        padding-left: 35px;
     }
     .flag-dropdown {
-      .selected-flag {
-        padding: 0;
-        width: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-right: 1px solid #dbe0e2;
-        .iti-flag {
-          background: none;
-          margin-top: 0;
-          top: 0;
-          position: relative;
-          .arrow {
-            top:33%;
-            left: 0; 
-            right: 0;
-            margin: 0 auto;
-          }
+        .selected-flag {
+            padding: 0;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid #dbe0e2;
+            .iti-flag {
+                background: none;
+                margin-top: 0;
+                top: 0;
+                position: relative;
+                .arrow {
+                    top:33%;
+                    left: 0;
+                    right: 0;
+                    margin: 0 auto;
+                }
+            }
         }
-      }
     }
-  }
+}
 
 
 
