@@ -1,4 +1,4 @@
-import {Component, ViewChild, Output, EventEmitter, OnInit } from '@angular/core';
+import {Component, ViewChild, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -18,16 +18,18 @@ import { Rate } from '../_models/rate';
     templateUrl: './buy-tokens.component.html',
     styleUrls: ['./buy-tokens.component.scss']
 })
-export class BuyTokensComponent implements OnInit {
+export class BuyTokensComponent implements OnInit, OnDestroy {
     buyForm: FormGroup;
     currentJustify = "fill";
     data: any;
     error: any;
     balance: Balance;
     rate: Rate;
-    acexBal: any;
     balanceUsd: any;
     requiredBal: any;
+    maxAcexTokens: number;
+    amountOfCurrencyReq: number;
+    currency: string;
 
     @Output() successEvent = new EventEmitter<boolean>();
 
@@ -43,12 +45,16 @@ export class BuyTokensComponent implements OnInit {
 
     ngOnInit () {
         this.buyForm = this.formBuilder.group({
-            currency: ['btc', Validators.required],
-            amountOfAcex: ['', [Validators.required, Validators.min(0), Validators.pattern]]
+            currency: ['', Validators.required],
+            amountOfAcex: ['', [Validators.required, Validators.min(1), Validators.pattern]]
         });
 
         this.dataService.currentBalance.subscribe(balance => { this.balance = balance });
         this.dataService.currentRate.subscribe(rate => { this.rate = rate });
+    }
+
+    ngOnDestroy() {
+        // this.buyForm.reset();
     }
 
     get f () { return this.buyForm.controls };
@@ -63,14 +69,9 @@ export class BuyTokensComponent implements OnInit {
         this.buyAcex.hide();
     }
 
-    amtOfAcex(tokens: number) {
-        if(this.f.amountOfAcex.errors){
-            return;
-        }
-    }
-
-    balanceCheck(currency, amountOfAcex) {
-        switch (currency) {
+    checkBalance(currency: string) {
+        this.currency = currency;
+        switch (this.currency) {
             case 'btc':
                 this.balanceUsd = this.balance.btc * this.rate.btc;
                 break;
@@ -81,27 +82,38 @@ export class BuyTokensComponent implements OnInit {
                 this.balanceUsd = this.balance.ltc * this.rate.ltc;
                 break;
         }
-        this.requiredBal = amountOfAcex * 0.1;
+        this.maxAcexTokens = Math.floor(this.balanceUsd / 0.1);
+        console.log(this.balanceUsd, this.maxAcexTokens);
+    }
 
-        if(this.requiredBal <= this.balanceUsd) {
-            return true;
+    amountOfCurrency(amount: number) {
+        var valueUsd = amount * 0.1;
+        switch (this.currency) {
+            case 'btc':
+                var rate = this.rate.btc;
+                break;
+            case 'eth':
+                var rate = this.rate.eth;
+                break;
+            case 'ltc':
+                var rate = this.rate.ltc;
+                break;
         }
-
-        return false;
-
+        this.amountOfCurrencyReq = valueUsd / rate;
+        console.log(this.amountOfCurrencyReq);
     }
 
     buyAcexTokens() {
-        console.log('Hello');
+        console.log(this.f.currency.value, this.f.amountOfAcex.value);
         if (this.buyForm.invalid) {
             return;
         }
-        const bool: boolean = this.balanceCheck(this.f.currency, this.f.amountOfAcex);
+        const bool: boolean = this.balanceCheck(this.f.amountOfAcex.value);
         if(bool == false) {
-            return this.toastr.warning('Insufficient funds');
+            this.toastr.info('Insufficient Funds')
         }
         if(bool == true) {
-            this.userService.buyAcex(this.f.currency, this.f.amountOfAcex)
+            this.userService.buyAcex(this.f.currency.value, this.f.amountOfAcex.value)
                 .pipe().subscribe(
                 data => {
                     this.data = data;
@@ -123,6 +135,18 @@ export class BuyTokensComponent implements OnInit {
         }
         // this.load.hide();
     }
+
+    balanceCheck(amountOfAcex) {
+        this.requiredBal = amountOfAcex * 0.1;
+
+        if(this.requiredBal <= this.balanceUsd) {
+            return true;
+        }
+
+        return false;
+
+    }
+
 
     logout() {
         this.authenticationService.logout().pipe().subscribe(

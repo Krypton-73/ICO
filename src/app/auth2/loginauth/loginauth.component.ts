@@ -42,7 +42,6 @@ export class LoginauthComponent implements OnInit {
     });
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern]],
-      countryCode: ['', Validators.required],
       mobile:  ['', [Validators.required, Validators.pattern]],
       password: ['', [Validators.required, Validators.pattern, Validators.minLength(8)]],
       refId:  [this.refId, Validators.minLength(7)],

@@ -10,13 +10,22 @@
                     <div class="card-body">
                         <p class="body-title">PROFILE</p>
                         <hr class="acex-hr">
-                        <div class="body-desc">
-                            <label class="acex-steps-0-0">Name: {{ this.user.msg.name }}</label>
+                        <div *ngIf="userProfile" class="body-desc">
+                            <label class="acex-steps-0-0">User Id: {{ this.userProfile.user_id }} </label>
                             <br>
-                            <label class="acex-steps-0-0">Email: {{ this.user.msg.email }}</label>
+                            <label class="acex-steps-0-0">Name: {{ this.userProfile.name }}</label>
                             <br>
-                            <label class="acex-steps-0-0">Mobile No: {{ this.user.msg.mobile }}</label>
+                            <label class="acex-steps-0-0">Email: {{ this.userProfile.email }} </label>
                             <br>
+                            <label class="acex-steps-0-0">Created On: {{ this.userProfile.createdAt | date }} </label>
+                            <br>
+                        </div>
+                        <div *ngIf="userKyc">
+                            <label class="acex-steps-0-0">Status: {{ this.userKyc.kyc_status }} </label>
+                            <br>
+                            <div class="text-center">
+                                <img class="image img-responsive img-rounded" src="data:image/gif;base64,image" alt="image not loaded" />
+                            </div>
                         </div>
                         <div class="text-center">
                             <button disabled type="button" class="btn btn-sm btn-info btn-floating waves-effect">EDIT</button>
@@ -91,14 +100,14 @@
                                                 <!---->
                                                 <!--</div>-->
                                             </div>
-                                            <div class="image_upload">
+                                            <div class="image_upload">addUserInformation
                                                 <div class="file_upload">
-                                                    <input name="file" type="file" id="file1" class="uploadFile" (change)="addUserInformation1($event)" />
-                                                    <input name="file" type="file" id="file2" class="uploadFile" (change)="addUserInformation2($event)" />
+                                                    <input name="file" type="file" id="file1" class="uploadFile" (change)="uploadKycDoc($event)" />
+                                                    <input name="file" type="file" id="file2" class="uploadFile" (change)="uploadKycDoc($event)" />
                                                 </div>
                                                 <div class="add_new">Attach More</div>
                                             </div>
-                                            <p>No. of Documents Submitted: {{ user.userImage }}</p>
+                                            <p>No. of Documents Submitted: </p>
                                             <!--<form class="dropzone" ng-model="data.images" id="my-awesome-dropzone"></form>-->
                                             <div class="declaration">
                                                 <input type="checkbox" id="declaration" />
@@ -121,7 +130,7 @@
                                         <img class="thankyou_image fa-thumbs-up">
                                     </div>
                                     <div class="thankyou_content">
-                                        <h2>Thank You , {{ user.firstName }}</h2>
+                                        <h2>Thank You , </h2>
                                         <p>Thank you for providing your documents. We will notify you via email with updates
                                             regarding your KYC.</p>
                                     </div>

@@ -11,19 +11,22 @@
       <div class="modal-body" [formGroup]="buyForm">
         <div class="form-group">
           <label for="currency">Currency</label>
-          <select class="form-control" id="currency" formControlName="currency">
+          <select mdbInputDirective [successMessage]="' '" [errorMessage]="' '" (input)="checkBalance($event.target.value)" class="form-control" id="currency" formControlName="currency">
             <!--<option value="" disabled selected>Currency</option>-->
             <option value="btc">Bitcoin</option>
             <option value="eth">Ethereum</option>
             <option value="ltc">Litecoin</option>
           </select>
         </div>
-        <div class="md-form">
+        <div *ngIf="currency" class="md-form">
           <label for="amountOfAcex">Amount of AceX Tokens</label>
-          <input class="form-control" mdbInputDirective type="number" id="amountOfAcex"
-                 formControlName="amountOfAcex" [successMessage]="' '" [errorMessage]="'Invalid Input'">
+          <input mdbInputDirective class="form-control" (input)="amountOfCurrency($event.target.value)" type="number" id="amountOfAcex"
+            formControlName="amountOfAcex" [successMessage]="' '" [errorMessage]="'Invalid Input'"/>
+          <div>
+            <p><em>Required: {{ this.amountOfCurrencyReq }}</em></p>
+          </div>
         </div>
-        <div class="modal-footer text-center">
+        <div class="modal-footer text-center md-form">
           <button type="submit" (click)="buyAcexTokens()" class="btn waves-light acex-btn-signin" mdbWavesEffect>Buy Tokens</button>
         </div>
       </div>

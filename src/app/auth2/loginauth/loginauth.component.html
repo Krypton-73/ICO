@@ -46,14 +46,12 @@
                       <label for="signupfname" class="">Full Name</label>
                     </div>
 
-                    <div class="md-form row">
-                        <int-phone-prefix class="form-control intl-tel-input flag-dropdown arrow" [onlyNumbers] [defaultCountry]="'91'" formControlName="countryCode">
-                          <input mdbInputDirective type="text" id="signupmobno" class="form-control" 
-                          formControlName="mobile" pattern="^[0-9]+$"
-                          [successMessage]="' '"
-                          [errorMessage]="registerForm.get('mobile').invalid ? 'Mobile no must be number' : 'Required'">
-                          <label for="mobile" class="">Mobile Number</label>
-                        </int-phone-prefix>
+                    <div class="md-form">
+                      <input mdbInputDirective type="text" id="signupmobno" class="form-control" 
+                      formControlName="mobile" pattern="^[0-9]+$"
+                      [successMessage]="' '"
+                      [errorMessage]="registerForm.get('mobile').invalid ? 'Mobile no must be number' : 'Required'">
+                      <label for="mobile" class="">Mobile Number</label>
                     </div>
     
                     <div class="md-form">
