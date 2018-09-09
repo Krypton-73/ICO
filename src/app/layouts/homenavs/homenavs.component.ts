@@ -70,6 +70,14 @@ export class HomenavsComponent implements OnInit {
     this.load.hide();
   }
 
+  openNav() {
+    document.getElementById('mySidenav').style.width = '250px';
+  }
+
+  closeNav() {
+      document.getElementById('mySidenav').style.width = '0';
+  }
+
   @ViewChild('buyAcex') buyAcex: BuyTokensComponent;
     
   buyAcexTokens() {

@@ -1,12 +1,80 @@
 @import '../../assets/scss/variable.scss';
 
-.main-div {
-    margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
-    padding: 0px 10px;
-    background-color: #fcfdff;
-    background-color: var(--ice-blue);
+@media screen and (min-width:768px) {
+    .main-div {
+        margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+        background-color: #fcfdff;
+        background-color: var(--ice-blue);
+    }
+
+    // referral text
+    .body-desc {
+        width: 377px;
+        height: 83px;
+        opacity: 0.7;
+        font-family: Poppins;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: #272734;
+    }
+
+    .main-row {
+        margin-top: 2%
+    }
+
+    p.body-title.referral {
+        margin-top: 35px;
+    }
+    
 }
 
+
+@media screen and (max-width:767px) {
+    .main-div {
+        // margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+        padding: 0px 0px;
+        background-color: #fcfdff;
+        background-color: var(--ice-blue);
+    }
+    .main-container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    img.referral-img {
+        width: 100%;
+    }
+
+    .body-desc {
+        width: 100%;
+        height: 83px;
+        opacity: 0.7;
+        font-family: Poppins;
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: #272734;
+        text-align: justify;
+    }
+
+
+    .main-row {
+        margin-top: 0%;
+    }
+
+    p.body-title.referral {
+        margin-top: 5px;
+    }    
+  }
+  
 
 .body-title {
     font-family: Poppins;
@@ -19,23 +87,7 @@
   color: #232d41;
 }
 
-p.body-title.referral {
-    margin-top: 35px;
-}
 
-.body-desc {
-    width: 377px;
-  height: 83px;
-  opacity: 0.7;
-  font-family: Poppins;
-  font-size: 14px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.4px;
-  color: #272734;
-}
   
 hr.acex-hr {
     width: 50%;
