@@ -22,7 +22,9 @@ export class SettingsComponent implements OnInit {
   files = [];
   userKycDocImgs = [];
   image: any;
-  
+
+  kycStatus: any;
+
 
   constructor(
     private userService: UserService,
@@ -41,15 +43,21 @@ export class SettingsComponent implements OnInit {
         console.log(this.userKyc);
         // this.userKycDocImgs.push(this.dataURItoBlob(JSON.stringify(this.userKyc.kyc_doc)));
         // console.log(this.userKycDocImgs);
-        this.userKycDocImgs.push(this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-        + this.userKyc.kyc_doc));
+        // this.userKycDocImgs.push(this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
+        // + this.userKyc.kyc_doc));
 
-        this.image = this.domSanitizer.bypassSecurityTrustUrl(this.userKyc.kyc_doc);
-        console.log(this.image);
+        // this.image = this.domSanitizer.bypassSecurityTrustUrl(this.userKyc.kyc_doc);
+        // console.log(this.image);
+
+        this.userKycDocImgs.push(this.userKyc.kyc_doc);
+        this.userKycDocImgs.push(this.userKyc.kyc_selfie);
+        this.kycStatus = this.userKyc.kyc_status;
+        // this.image = this.domSanitizer.bypassSecurityTrustUrl(this.userKyc.kyc_doc);
+        // console.log(this.image);
       },
       error => {
         console.log(error);
-        this.error = error.error
+        this.error = error.error;
         if (this.error.code === 401) {
           return this.logout();
         }
@@ -77,14 +85,15 @@ export class SettingsComponent implements OnInit {
     if (files && file) {
       var reader = new FileReader();
       reader.onload = this._handleReaderLoaded.bind(this);
-      reader.readAsBinaryString(file);
+      reader.readAsDataURL(file);
     }
   }
 
   _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.base64String.push(btoa(binaryString));
-    console.log(btoa(binaryString));
+    console.log(readerEvt, readerEvt.target);
+    const binaryString = readerEvt.target.result;
+    this.base64String.push(binaryString);
+    // console.log(btoa(binaryString));
   }
 
   verifyKyc() {

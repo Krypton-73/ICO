@@ -48,8 +48,7 @@ button.acex-btn-submit {
 }
 
 .image {
-  height: 10px;
-  width: 50px;
+  width: 100%;
 }
 
 // side btn
@@ -121,7 +120,17 @@ p.acex-p-1 {
     // margin-top: 50px;
 }
 
-
+.acex-steps-profile {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  color: #272734;
+  
+}
 
 // buy steps
 .acex-steps-0-0 {

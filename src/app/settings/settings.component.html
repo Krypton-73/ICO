@@ -11,20 +11,37 @@
                         <p class="body-title">PROFILE</p>
                         <hr class="acex-hr">
                         <div *ngIf="userProfile" class="body-desc">
-                            <label class="acex-steps-0-0">User Id: {{ this.userProfile.user_id }} </label>
+                            <label class="acex-steps-profile">User Id: {{ this.userProfile.user_id }} </label>
                             <br>
-                            <label class="acex-steps-0-0">Name: {{ this.userProfile.name }}</label>
+                            <label class="acex-steps-profile">Name: {{ this.userProfile.name }}</label>
                             <br>
-                            <label class="acex-steps-0-0">Email: {{ this.userProfile.email }} </label>
+                            <label class="acex-steps-profile">Email: {{ this.userProfile.email }} </label>
                             <br>
-                            <label class="acex-steps-0-0">Created On: {{ this.userProfile.createdAt | date }} </label>
+                            <label class="acex-steps-profile">Created On: {{ this.userProfile.createdAt | date }} </label>
                             <br>
                         </div>
                         <div *ngIf="userKyc">
-                            <label class="acex-steps-0-0">Status: {{ this.userKyc.kyc_status }} </label>
+                            <label class="acex-steps-profile">Status: 
+                                <ng-container *ngIf="kycStatus  === -1">
+                                    <span class="badge badge-info">KYC Not Uploaded</span>
+                                </ng-container>
+                                <ng-container *ngIf="kycStatus  === 0">
+                                    <span class="badge badge-primary">Verification Pending</span>
+                                </ng-container>
+                                <ng-container *ngIf="kycStatus  === 1">
+                                    <span class="badge badge-success">KYC Verified</span>
+                                </ng-container>
+                                <ng-container *ngIf="kycStatus  === 2">
+                                    <span class="badge badge-warning">Re-upload KYC</span>
+                                </ng-container>
+                                <ng-container *ngIf="kycStatus  === 3">
+                                    <span class="badge badge-danger">KYC Rejected</span>
+                                </ng-container>
+                            </label>
                             <br>
-                            <div class="text-center">
-                                <img class="image img-responsive img-rounded" src="data:image/gif;base64,image" alt="image not loaded" />
+                            <div class="text-center" *ngFor="let imgSrc of userKycDocImgs">
+                                <br>
+                                <img class="image img-responsive img-rounded" [src]="imgSrc" alt="Profile Documents" />
                             </div>
                         </div>
                         <!-- <div class="text-center">
