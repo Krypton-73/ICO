@@ -66,12 +66,7 @@ export class AuthenticationService {
         'x-access-token': this.yolo.msg.jwt
       })
     }
-    return this.http.post(`${baseUrl}/logout`, { email: this.yolo.msg.email }, this.httpOptions)
-    .pipe(map(data => {
-      console.log(data);
-      return data;
-    }
-  ));
+    return this.http.post(`${baseUrl}/logout`, { email: this.yolo.msg.email }, this.httpOptions);
   }
 
 }

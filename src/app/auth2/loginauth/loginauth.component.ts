@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authenticationService';
 import { ToastrService } from 'ngx-toastr';
-import { PasswordValidator } from '../../_models/PasswordValidator';
 
 @Component({
   selector: 'app-loginauth',
@@ -12,14 +11,14 @@ import { PasswordValidator } from '../../_models/PasswordValidator';
 })
 export class LoginauthComponent implements OnInit {
 
-  currentJustify: any = 'fill';
+  currentJustify = 'fill';
+  tab = 'login'
   loginForm: FormGroup;
   registerForm: FormGroup;
   submitted: any = false;
   verified: boolean;
   email: string;
   refId: string;
-  tab: string = 'login'
   data: any;
 
   constructor(
@@ -34,20 +33,20 @@ export class LoginauthComponent implements OnInit {
     this.email = this.route.snapshot.paramMap.get('email');
     this.refId = this.route.snapshot.paramMap.get('refId');
     if (this.refId) {
-      this.tab='register';
+      this.tab = 'register';
     }
 
-    this.loginForm = this.formBuilder.group( {
+    this.loginForm = this.formBuilder.group({
       email: [this.email, [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    this.registerForm = this.formBuilder.group( {
-      name: ['', Validators.required],
-      mobile:  ['', [Validators.required, Validators.minLength(7)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+    this.registerForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.pattern]],
+      mobile:  ['', [Validators.required, Validators.pattern]],
+      password: ['', [Validators.required, Validators.pattern, Validators.minLength(8)]],
       refId:  [this.refId, Validators.minLength(7)],
       email:  ['', [Validators.required, Validators.email]],
-      cPassword:  ['', [Validators.required, Validators.minLength(6)]],
+      cPassword:  ['', Validators.required],
       agree: ['', Validators.required]
     });
   }

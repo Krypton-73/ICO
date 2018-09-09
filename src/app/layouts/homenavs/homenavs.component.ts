@@ -45,7 +45,7 @@ export class HomenavsComponent implements OnInit {
       }
     },
     error => {
-      this.error = error;
+      this.error = error.error;
       if (this.error.code===401){
         return this.logout();
       }
@@ -60,7 +60,7 @@ export class HomenavsComponent implements OnInit {
         }
       },
       error => {
-      this.error = error;
+      this.error = error.error;
       if (this.error.code===401){
         return this.logout();
       }

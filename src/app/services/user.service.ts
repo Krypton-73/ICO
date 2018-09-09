@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthenticationService } from '../services/authenticationService';
+import { AuthenticationService } from './authenticationService';
 
 import { baseUrl } from '../_models/baseUrl';
 import { map } from 'rxjs/operators';
@@ -16,6 +16,29 @@ export class UserService {
   constructor(
     private http: HttpClient
   ) { }
+
+  userKYC(kyc_doc: any, kyc_selfie: any) {
+    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.httpOptions = { 
+      headers: new HttpHeaders({
+        'x-access-token': this.yolo.msg.jwt
+      })
+    }
+    console.log(kyc_doc,kyc_selfie);
+    return this.http.post(`${baseUrl}/set_kyc`, { 
+      email: this.yolo.msg.email, kyc_doc: kyc_doc, kyc_selfie: kyc_selfie
+    }, this.httpOptions);
+  }
+
+  getProfile() {
+    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.httpOptions = { 
+      headers: new HttpHeaders({
+        'x-access-token': this.yolo.msg.jwt
+      })
+    }
+    return this.http.get(`${baseUrl}/get_profile?email=${this.yolo.msg.email}`, this.httpOptions);
+  }
 
 
   getBalances() {
@@ -58,7 +81,7 @@ export class UserService {
     return this.http.post(`${baseUrl}/get_rate`, { email: this.yolo.msg.email }, this.httpOptions);
   }
 
-  buyAcex(currency, amount) {
+  buyAcex(currency: string, amount: number) {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
     this.httpOptions = { 
       headers: new HttpHeaders({
