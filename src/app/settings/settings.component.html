@@ -81,6 +81,11 @@
                                                         <!-- - Selfie Picture of You Holding Gov Issued ID<br>-->
                                                         <!-- - Proof of Home Address( Utility Bill or Bank Statement) issued within the last 3 months containing your name on the account-->
                                                     </div>
+                                                    <div class="image_upload">
+                                                        <div class="file_upload">
+                                                            <input name="file" type="file" id="file1" class="uploadFile uploadFile1" (change)="uploadKycDoc($event)" />
+                                                        </div>
+                                                    </div>        
                                                     <div class="doc_blocks">
                                                         <p>Document Guide</p>
                                                         <ul>
@@ -95,6 +100,11 @@
                                                         <!-- - Selfie with ID requirements<br>-->
 
                                                     </div>
+                                                    <div class="image_upload">addUserInformation
+                                                        <div class="file_upload">
+                                                            <input name="file" type="file" id="file2" class="uploadFile uploadFile2" (change)="uploadKycDoc($event)" />
+                                                        </div>
+                                                    </div>        
 
                                                 </div>
 
@@ -111,20 +121,22 @@
                                                             <li>Image should be in high resolution (min 300 dpi)</li>
                                                         </ul>
                                                     </div>
+                                                    <div class="image_upload">
+                                                        <!-- addUserInformation -->
+                                                        <div class="file_upload">
+                                                            <!-- <input name="file" type="file" id="file1" class="uploadFile uploadFile1" (change)="uploadKycDoc($event)" /> -->
+                                                            <!-- <br /><br /> -->
+                                                            <input name="file" type="file" id="file3" class="uploadFile uploadFile2" (change)="uploadKycDoc($event)" />
+                                                        </div>
+                                                        <!-- <div class="add_new">Attach More</div> -->
+                                                    </div>
                                                 </div>
 
                                                 <!--<div class="doc_blocks">-->
                                                 <!---->
                                                 <!--</div>-->
                                             </div>
-                                            <div class="image_upload">addUserInformation
-                                                <div class="file_upload">
-                                                    <input name="file" type="file" id="file1" class="uploadFile uploadFile1" (change)="uploadKycDoc($event)" />
-                                                    <br /><br />
-                                                    <input name="file" type="file" id="file2" class="uploadFile uploadFile2" (change)="uploadKycDoc($event)" />
-                                                </div>
-                                                <div class="add_new">Attach More</div>
-                                            </div>
+                                            
                                             <p>No. of Documents Submitted: </p>
                                             <!--<form class="dropzone" ng-model="data.images" id="my-awesome-dropzone"></form>-->
                                             <div class="declaration">

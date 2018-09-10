@@ -84,3 +84,18 @@ a.nav-link .acex-login-text {
 a.nav-link.active .acex-login-text {
     color: #323246;
 }
+
+// ngx phone input globalcss
+.intl-tel-input.allow-dropdown {
+    width: 100%;
+}
+.intl-tel-input.allow-dropdown {
+    span.country-name {
+        color: #000;
+    } 
+    input.form-control.intl {
+        border: 0;
+        border-bottom: 1px solid rgb(206, 212, 218);
+        width: 100%;
+    } 
+}

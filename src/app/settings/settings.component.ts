@@ -25,6 +25,7 @@ export class SettingsComponent implements OnInit {
 
   kycStatus: any;
 
+  thankshow: any;
 
   constructor(
     private userService: UserService,

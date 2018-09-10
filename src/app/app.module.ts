@@ -22,6 +22,7 @@ import { LoaderService } from './layouts/loading/loading.service';
 import { KeyeventService } from './services/keyevent.service';
 import { HomeService } from './services/home.service';
 import { InternationalPhoneModule } from 'ng4-intl-phone';
+import { NgxPhoneSelectModule } from 'ngx-phone-select';
 
 // import { AppLoadingModule } from './layouts/loading/loading.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -96,7 +97,8 @@ import { SettingsComponent } from './settings/settings.component';
     HighchartsChartModule,
     NgbModule.forRoot(),
     ClipboardModule,
-    InternationalPhoneModule
+    InternationalPhoneModule,
+    NgxPhoneSelectModule,
   ],
   providers: [
     GlobalsService,
