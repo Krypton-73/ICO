@@ -111,38 +111,38 @@ export class LoginauthComponent implements OnInit {
   }
 
   if (type === 'signup') {
-    console.log(this.registerForm, this.registerForm.value, this.registerForm.valid);
+    // console.log(this.registerForm, this.registerForm.value, this.registerForm.valid);
 
     const phone = this.registerForm.value.mobile;
     if (phone.toString().length !== 10) {
       this.toastr.error('Mobile number must be 10 digits', null, { timeOut: 4000 });
       return;
     }
-    // if (this.registerForm.invalid) { return; }
-    // if (this.t.password.value !== this.t.cPassword.value ) {
-    //   return this.toastr.warning('Password and Confirm Password does not match');
-    // }
-    // this.authenticationService.register(this.registerForm.value).pipe().subscribe(
-    //   data => {
-    //     this.data = data;
-    //     if(this.data.code===200 && this.data.msg==='successfully_added') {
-    //       this.toastr.success('A verification link has been sent to your registered Email.');   
-    //       // email input in sign-in on successful registeration. 
-    //       this.router.navigate(['/auth/signin', this.t.email.value]);  
-    //     }
-    //   },
-    //   error => {
-    //     this.data = error;
-    //     console.log(this.data.error.code);
-    //     if(this.data.error.code===500 && this.data.error.msg==='already exists'){
-    //       return this.toastr.error('User email already Registered');
-    //      }
-    //     if(this.data.error.code===500 && this.data.error.msg==='invalid mobile'){
-    //       return this.toastr.error('Mobile No must be a number');
-    //     }
-    //     this.toastr.error('error', null, { timeOut: 4000 });
-    //   }
-    // );
+    if (this.registerForm.invalid) { return; }
+    if (this.t.password.value !== this.t.cPassword.value ) {
+      return this.toastr.warning('Password and Confirm Password does not match');
+    }
+    this.authenticationService.register(this.registerForm.value).pipe().subscribe(
+      data => {
+        this.data = data;
+        if(this.data.code===200 && this.data.msg==='successfully_added') {
+          this.toastr.success('A verification link has been sent to your registered Email.');   
+          // email input in sign-in on successful registeration. 
+          this.router.navigate(['/auth/signin', this.t.email.value]);  
+        }
+      },
+      error => {
+        this.data = error;
+        console.log(this.data.error.code);
+        if(this.data.error.code===500 && this.data.error.msg==='already exists'){
+          return this.toastr.error('User email already Registered');
+         }
+        if(this.data.error.code===500 && this.data.error.msg==='invalid mobile'){
+          return this.toastr.error('Mobile No must be a number');
+        }
+        this.toastr.error('error', null, { timeOut: 4000 });
+      }
+    );
   }
     // 'signup', 'signin'
     
