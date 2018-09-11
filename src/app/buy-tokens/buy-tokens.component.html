@@ -18,12 +18,14 @@
             <option value="ltc">Litecoin</option>
           </select>
         </div>
-        <div *ngIf="currency" class="md-form">
+        <div class="md-form">
           <label for="amountOfAcex">Amount of AceX Tokens</label>
           <input mdbInputDirective class="form-control" (input)="amountOfCurrency($event.target.value)" type="number" id="amountOfAcex"
             formControlName="amountOfAcex" [successMessage]="' '" [errorMessage]="'Invalid Input'"/>
           <div>
             <p><em>Required: {{ this.amountOfCurrencyReq }}</em></p>
+            <p><em>Balance: {{ this.balanceUsd }}</em></p>
+            <p><em>Max Tokens that can be purchased: {{ this.maxAcexTokens }}</em></p>
           </div>
         </div>
         <div class="modal-footer text-center md-form">

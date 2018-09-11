@@ -1,4 +1,4 @@
-import {Component, ViewChild, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -31,35 +31,45 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
     amountOfCurrencyReq: number;
     currency: string;
 
+    @ViewChild('buyAcex') buyAcex: ModalDirective;
+
     @Output() successEvent = new EventEmitter<boolean>();
 
     constructor(public modalService: NgbModal,
-                private userService: UserService,
-                private authenticationService: AuthenticationService,
-                private load: LoaderService,
-                private toastr: ToastrService,
-                public dataService: DataService,
-                private router: Router,
-                private formBuilder: FormBuilder
-    ) {}
+        private userService: UserService,
+        private authenticationService: AuthenticationService,
+        private load: LoaderService,
+        private toastr: ToastrService,
+        public dataService: DataService,
+        private router: Router,
+        private formBuilder: FormBuilder
+    ) { }
 
-    ngOnInit () {
+    ngOnInit() {
         this.buyForm = this.formBuilder.group({
-            currency: ['', Validators.required],
-            amountOfAcex: ['', [Validators.required, Validators.min(1), Validators.pattern]]
+            currency: ['btc', Validators.required],
+            amountOfAcex: [100, [Validators.required, Validators.min(100), Validators.pattern]]
         });
 
         this.dataService.currentBalance.subscribe(balance => { this.balance = balance });
-        this.dataService.currentRate.subscribe(rate => { this.rate = rate });
+        this.dataService.currentRate.subscribe(
+            rate => {
+                this.rate = rate;
+                if (this.rate) {    
+                    this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
+                    console.log(this.amountOfCurrencyReq);  
+                }
+            },
+            error => {
+            console.log(error);
+        });
     }
 
     ngOnDestroy() {
         // this.buyForm.reset();
     }
 
-    get f () { return this.buyForm.controls };
-
-    @ViewChild('buyAcex') buyAcex: ModalDirective;
+    get f() { return this.buyForm.controls };
 
     show() {
         this.buyAcex.show();
@@ -74,12 +84,15 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
         switch (this.currency) {
             case 'btc':
                 this.balanceUsd = this.balance.btc * this.rate.btc;
+                this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
                 break;
             case 'eth':
                 this.balanceUsd = this.balance.eth * this.rate.eth;
+                this.amountOfCurrencyReq = (100 * 0.1) / this.rate.eth;
                 break;
             case 'ltc':
                 this.balanceUsd = this.balance.ltc * this.rate.ltc;
+                this.amountOfCurrencyReq = (100 * 0.1) / this.rate.ltc;
                 break;
         }
         this.maxAcexTokens = Math.floor(this.balanceUsd / 0.1);
@@ -108,30 +121,30 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
         if (this.buyForm.invalid) {
             return;
         }
-        const bool: boolean = this.balanceCheck(this.f.amountOfAcex.value);
-        if(bool == false) {
+        let bool: boolean = this.balanceCheck(this.f.amountOfAcex.value);
+        if (bool == false) {
             this.toastr.info('Insufficient Funds')
         }
-        if(bool == true) {
+        if (bool == true) {
             this.userService.buyAcex(this.f.currency.value, this.f.amountOfAcex.value)
                 .pipe().subscribe(
-                data => {
-                    this.data = data;
-                    if (this.data.code===200) {
-                        this.toastr.success('Tokens Purchased!');
+                    data => {
+                        this.data = data;
+                        if (this.data.code === 200) {
+                            this.toastr.success('Tokens Purchased!');
+                        }
+                        this.buyAcex.hide();
+                        this.successEvent.emit(true);
+                    },
+                    error => {
+                        this.error = error.error;
+                        if (this.error.code === 401) {
+                            this.toastr.info('Unable to connect to server. Please retry login.');
+                            return this.logout();
+                        }
+                        this.toastr.error('Error');
                     }
-                    this.buyAcex.hide();
-                    this.successEvent.emit(true);
-                },
-                error => {
-                    this.error = error.error;
-                    if (this.error.code===401) {
-                        this.toastr.info('Unable to connect to server. Please retry login.');
-                        return this.logout();
-                    }
-                    this.toastr.error('Error');
-                }
-            );
+                );
         }
         // this.load.hide();
     }
@@ -139,7 +152,7 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
     balanceCheck(amountOfAcex) {
         this.requiredBal = amountOfAcex * 0.1;
 
-        if(this.requiredBal <= this.balanceUsd) {
+        if (this.requiredBal <= this.balanceUsd) {
             return true;
         }
 

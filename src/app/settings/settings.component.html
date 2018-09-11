@@ -7,24 +7,24 @@
             <div class="col-md-6">
 
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" *ngIf="user">
                         <p class="body-title">PROFILE</p>
                         <hr class="acex-hr">
-                        <div *ngIf="userProfile" class="body-desc">
-                            <label class="acex-steps-0-0">User Id: {{ this.userProfile.user_id }} </label>
+                        <div class="body-desc">
+                            <label class="acex-steps-0-0">User Id: {{ this.user.profile.user_id }} </label>
                             <br>
-                            <label class="acex-steps-0-0">Name: {{ this.userProfile.name }}</label>
+                            <label class="acex-steps-0-0">Name: {{ this.user.profile.name }}</label>
                             <br>
-                            <label class="acex-steps-0-0">Email: {{ this.userProfile.email }} </label>
+                            <label class="acex-steps-0-0">Email: {{ this.user.profile.email }} </label>
                             <br>
-                            <label class="acex-steps-0-0">Created On: {{ this.userProfile.createdAt | date }} </label>
+                            <label class="acex-steps-0-0">Created On: {{ this.user.profile.createdAt | date }} </label>
                             <br>
                         </div>
-                        <div *ngIf="userKyc">
-                            <label class="acex-steps-0-0">Status: {{ this.userKyc.kyc_status }} </label>
+                        <div>
+                            <label class="acex-steps-0-0">Status: {{ this.user.kyc.kyc_status }} </label>
                             <br>
                             <div class="text-center">
-                                <img class="image img-responsive img-rounded" src="data:image/gif;base64,image" alt="image not loaded" />
+                                <img class="image img-responsive img-rounded" [src]="image" alt="Image! Where are you?" />
                             </div>
                         </div>
                         <div class="text-center">
