@@ -1,15 +1,54 @@
 @import '../../assets/scss/variable.scss';
 
-.main-div {
-    margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
-    padding: 0px 10px;
-    background-color: #fcfdff;
-    background-color: var(--ice-blue);
+@media screen and (min-width:768px) {
+  .main-div {
+      margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+      padding: 0px 10px;
+      background-color: #fcfdff;
+      background-color: var(--ice-blue);
+  }
+  .main-row {
+      margin-top: 2%;
+  }
+
+  .body-desc{
+    font-family: Poppins;
+  }
+}
+
+
+@media screen and (max-width:767px) {
+  .main-div {
+      // margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+      padding: 0px 0px;
+      background-color: #fcfdff;
+      background-color: var(--ice-blue);
+  }
+  .main-container {
+      padding-left: 0px;
+      padding-right: 0px;
+  }
+  .main-row {
+      margin-top: 0%;
+  }
+}
+
+button.acex-btn-submit {
+  width: 182px;
+  height: 40px;
+  border-radius: 28px;
+  box-shadow: 5px 0 10px 0 #fff;
+  background-color: #fff;
+  border: solid 2px #1f8efa;
+  color: #1f8efa;
+  padding-top: 8px;
+  font-weight: 600;
+  float: right;
+  margin-top: -10px;
 }
 
 .image {
-  height: 10px;
-  width: 50px;
+  width: 100%;
 }
 
 // side btn
@@ -81,7 +120,17 @@ p.acex-p-1 {
     // margin-top: 50px;
 }
 
-
+.acex-steps-profile {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  color: #272734;
+  
+}
 
 // buy steps
 .acex-steps-0-0 {
@@ -529,4 +578,9 @@ p.acex-p-1 {
   color: rgba(0, 0, 0, 0.74);
   width: 90%;
   margin: auto;
+}
+
+
+.declaration {
+  text-align: justify;
 }

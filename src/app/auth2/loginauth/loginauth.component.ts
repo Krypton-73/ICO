@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authenticationService';
@@ -20,6 +20,17 @@ export class LoginauthComponent implements OnInit {
   email: string;
   refId: string;
   data: any;
+
+  preferredCountries = ['us', 'au', 'ru', 'gb', 'in'];
+
+  @ViewChild('phoneSelect') phoneSelect;
+
+  setCountry(countryCode) {
+    this.phoneSelect.setCountry(countryCode);
+  }
+  getCountryData() {
+    return this.phoneSelect.getCountryData();
+  }
 
   constructor(
     private router: Router,
@@ -43,12 +54,31 @@ export class LoginauthComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern]],
       mobile:  ['', [Validators.required, Validators.pattern]],
+      // mobile:  ['', [Validators.required]],
       password: ['', [Validators.required, Validators.pattern, Validators.minLength(8)]],
       refId:  [this.refId, Validators.minLength(7)],
       email:  ['', [Validators.required, Validators.email]],
       cPassword:  ['', Validators.required],
-      agree: ['', Validators.required]
+      agree: ['', Validators.required],
+      phoneCode: ['', []],
+      country: ['', []],
+      countryISO2Code: ['', []],
     });
+  }
+
+  appendTOForm($event) {
+    const flag = this.getCountryData();
+    this.registerForm.get('phoneCode').setValue(flag.dialCode);
+    this.registerForm.get('country').setValue(flag.name);
+    this.registerForm.get('countryISO2Code').setValue(flag.iso2);
+
+    const phone = this.registerForm.value.mobile;
+    if (phone.toString().length === 10) {
+      this.registerForm.controls['mobile'].setErrors(null); // {'validatePhone': true}
+      this.registerForm.controls['mobile'].setValidators(null);
+    } else {
+      this.registerForm.controls['mobile'].setErrors({'validatePhone': false}); //
+    }
   }
 
   get f() { return this.loginForm.controls; }
@@ -81,6 +111,13 @@ export class LoginauthComponent implements OnInit {
   }
 
   if (type === 'signup') {
+    // console.log(this.registerForm, this.registerForm.value, this.registerForm.valid);
+
+    const phone = this.registerForm.value.mobile;
+    if (phone.toString().length !== 10) {
+      this.toastr.error('Mobile number must be 10 digits', null, { timeOut: 4000 });
+      return;
+    }
     if (this.registerForm.invalid) { return; }
     if (this.t.password.value !== this.t.cPassword.value ) {
       return this.toastr.warning('Password and Confirm Password does not match');

@@ -1,5 +1,74 @@
 @import '../../../assets/scss/variable.scss';
 
+// mob
+@media screen and (max-width:767px) {
+  .m-sidenav {
+      display: block;
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #1f2636;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+  }
+
+  .toggleMenuForMob {
+    display: block;
+  }
+
+  .m-sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      display: block;
+      font-size: 16px;
+      font-family: Poppins, sans-serif;
+      color: #fff;
+      transition: 0.3s;
+  }
+
+  .m-sidenav a:hover {
+    font-family: Poppins, sans-serif;
+    color: $btnBorder;
+  }
+
+
+  .m-sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+  }
+
+  @media screen and (max-height: 450px) {
+    .m-sidenav {padding-top: 15px;}
+    .m-sidenav a {font-size: 18px;}
+  }
+
+  // for sidemenu top image
+  .m-sidenav a.logo.navbar-brand.text-center.acex-a-logo, .acex-a-logo-div {
+    position: absolute;
+    top: 0;
+    width: 75%;
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+
+
+}
+
+
+@media screen and (min-width:768px){
+.m-sidenav {
+    display: none;
+}
+.toggleMenuForMob {
+  display: none;
+}
 .sidenav {
   height: 100%;
   position: fixed;
@@ -24,12 +93,26 @@
   color: $btnBorder;
 }
 
-@media screen and (max-height: 450px) {
+}
+
+@media screen and (max-width: 767px) {
   .sidenav {
-    padding-top: 15px;
+    // padding-top: 15px;
+    .acex-m-container {
+      display: none;
+    }
   }
   .sidenav a {
     font-size: 18px;
+  }
+
+  .toggleMenuForMob {
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    margin-top: 13px;
+    color: #fff;
+    margin-left: 15px;
   }
 }
 
@@ -52,13 +135,30 @@ li.nav-item.active.waves-light.acex-user-profile {
 }
 
 // main a logo
-a.acex-a-logo {
-  height: 60px;
-  width: 100%;
-  // padding: 0px;
-  // padding-top: 0px;
-  background-color: #1f2636;
-  margin-bottom: 10%;
+@media screen and (min-width: 768px) {
+  a.acex-a-logo {
+    height: 60px;
+    width: 100%;
+    // padding: 0px;
+    // padding-top: 0px;
+    background-color: #1f2636;
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  a.acex-a-logo {
+    height: 75px;
+    width: 100%;
+    // padding: 0px;
+    // padding-top: 0px;
+    background-color: #1f2636;
+    // margin-bottom: 10%;
+  }
+
+  header.h-100 {
+    display: none;
+  }
 }
 
 // menu items
@@ -130,33 +230,79 @@ a.acex-side-item i.fa {
   //   border: solid 2px var(--clear-blue);
 }
 
-// user
-.acex-user-name {
-  width: 184px;
-  //   height: 22px;
-  font-family: Poppins, sans-serif;
-  font-size: 13px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  //   line-height: 1.69;
-  letter-spacing: normal;
-  color: #232b3d;
-  margin-bottom: -6px;
-  margin-top: 2px;
+@media screen and (min-width:768px) {
+  // user
+  .acex-user-name {
+    width: 184px;
+    //   height: 22px;
+    font-family: Poppins, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    //   line-height: 1.69;
+    letter-spacing: normal;
+    color: #232b3d;
+    margin-bottom: -6px;
+    margin-top: 2px;
+  }
+
+  .acex-user-email {
+    width: 184px;
+    // height: 22px;
+    font-family: Poppins, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    // line-height: 1.69;
+    letter-spacing: normal;
+    color: #232b3d;
+  }
+
+  // user profile
+  .acex-profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+  }
 }
 
-.acex-user-email {
-  width: 184px;
-  // height: 22px;
-  font-family: Poppins, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  // line-height: 1.69;
-  letter-spacing: normal;
-  color: #232b3d;
+@media screen and (max-width:767px) {
+  // user
+  .acex-user-name {
+    // width: 184px; 
+    font-family: Poppins, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #fff;
+    /* margin-bottom: -6px; */
+    margin-top: 15px;
+    margin-left: 25px;
+  }
+
+  .acex-user-email {
+    width: 184px;
+    // height: 22px;
+    font-family: Poppins, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    // line-height: 1.69;
+    letter-spacing: normal;
+    color: #fff;
+  }
+
+  // user profile
+  .acex-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+  }
 }
 
 // logout
@@ -187,15 +333,9 @@ li.nav-item.waves-light.acex-li-profile {
   right: 0;
   position: absolute;
   margin-right: 4%;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
-// user profile
-.acex-profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50px;
-}
 
 //  acex-buytokens
 .acex-buytokens {

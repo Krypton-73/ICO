@@ -33,16 +33,16 @@ export class SettingsComponent implements OnInit {
 
     if (sessionStorage.getItem('userProfile')) {
       this.user = JSON.parse(sessionStorage.getItem('userProfile'));
+      this.userKycDocImgs.push(this.user.kyc.kyc_doc);
+      this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
     } else {
       this.userService.getProfile().pipe().subscribe(
         data => {
           this.data = data;
           sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
           this.user = this.data.msg;
-          console.log(this.user);
-          this.image = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'
-            + this.user.kyc.kyc_doc);
-          console.log(this.image);
+          this.userKycDocImgs.push(this.user.kyc.kyc_doc);
+          this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
         },
         error => {
           console.log(error);
@@ -63,13 +63,14 @@ export class SettingsComponent implements OnInit {
     if (files && file) {
       let reader = new FileReader();
       reader.onload = this._handleReaderLoaded.bind(this);
-      reader.readAsBinaryString(file);
+      reader.readAsDataURL(file);
     }
   }
 
   _handleReaderLoaded(readerEvt) {
     let binaryString = readerEvt.target.result;
-    this.base64String.push(btoa(binaryString));
+    console.log(readerEvt.target.result);
+    this.base64String.push(binaryString);
     console.log(btoa(binaryString));
   }
 

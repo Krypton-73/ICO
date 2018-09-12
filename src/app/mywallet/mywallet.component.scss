@@ -1,9 +1,32 @@
 @import '../../assets/scss/variable.scss';
 
-.main-div {
-  margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
-  padding: 0px 10px;
-  background-color: #fcfdff;
+@media screen and (min-width:768px) {
+  .main-div {
+    margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+    padding: 0px 10px;
+    background-color: #fcfdff;
+  }
+
+  .main-row {
+      margin-top: 2%;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .main-div {
+      // margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
+      padding: 0px 0px;
+      background-color: #fcfdff;
+      background-color: var(--ice-blue);
+  }
+  .main-container {
+      padding-left: 0px;
+      padding-right: 0px;
+  }
+
+  .main-row {
+      margin-top: 0%;
+  }
 }
 
 .body-title {
@@ -24,6 +47,7 @@ div.card.acex-bal-card-0 {
   border-radius: 9px;
   background-color: #242e42;
   box-shadow: -12px 13px 26px 0 rgba(25, 33, 48, 0.16);
+  margin-top: 2.5%;
 }
 
 p.acex-p-0 {

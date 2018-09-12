@@ -3,7 +3,7 @@
 <main class="main-div">
 
     <div class="container main-container">
-        <div class="row" style="margin-top: 2%">
+        <div class="row main-row">
             <div class="col-md-6">
 
                 <div class="card">
@@ -11,25 +11,42 @@
                         <p class="body-title">PROFILE</p>
                         <hr class="acex-hr">
                         <div class="body-desc">
-                            <label class="acex-steps-0-0">User Id: {{ this.user.profile.user_id }} </label>
+                            <label class="acex-steps-profile">User Id: {{ this.user.profile.user_id }} </label>
                             <br>
-                            <label class="acex-steps-0-0">Name: {{ this.user.profile.name }}</label>
+                            <label class="acex-steps-profile">Name: {{ this.user.profile.name }}</label>
                             <br>
-                            <label class="acex-steps-0-0">Email: {{ this.user.profile.email }} </label>
+                            <label class="acex-steps-profile">Email: {{ this.user.profile.email }} </label>
                             <br>
-                            <label class="acex-steps-0-0">Created On: {{ this.user.profile.createdAt | date }} </label>
+                            <label class="acex-steps-profile">Created On: {{ this.user.profile.createdAt | date }} </label>
                             <br>
                         </div>
                         <div>
-                            <label class="acex-steps-0-0">Status: {{ this.user.kyc.kyc_status }} </label>
+                            <label class="acex-steps-profile">Status: 
+                                <ng-container *ngIf="this.user.kyc.kyc_status === -1">
+                                    <span class="badge badge-info">KYC Not Uploaded</span>
+                                </ng-container>
+                                <ng-container *ngIf="this.user.kyc.kyc_status === 0">
+                                    <span class="badge badge-primary">Verification Pending</span>
+                                </ng-container>
+                                <ng-container *ngIf="this.user.kyc.kyc_status === 1">
+                                    <span class="badge badge-success">KYC Verified</span>
+                                </ng-container>
+                                <ng-container *ngIf="this.user.kyc.kyc_status === 2">
+                                    <span class="badge badge-warning">Re-upload KYC</span>
+                                </ng-container>
+                                <ng-container *ngIf="this.user.kyc.kyc_status === 3">
+                                    <span class="badge badge-danger">KYC Rejected</span>
+                                </ng-container>
+                            </label>
                             <br>
-                            <div class="text-center">
-                                <img class="image img-responsive img-rounded" [src]="image" alt="Image! Where are you?" />
+                            <div class="text-center" *ngFor="let imgSrc of userKycDocImgs">
+                                <br>
+                                <img class="image img-responsive img-rounded" [src]="imgSrc" alt="Profile Documents" />
                             </div>
                         </div>
-                        <div class="text-center">
+                        <!-- <div class="text-center">
                             <button disabled type="button" class="btn btn-sm btn-info btn-floating waves-effect">EDIT</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -64,6 +81,11 @@
                                                         <!-- - Selfie Picture of You Holding Gov Issued ID<br>-->
                                                         <!-- - Proof of Home Address( Utility Bill or Bank Statement) issued within the last 3 months containing your name on the account-->
                                                     </div>
+                                                    <div class="image_upload">
+                                                        <div class="file_upload">
+                                                            <input name="file" type="file" id="file1" class="uploadFile uploadFile1" (change)="uploadKycDoc($event)" />
+                                                        </div>
+                                                    </div>        
                                                     <div class="doc_blocks">
                                                         <p>Document Guide</p>
                                                         <ul>
@@ -78,6 +100,11 @@
                                                         <!-- - Selfie with ID requirements<br>-->
 
                                                     </div>
+                                                    <div class="image_upload">addUserInformation
+                                                        <div class="file_upload">
+                                                            <input name="file" type="file" id="file2" class="uploadFile uploadFile2" (change)="uploadKycDoc($event)" />
+                                                        </div>
+                                                    </div>        
 
                                                 </div>
 
@@ -94,19 +121,22 @@
                                                             <li>Image should be in high resolution (min 300 dpi)</li>
                                                         </ul>
                                                     </div>
+                                                    <div class="image_upload">
+                                                        <!-- addUserInformation -->
+                                                        <div class="file_upload">
+                                                            <!-- <input name="file" type="file" id="file1" class="uploadFile uploadFile1" (change)="uploadKycDoc($event)" /> -->
+                                                            <!-- <br /><br /> -->
+                                                            <input name="file" type="file" id="file3" class="uploadFile uploadFile2" (change)="uploadKycDoc($event)" />
+                                                        </div>
+                                                        <!-- <div class="add_new">Attach More</div> -->
+                                                    </div>
                                                 </div>
 
                                                 <!--<div class="doc_blocks">-->
                                                 <!---->
                                                 <!--</div>-->
                                             </div>
-                                            <div class="image_upload">addUserInformation
-                                                <div class="file_upload">
-                                                    <input name="file" type="file" id="file1" class="uploadFile" (change)="uploadKycDoc($event)" />
-                                                    <input name="file" type="file" id="file2" class="uploadFile" (change)="uploadKycDoc($event)" />
-                                                </div>
-                                                <div class="add_new">Attach More</div>
-                                            </div>
+                                            
                                             <p>No. of Documents Submitted: </p>
                                             <!--<form class="dropzone" ng-model="data.images" id="my-awesome-dropzone"></form>-->
                                             <div class="declaration">
@@ -120,12 +150,12 @@
 
                                             <div class="bottom_button_wrap">
                                                 <div class="text-center">
-                                                    <button type="submit" (click)="verifyKyc()" class="btn btn-primary waves-light acex-btn-signin" mdbWavesEffect>Verify</button>
+                                                    <button type="submit" (click)="verifyKyc()" class="btn waves-light acex-btn-submit" mdbWavesEffect>Verify</button>
                                                 </div>
                                             </div>
                                         </div>
                             
-                                <div class="thankyou" *ngIf="thankshow">
+                                <!-- <div class="thankyou" *ngIf="thankshow">
                                     <div>
                                         <img class="thankyou_image fa-thumbs-up">
                                     </div>
@@ -134,7 +164,7 @@
                                         <p>Thank you for providing your documents. We will notify you via email with updates
                                             regarding your KYC.</p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
