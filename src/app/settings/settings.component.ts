@@ -39,8 +39,10 @@ export class SettingsComponent implements OnInit {
       this.userService.getProfile().pipe().subscribe(
         data => {
           this.data = data;
-          sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
           this.user = this.data.msg;
+          if (this.user.kyc.kyc_status !== -1) {
+            sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
+          }
           this.userKycDocImgs.push(this.user.kyc.kyc_doc);
           this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
         },
@@ -79,6 +81,8 @@ export class SettingsComponent implements OnInit {
       data => {
         this.data = data;
         console.log(data);
+        this.toastr.success('Uploaded Successfully');
+        window.location.reload();
       },
       error => {
         this.error = error.error;
@@ -86,6 +90,7 @@ export class SettingsComponent implements OnInit {
           return this.logout();
         }
         console.log(error);
+        this.toastr.warning('Invalid');
       }
     )
   }

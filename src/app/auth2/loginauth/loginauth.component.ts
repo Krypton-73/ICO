@@ -21,7 +21,7 @@ export class LoginauthComponent implements OnInit {
   refId: string;
   data: any;
 
-  preferredCountries = ['us', 'au', 'ru', 'gb', 'in'];
+  preferredCountries = ['my', 'au', 'ru', 'gb', 'in'];
 
   @ViewChild('phoneSelect') phoneSelect;
 
@@ -114,6 +114,7 @@ export class LoginauthComponent implements OnInit {
     // console.log(this.registerForm, this.registerForm.value, this.registerForm.valid);
 
     const phone = this.registerForm.value.mobile;
+    console.log(phone);
     if (phone.toString().length !== 10) {
       this.toastr.error('Mobile number must be 10 digits', null, { timeOut: 4000 });
       return;

@@ -47,7 +47,7 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.buyForm = this.formBuilder.group({
-            currency: ['btc', Validators.required],
+            currency: ['', Validators.required],
             amountOfAcex: [100, [Validators.required, Validators.min(100), Validators.pattern]]
         });
 
