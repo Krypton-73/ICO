@@ -15,17 +15,17 @@ export class ModalComponent implements OnInit {
   address: string;
   destAddress: string;
   amount: string;
-  QRaddress:string = '';
+  QRaddress = '';
   currencyType: any = {
     'btc': 'BTC',
     'eth': 'ETH',
     'ltc': 'LTC',
     'acex': 'ACEX'
-  }
+  };
 
   constructor(
     public toastr: ToastrService
-  ) { 
+  ) {
   }
 
   ngOnInit() {

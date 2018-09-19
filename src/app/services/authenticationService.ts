@@ -5,7 +5,6 @@ import { sha256 } from 'js-sha256';
 // import { User } from '../_models/user';
 import { baseUrl } from '../_models/baseUrl';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +15,15 @@ export class AuthenticationService {
   yolo: any;
   httpOptions: any;
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient
   ) { }
 
   register(newUser: any) {
     return this.http.post(`${baseUrl}/register`
-    , { email: newUser.email, password: sha256(newUser.password)
-    , ref_id: newUser.refId, name: newUser.name, mobile: newUser.mobile });
+      , {
+        email: newUser.email, password: sha256(newUser.password)
+        , ref_id: newUser.refId, name: newUser.name, mobile: newUser.mobile
+      });
   }
 
   login(email: string, password: string) {
@@ -32,14 +32,14 @@ export class AuthenticationService {
 
   verifyOtp(userEmail: any, userOtp: any) {
     return this.http.post(`${baseUrl}/validate_otp`, { email: userEmail, otp: userOtp })
-    .pipe(map( user => {
-      this.user = user;
-      if (this.user && this.user.msg.jwt) {
-        console.log('map: ' + this.user.msg.jwt);
-        sessionStorage.setItem('currentUser', JSON.stringify(user));
-      }
-      return user;
-    }));
+      .pipe(map(user => {
+        this.user = user;
+        if (this.user.code === 200 && this.user.msg.jwt) {
+          console.log('map: ' + this.user.msg.jwt);
+          sessionStorage.setItem('currentUser', JSON.stringify(user));
+        }
+        return user;
+      }));
   }
 
   verifyEmail(email: string, verCode: string) {
@@ -56,16 +56,16 @@ export class AuthenticationService {
 
   resetPassword(email: string, password: string, verCode: string) {
     return this.http.post(`${baseUrl}/reset_password`
-    , { email: email, password: sha256(password), verCode: verCode });
+      , { email: email, password: sha256(password), verCode: verCode });
   }
 
   logout() {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
-    this.httpOptions = { 
+    this.httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': this.yolo.msg.jwt
       })
-    }
+    };
     return this.http.post(`${baseUrl}/logout`, { email: this.yolo.msg.email }, this.httpOptions);
   }
 

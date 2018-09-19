@@ -8,10 +8,10 @@ export class LoggedIn implements CanActivate {
 
   constructor(
     public router: Router
-  ) {}
+  ) { }
 
   canActivate(): boolean {
-    
+
     if (sessionStorage.getItem('currentUser')) {
       this.router.navigate(['/dashboard']);
     }

@@ -32,7 +32,7 @@ export class MywalletComponent implements OnInit {
     'eth': 'ETH',
     'ltc': 'LTC',
     'acex': 'ACEX'
-  }
+  };
   data: any;
   error: any;
 
@@ -53,11 +53,11 @@ export class MywalletComponent implements OnInit {
     this.userService.getTxns().pipe().subscribe(
       data => {
         this.data = data;
-        if (this.data.code===200) {
+        if (this.data.code === 200) {
           let i: any;
           for (i = 0; i < this.data.msg.length; i++) {
             this.txns.push(this.data.msg[i]);
-            if(this.data.msg[i].type===2) {
+            if (this.data.msg[i].type === 2) {
               this.txns[i].currency = 'acex';
             }
           }
@@ -65,8 +65,8 @@ export class MywalletComponent implements OnInit {
       },
       error => {
         this.error = error.error;
-        if (this.error.code===401) {
-         return this.logout();
+        if (this.error.code === 401) {
+          return this.logout();
         }
         this.toastr.error('Error connecting to server');
       }
@@ -86,14 +86,14 @@ export class MywalletComponent implements OnInit {
     this.userService.getWallet(currency).pipe().subscribe(
       data => {
         this.data = data;
-        if (this.data.code===200) {
+        if (this.data.code === 200) {
           this.address = this.data.msg.address;
           this.depositModal.show(currency, this.address);
         }
       },
       error => {
         this.error = error.error;
-        if (this.error.code===401) {
+        if (this.error.code === 401) {
           this.logout();
         }
         this.toastr.error('Error connecting to server');

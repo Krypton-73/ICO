@@ -39,36 +39,38 @@ export class SettingsComponent implements OnInit {
       this.userService.getProfile().pipe().subscribe(
         data => {
           this.data = data;
-          sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
+          if (this.data.msg.kyc.kyc_doc && this.data.msg.kyc_selfie) {
+            sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
+          }
           this.user = this.data.msg;
           this.userKycDocImgs.push(this.user.kyc.kyc_doc);
           this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
         },
         error => {
           console.log(error);
-          this.error = error.error
+          this.error = error.error;
           if (this.error.code === 401) {
             return this.logout();
           }
           this.toastr.error('Error connecting to server.');
         }
-      )
+      );
     }
   }
 
   uploadKycDoc(event) {
-    let files = event.target.files;
-    let file = files[0];
+    const files = event.target.files;
+    const file = files[0];
 
     if (files && file) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = this._handleReaderLoaded.bind(this);
       reader.readAsDataURL(file);
     }
   }
 
   _handleReaderLoaded(readerEvt) {
-    let binaryString = readerEvt.target.result;
+    const binaryString = readerEvt.target.result;
     console.log(readerEvt.target.result);
     this.base64String.push(binaryString);
     console.log(btoa(binaryString));
@@ -87,7 +89,7 @@ export class SettingsComponent implements OnInit {
         }
         console.log(error);
       }
-    )
+    );
   }
 
   logout() {

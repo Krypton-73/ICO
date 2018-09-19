@@ -10,5 +10,5 @@ export class User {
         name: string;
         twoFac: number;
         user_id: string;
-    }
+    };
 }
