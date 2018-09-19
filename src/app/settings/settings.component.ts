@@ -19,6 +19,7 @@ export class SettingsComponent implements OnInit {
   error: any;
   userKycDocImgs = [];
   image: any;
+  submitButton: boolean;
 
 
   constructor(
@@ -39,10 +40,11 @@ export class SettingsComponent implements OnInit {
       this.userService.getProfile().pipe().subscribe(
         data => {
           this.data = data;
-          if (this.data.msg.kyc.kyc_doc && this.data.msg.kyc_selfie) {
+          this.user = this.data.msg;
+          if (this.user.kyc.kyc_status !== -1) {
+            this.submitButton = false;
             sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
           }
-          this.user = this.data.msg;
           this.userKycDocImgs.push(this.user.kyc.kyc_doc);
           this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
         },
@@ -81,6 +83,13 @@ export class SettingsComponent implements OnInit {
       data => {
         this.data = data;
         console.log(data);
+        if (this.data.msg.kyc.kyc_status !== -1 ) {
+          this.toastr.warning('Already Uploaded');
+          return;
+        }
+        this.toastr.success('Uploaded Successfully');
+        window.location.reload();
+        this.router.navigate(['/settings']);
       },
       error => {
         this.error = error.error;
@@ -88,6 +97,7 @@ export class SettingsComponent implements OnInit {
           return this.logout();
         }
         console.log(error);
+        this.toastr.warning('Already Uploaded');
       }
     );
   }

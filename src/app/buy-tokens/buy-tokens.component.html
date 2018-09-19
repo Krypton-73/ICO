@@ -18,17 +18,18 @@
             <option value="ltc">Litecoin</option>
           </select>
         </div>
-        <div class="md-form">
-          <label for="amountOfAcex">Amount of AceX Tokens</label>
+        <div *ngIf="currency" class="md-form">
+          <label for="amountOfAcex">Amount of AceX Tokens*</label>
           <input mdbInputDirective class="form-control" (input)="amountOfCurrency($event.target.value)" type="number" id="amountOfAcex"
             formControlName="amountOfAcex" [successMessage]="' '" [errorMessage]="'Invalid Input'"/>
           <div>
             <p><em>Required: {{ this.amountOfCurrencyReq }}</em></p>
-            <p><em>Balance: {{ this.balanceUsd }}</em></p>
+            <p><em>Balance: {{ this.balanceUsd }} USD</em></p>
             <p><em>Max Tokens that can be purchased: {{ this.maxAcexTokens }}</em></p>
+            <p><em>*Mininum investment required is 10$.</em></p>
           </div>
         </div>
-        <div class="modal-footer text-center md-form">
+        <div *ngIf="currency" class="modal-footer text-center md-form">
           <button type="submit" (click)="buyAcexTokens()" class="btn waves-light acex-btn-signin" mdbWavesEffect>Buy Tokens</button>
         </div>
       </div>

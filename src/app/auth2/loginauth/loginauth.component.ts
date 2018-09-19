@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginauthComponent implements OnInit {
 
   currentJustify = 'fill';
-  tab = 'login'
+  tab = 'login';
   loginForm: FormGroup;
   registerForm: FormGroup;
   submitted: any = false;
@@ -21,7 +21,7 @@ export class LoginauthComponent implements OnInit {
   refId: string;
   data: any;
 
-  preferredCountries = ['us', 'au', 'ru', 'gb', 'in'];
+  preferredCountries = ['my', 'au', 'ru', 'gb', 'in'];
 
   @ViewChild('phoneSelect') phoneSelect;
 
@@ -127,7 +127,7 @@ export class LoginauthComponent implements OnInit {
           this.data = data;
           if (this.data.code === 200 && this.data.msg === 'successfully_added') {
             this.toastr.success('A verification link has been sent to your registered Email.');
-            // email input in sign-in on successful registeration. 
+            // email input in sign-in on successful registeration.
             this.router.navigate(['/auth/signin', this.t.email.value]);
           }
         },
@@ -160,7 +160,7 @@ export class LoginauthComponent implements OnInit {
         error => {
           return this.toastr.error('Error connecting to server');
         }
-      )
+      );
   }
 
 }

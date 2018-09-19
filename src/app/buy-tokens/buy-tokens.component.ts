@@ -20,7 +20,7 @@ import { Rate } from '../_models/rate';
 })
 export class BuyTokensComponent implements OnInit, OnDestroy {
     buyForm: FormGroup;
-    currentJustify = "fill";
+    currentJustify = 'fill';
     data: any;
     error: any;
     balance: Balance;
@@ -47,29 +47,29 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.buyForm = this.formBuilder.group({
-            currency: ['btc', Validators.required],
+            currency: ['', Validators.required],
             amountOfAcex: [100, [Validators.required, Validators.min(100), Validators.pattern]]
         });
 
-        this.dataService.currentBalance.subscribe(balance => { this.balance = balance });
+        this.dataService.currentBalance.subscribe(balance => { this.balance = balance; });
         this.dataService.currentRate.subscribe(
             rate => {
                 this.rate = rate;
-                if (this.rate) {    
+                if (this.rate) {
                     this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
-                    console.log(this.amountOfCurrencyReq);  
+                    console.log(this.amountOfCurrencyReq);
                 }
             },
             error => {
-            console.log(error);
-        });
+                console.log(error);
+            });
     }
 
     ngOnDestroy() {
         // this.buyForm.reset();
     }
 
-    get f() { return this.buyForm.controls };
+    get f() { return this.buyForm.controls; }
 
     show() {
         this.buyAcex.show();
@@ -100,19 +100,20 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
     }
 
     amountOfCurrency(amount: number) {
-        var valueUsd = amount * 0.1;
+        const valueUsd = amount * 0.1;
+        let rateOfPurchase: number;
         switch (this.currency) {
             case 'btc':
-                var rate = this.rate.btc;
+                rateOfPurchase = this.rate.btc;
                 break;
             case 'eth':
-                var rate = this.rate.eth;
+                rateOfPurchase = this.rate.eth;
                 break;
             case 'ltc':
-                var rate = this.rate.ltc;
+                rateOfPurchase = this.rate.ltc;
                 break;
         }
-        this.amountOfCurrencyReq = valueUsd / rate;
+        this.amountOfCurrencyReq = valueUsd / rateOfPurchase;
         console.log(this.amountOfCurrencyReq);
     }
 
@@ -121,11 +122,11 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
         if (this.buyForm.invalid) {
             return;
         }
-        let bool: boolean = this.balanceCheck(this.f.amountOfAcex.value);
-        if (bool == false) {
-            this.toastr.info('Insufficient Funds')
+        const bool: boolean = this.balanceCheck(this.f.amountOfAcex.value);
+        if (bool === false) {
+            this.toastr.info('Insufficient Funds');
         }
-        if (bool == true) {
+        if (bool === true) {
             this.userService.buyAcex(this.f.currency.value, this.f.amountOfAcex.value)
                 .pipe().subscribe(
                     data => {
@@ -171,7 +172,7 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
                 window.sessionStorage.clear();
                 this.router.navigate(['/auth']);
             }
-        )
+        );
     }
 
 }
