@@ -13,6 +13,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {MywalletComponent} from './mywallet/mywallet.component';
 import {ReferralsComponent} from './referrals/referrals.component';
 import {LoggedIn} from './guards/logged-in';
+import {MaintenanceGuard} from './guards/maintenance.guard';
 import {SettingsComponent} from './settings/settings.component';
 import {MaintenanceComponent} from './layouts/maintenance/maintenance.component';
 
@@ -28,7 +29,7 @@ const routes: Routes = [
         path: 'auth',
         component: LoginauthComponent,
         data: {title: 'AceX | Auth'},
-        canActivate: [ LoggedIn ]
+        canActivate: [ MaintenanceGuard ]
     },
     {
         path: 'auth/signin/:email',
