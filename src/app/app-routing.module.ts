@@ -23,13 +23,13 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/maintenance'
+        redirectTo: '/auth'
     },
     {
         path: 'auth',
         component: LoginauthComponent,
         data: {title: 'AceX | Auth'},
-        canActivate: [ MaintenanceGuard ]
+        canActivate: [ LoggedIn ]
     },
     {
         path: 'auth/signin/:email',
@@ -100,7 +100,7 @@ const routes: Routes = [
         path: 'maintenance',
         component: MaintenanceComponent,
         data: {title: 'AceX | Maintenance'}
-    },
+    }
 ];
 
 @NgModule({

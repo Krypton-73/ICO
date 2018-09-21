@@ -19,7 +19,6 @@ export class SettingsComponent implements OnInit {
   error: any;
   userKycDocImgs = [];
   image: any;
-  submitButton: boolean;
 
 
   constructor(
@@ -42,7 +41,6 @@ export class SettingsComponent implements OnInit {
           this.data = data;
           this.user = this.data.msg;
           if (this.user.kyc.kyc_status !== -1) {
-            this.submitButton = false;
             sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
           }
           this.userKycDocImgs.push(this.user.kyc.kyc_doc);
@@ -79,27 +77,26 @@ export class SettingsComponent implements OnInit {
   }
 
   verifyKyc() {
-    this.userService.userKYC(this.base64String[0], this.base64String[1]).pipe().subscribe(
+    this.userService.setKyc(this.base64String[0], this.base64String[1]).pipe().subscribe(
       data => {
         this.data = data;
-        console.log(data);
-        if (this.data.msg.kyc.kyc_status !== -1 ) {
-          this.toastr.warning('Already Uploaded');
-          return;
-        }
-        this.toastr.success('Uploaded Successfully');
+        console.log(this.data);
         window.location.reload();
         this.router.navigate(['/settings']);
+        this.toastr.success('Uploaded Successfully');
       },
       error => {
         this.error = error.error;
         if (this.error.code === 401) {
           return this.logout();
         }
+        // window.location.reload();
         console.log(error);
-        this.toastr.warning('Already Uploaded');
+        this.toastr.info('Invalid Request');
       }
     );
+    // window.location.reload();
+    // this.router.navigate(['/settings']);
   }
 
   logout() {

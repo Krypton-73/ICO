@@ -17,7 +17,7 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  userKYC(kyc_doc: any, kyc_selfie: any) {
+  setKyc(kyc_doc, kyc_selfie) {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
     this.httpOptions = {
       headers: new HttpHeaders({
