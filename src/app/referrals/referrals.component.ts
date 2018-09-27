@@ -30,9 +30,9 @@ export class ReferralsComponent implements OnInit {
   private authenticationService: AuthenticationService,
   private toastr: ToastrService,
   private router: Router
-  ) { 
+  ) {
    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
-   this.refId = this.yolo.msg.user_id;  
+   this.refId = this.yolo.msg.user_id;
   }
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class ReferralsComponent implements OnInit {
         if (this.data.code === 200){
           let i: any;
           for (i = 0; i < this.data.msg.length; i++) {
-            if (this.data.msg[i].type===3){
+            if (this.data.msg[i].type === 3) {
               this.txns.push(this.data.msg[i]);
             }
           }
@@ -50,7 +50,7 @@ export class ReferralsComponent implements OnInit {
       },
       error => {
         this.error = error.error;
-        if (this.error.code===401){
+        if (this.error.code === 401) {
           return this.logout();
         }
         this.toastr.error('Error connecting to server');

@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-
 import {VerifyotpComponent} from './auth/verifyotp/verifyotp.component';
 import {AuthGuard} from './guards/auth.guard';
 
@@ -13,9 +12,10 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {MywalletComponent} from './mywallet/mywallet.component';
 import {ReferralsComponent} from './referrals/referrals.component';
 import {LoggedIn} from './guards/logged-in';
-import {MaintenanceGuard} from './guards/maintenance.guard';
+// import {MaintenanceGuard} from './guards/maintenance.guard';
 import {SettingsComponent} from './settings/settings.component';
 import {MaintenanceComponent} from './layouts/maintenance/maintenance.component';
+import {TicketComponent} from './ticket/ticket.component';
 
 
 const routes: Routes = [
@@ -84,6 +84,12 @@ const routes: Routes = [
         component: ReferralsComponent,
         canActivate: [ AuthGuard ],
         data: {title: 'AceX | Referrals'}
+    },
+    {
+        path: 'ticket',
+        component: TicketComponent,
+        canActivate: [ AuthGuard ],
+        data: {title: 'AceX | Ticket'}
     },
     {
         path: 'settings',

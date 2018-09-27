@@ -51,6 +51,7 @@ import { ResetPasswordComponent } from './auth2/reset-password/reset-password.co
 import { VerifyEmailComponent } from './auth2/verify-email/verify-email.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MaintenanceComponent } from './layouts/maintenance/maintenance.component';
+import { TicketComponent } from './ticket/ticket.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { MaintenanceComponent } from './layouts/maintenance/maintenance.componen
     ResetPasswordComponent,
     VerifyEmailComponent,
     SettingsComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,
