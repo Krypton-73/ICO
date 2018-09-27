@@ -103,4 +103,16 @@ export class UserService {
     return this.http.post(`${baseUrl}/get_txs`, { email: this.yolo.msg.email }, this.httpOptions);
   }
 
+  submitTicket(subject: string, message: string) {
+    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': this.yolo.msg.jwt
+      })
+    };
+    return this.http.post(`${baseUrl}/submit_ticket`
+    , { email: this.yolo.msg.email, subject: subject, description: message }
+    , this.httpOptions);
+  }
+
 }
