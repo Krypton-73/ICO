@@ -115,4 +115,24 @@ export class UserService {
     , this.httpOptions);
   }
 
+  getTickets() {
+    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': this.yolo.msg.jwt
+      })
+    };
+    return this.http.post(`${baseUrl}/get_tickets`, { email: this.yolo.msg.email }, this.httpOptions);
+  }
+
+  getTicket(ticketNo: string) {
+    this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': this.yolo.msg.jwt
+      })
+    };
+    return this.http.post(`${baseUrl}/get_tickets/${ticketNo}`, { email: this.yolo.msg.email }, this.httpOptions);
+  }
+
 }

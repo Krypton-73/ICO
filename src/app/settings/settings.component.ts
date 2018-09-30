@@ -30,7 +30,10 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getProfile();
+  }
 
+  getProfile() {
     if (sessionStorage.getItem('userProfile')) {
       this.user = JSON.parse(sessionStorage.getItem('userProfile'));
       this.userKycDocImgs.push(this.user.kyc.kyc_doc);
@@ -45,6 +48,7 @@ export class SettingsComponent implements OnInit {
           }
           this.userKycDocImgs.push(this.user.kyc.kyc_doc);
           this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
+          console.log(this.userKycDocImgs);
         },
         error => {
           console.log(error);
@@ -81,8 +85,7 @@ export class SettingsComponent implements OnInit {
       data => {
         this.data = data;
         console.log(this.data);
-        window.location.reload();
-        this.router.navigate(['/settings']);
+        this.getProfile();
         this.toastr.success('Uploaded Successfully');
       },
       error => {

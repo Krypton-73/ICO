@@ -22,7 +22,9 @@ export class HomenavsComponent implements OnInit {
   user: any;
   balance: Balance;
   rate: Rate;
-  
+
+  @ViewChild('buyAcex') buyAcex: BuyTokensComponent;
+
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
@@ -37,34 +39,34 @@ export class HomenavsComponent implements OnInit {
 
     this.load.show();
     this.userService.getBalances().pipe().subscribe(
-      data => {  
-      this.data = data;
-      if (this.data.code===200) {
-        this.balance = this.data.msg;
-        this.newBalance();
-      }
-    },
-    error => {
-      this.error = error.error;
-      if (this.error.code===401){
-        return this.logout();
-      }
-      this.toastr.error('Error connecting to server');
-    });
-    this.userService.getRate().pipe().subscribe(
       data => {
         this.data = data;
-        if (this.data.code===200) {
-        this.rate = this.data.msg;
-        this.newRate();
+        if (this.data.code === 200) {
+          this.balance = this.data.msg;
+          this.newBalance();
         }
       },
       error => {
-      this.error = error.error;
-      if (this.error.code===401){
-        return this.logout();
-      }
-      this.toastr.error('Error connecting to server');
+        this.error = error.error;
+        if (this.error.code === 401) {
+          return this.logout();
+        }
+        this.toastr.error('Error connecting to server');
+      });
+    this.userService.getRate().pipe().subscribe(
+      data => {
+        this.data = data;
+        if (this.data.code === 200) {
+          this.rate = this.data.msg;
+          this.newRate();
+        }
+      },
+      error => {
+        this.error = error.error;
+        if (this.error.code === 401) {
+          return this.logout();
+        }
+        this.toastr.error('Error connecting to server');
       }
     );
     this.load.hide();
@@ -75,11 +77,9 @@ export class HomenavsComponent implements OnInit {
   }
 
   closeNav() {
-      document.getElementById('mySidenav').style.width = '0';
+    document.getElementById('mySidenav').style.width = '0';
   }
 
-  @ViewChild('buyAcex') buyAcex: BuyTokensComponent;
-    
   buyAcexTokens() {
     this.buyAcex.show();
   }
@@ -90,7 +90,7 @@ export class HomenavsComponent implements OnInit {
 
   newBalance() {
     if (this.balance) {
-    this.dataService.newBalance(this.balance);
+      this.dataService.newBalance(this.balance);
     }
   }
 

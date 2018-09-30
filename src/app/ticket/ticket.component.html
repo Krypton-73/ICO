@@ -4,91 +4,85 @@
 
   <div class="container main-container">
     <div class="row main-row">
-      <div class="col-lg-4">
+      <div class="col-md-6">
         <div class="card">
           <div class="card-body">
             <p class="body-title">Pending Tickets</p>
             <hr>
             <table class="table table-striped">
-              <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Query</th>
-                <th scope="col">Last updated</th>
-                <th scope="col">Status</th>
-              </tr>
+              <thead class="text-center">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Query</th>
+                  <th scope="col">Created At</th>
+                  <th scope="col">Status</th>
+                </tr>
               </thead>
-              <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              <tbody class="text-center">
+                <tr *ngFor="let ticket of tickets">
+                  <th scope="row">1</th>
+                  <td>{{ ticket.subject }}</td>
+                  <td>{{ ticket.createdAt | date }}</td>
+                  <td>{{ statusType[ticket.status] }}</td>
+                  <td>
+                    <button type="button" mdbBtn class="relative waves-light btn btn-info" data-toggle="modal"
+                      data-target="#ticketModal" data-dismiss="modal" (click)="viewTicket(ticket.ticket_no)">View</button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <div class="col-lg-8">
+      <div class="col-md-6">
         <div class="card">
-            <div class="card-body">
-                <p class="body-title">Raise a Ticket</p>
-                <hr>
-                <!-- Default form -->
-                <form class="text-center border border-light p-5" [formGroup]="ticketForm">
-                    <!-- Subject -->
-                    <label for="subject"><b><em>Subject</em></b></label>
-                    <select id="subject" formControlName="subject" class="browser-default custom-select mb-4">
-                        <option value="" disabled>Choose option</option>
-                        <option value="crypto_deposit" selected>Crypto Deposit</option>
-                        <option value="crypto_withdrawal">Crypto Withdrawal</option>
-                        <!--<option value="inr_deposit">FIAT Deposit</option>-->
-                        <!--<option value="inr_withdrawal">FIAT Withdrawal</option>-->
-                        <option value="bank_details_change">Bank Details Change</option>
-                        <option value="kyc">KYC</option>
-                        <option value="email_change">Email Change</option>
-                        <option value="mobile_number_change">Mobile Number Change</option>
-                        <option value="recovery_password">Recovery Password</option>
-                        <!--<option value="authenticator">Google Authenticator</option>-->
-                        <option value="account_frozen">Account being Monitored</option>
-                        <option value="name_change">Name Change</option>
-                        <!--<option value="mobile_app_issues">Mobile App Issues</option>-->
-                        <option value="suggestions">Suggestions</option>
-                        <option value="others">Others</option>
-                    </select>
+          <div class="card-body">
+            <p class="body-title">Raise a Ticket</p>
+            <hr>
+            <!-- Default form -->
+            <form class="text-center border border-light p-5" [formGroup]="ticketForm">
+              <!-- Subject -->
+              <label for="subject"><b><em>Subject</em></b></label>
+              <select id="subject" formControlName="subject" class="browser-default custom-select mb-4">
+                <option value="" disabled>Choose option</option>
+                <option value="crypto_deposit" selected>Crypto Deposit</option>
+                <option value="crypto_withdrawal">Crypto Withdrawal</option>
+                <!--<option value="inr_deposit">FIAT Deposit</option>-->
+                <!--<option value="inr_withdrawal">FIAT Withdrawal</option>-->
+                <option value="bank_details_change">Bank Details Change</option>
+                <option value="kyc">KYC</option>
+                <option value="email_change">Email Change</option>
+                <option value="mobile_number_change">Mobile Number Change</option>
+                <option value="recovery_password">Recovery Password</option>
+                <!--<option value="authenticator">Google Authenticator</option>-->
+                <option value="account_frozen">Account being Monitored</option>
+                <option value="name_change">Name Change</option>
+                <!--<option value="mobile_app_issues">Mobile App Issues</option>-->
+                <option value="suggestions">Suggestions</option>
+                <option value="others">Others</option>
+              </select>
 
-                    <!-- Message -->
-                    <div class="form-group">
-                        <textarea class="form-control rounded-0" formControlName="message" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
-                    </div>
+              <!-- Message -->
+              <div class="form-group">
+                <textarea class="form-control rounded-0" formControlName="message" id="exampleFormControlTextarea2"
+                  rows="3" placeholder="Message"></textarea>
+              </div>
 
-                    <!-- Copy -->
-                    <div class="custom-control custom-checkbox mb-4">
-                        <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
-                        <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
-                    </div>
+              <!-- Copy -->
+              <div class="custom-control custom-checkbox mb-4">
+                <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
+                <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
+              </div>
 
-                    <!-- Send button -->
-                    <button class="btn btn-info btn-block" (click)="submit()" type="submit">Send</button>
+              <!-- Send button -->
+              <button class="btn btn-info btn-block" (click)="submit()" type="submit">Send</button>
 
-                </form>
-                <!-- Default form -->
-            </div>
+            </form>
+            <!-- Default form -->
+          </div>
         </div>
       </div>
     </div>
   </div>
 </main>
+<app-ticket-modal #ticketModal></app-ticket-modal>

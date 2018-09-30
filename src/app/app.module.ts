@@ -52,6 +52,7 @@ import { VerifyEmailComponent } from './auth2/verify-email/verify-email.componen
 import { SettingsComponent } from './settings/settings.component';
 import { MaintenanceComponent } from './layouts/maintenance/maintenance.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { TicketComponent } from './ticket/ticket.component';
     VerifyEmailComponent,
     SettingsComponent,
     MaintenanceComponent,
-    TicketComponent
+    TicketComponent,
+    TicketModalComponent
   ],
   imports: [
     BrowserModule,
