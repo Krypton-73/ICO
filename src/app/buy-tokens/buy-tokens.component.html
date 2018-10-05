@@ -23,8 +23,8 @@
           <input mdbInputDirective class="form-control" (input)="amountOfCurrency($event.target.value)" type="number" id="amountOfAcex"
             formControlName="amountOfAcex" [successMessage]="' '" [errorMessage]="'Invalid Input'"/>
           <div>
-            <p><em>Required: {{ this.amountOfCurrencyReq }}</em></p>
-            <p><em>Balance: {{ this.balanceUsd }} USD</em></p>
+            <p><em>Required: {{ prefixNosByFix(this.amountOfCurrencyReq) }} {{ this.f.currency.value | uppercase }} </em></p>
+            <p><em>Balance: {{ this.balanceUsd | number : '1.0-2'}} USD</em></p>
             <p><em>Max Tokens that can be purchased: {{ this.maxAcexTokens }}</em></p>
             <p><em>*Mininum investment required is 10$.</em></p>
           </div>

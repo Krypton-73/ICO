@@ -21,12 +21,12 @@
               <tbody class="text-center">
                 <tr *ngFor="let ticket of tickets">
                   <th scope="row">1</th>
-                  <td>{{ ticket.subject }}</td>
+                  <td>{{ subjectReform[ticket.subject] }}</td>
                   <td>{{ ticket.createdAt | date }}</td>
                   <td>{{ statusType[ticket.status] }}</td>
                   <td>
-                    <button type="button" mdbBtn class="relative waves-light btn btn-info" data-toggle="modal"
-                      data-target="#ticketModal" data-dismiss="modal" (click)="viewTicket(ticket.ticket_no)">View</button>
+                    <button type="button" mdbBtn class="relative waves-light btn btn-info" data-toggle="modal" data-target="#ticketModal" data-dismiss="modal"
+                      (click)="viewTicket(ticket.ticket_no)">View</button>
                   </td>
                 </tr>
               </tbody>
@@ -42,7 +42,11 @@
             <!-- Default form -->
             <form class="text-center border border-light p-5" [formGroup]="ticketForm">
               <!-- Subject -->
-              <label for="subject"><b><em>Subject</em></b></label>
+              <label for="subject">
+                <b>
+                  <em>Subject</em>
+                </b>
+              </label>
               <select id="subject" formControlName="subject" class="browser-default custom-select mb-4">
                 <option value="" disabled>Choose option</option>
                 <option value="crypto_deposit" selected>Crypto Deposit</option>
@@ -64,8 +68,7 @@
 
               <!-- Message -->
               <div class="form-group">
-                <textarea class="form-control rounded-0" formControlName="message" id="exampleFormControlTextarea2"
-                  rows="3" placeholder="Message"></textarea>
+                <textarea class="form-control rounded-0" formControlName="message" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
               </div>
 
               <!-- Copy -->

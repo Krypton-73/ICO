@@ -14,7 +14,19 @@ export class TicketModalComponent implements OnInit {
   constructor() { }
 
   ticket: any;
-  body: any;
+  messages: any = [];
+  userName: string;
+
+  statusType = {
+    1: 'Submitted',
+    2: 'Pending',
+    3: 'Closed'
+  };
+
+  subjectReform: any = {
+    "crypto_deposit": "Crypto Deposit",
+    "YOLO": "YOLO"
+  }
 
   ngOnInit() {
   }
@@ -22,8 +34,8 @@ export class TicketModalComponent implements OnInit {
   show(ticket: any, body: string ) {
     // console.log(ticket, body);
     this.ticket = ticket;
-    this.body = body;
-    console.log(this.ticket.user_id, this.body.body);
+    this.messages = body;
+    console.log(this.ticket, this.messages);
     this.ticketModal.show();
   }
 

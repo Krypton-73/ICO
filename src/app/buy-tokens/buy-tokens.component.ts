@@ -25,7 +25,7 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
     error: any;
     balance: Balance;
     rate: Rate;
-    balanceUsd: any;
+    balanceUsd: number;
     requiredBal: any;
     maxAcexTokens: number;
     amountOfCurrencyReq: number;
@@ -67,6 +67,18 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         // this.buyForm.reset();
+    }
+
+    prefixNosByFix (no: any) {
+        try {
+            if (no !== 0) {
+                return Number.parseFloat(no).toFixed(8);
+            } else {
+                return 0;
+            }
+        } catch (e) {
+            return 0;
+        }
     }
 
     get f() { return this.buyForm.controls; }

@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     prefixNosByFix (no: any) {
         try {
             if (no !== 0) {
-                return Number.parseFloat(no).toFixed(4);
+                return Number.parseFloat(no).toFixed(8);
             } else {
                 return 0;
             }

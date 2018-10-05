@@ -105,10 +105,12 @@ export class SettingsComponent implements OnInit {
   logout() {
     this.authenticationService.logout().pipe().subscribe(
       data => {
+        this.data = data;
         window.sessionStorage.clear();
         this.router.navigate(['/auth']);
       },
       error => {
+        this.data = error.error;
         window.sessionStorage.clear();
         this.router.navigate(['/auth']);
       }

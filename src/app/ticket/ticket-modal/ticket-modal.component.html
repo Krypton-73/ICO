@@ -1,24 +1,36 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ticketModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div mdbModal class="modal fade" #ticketModal="mdbModal" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+<div mdbModal class="modal fade" #ticketModal="mdbModal" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content" *ngIf="ticket">
       <div class="modal-header">
-        <h5 class="modal-title" id="ticketModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="ticketModalLabel">
+          <b>{{ subjectReform[ticket.subject] }}</b>
+        </h5>
         <button type="button" class="close" data-dismiss="ticketModal" (click)="hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p></p>
+        <div>
+          <p><b>Ticket No.: </b>
+            <em>{{ ticket.ticket_no }}</em>
+          </p>
+          <p><b>Submitted On: </b>
+            <em>{{ ticket.createdAt | date }}</em>
+          </p>
+          <p><b>Status: </b>
+            <em>{{ statusType[ticket.status] }}</em>
+          </p>
+        </div>
+        <div *ngFor="let msg of messages">
+          <p>From: {{ msg.name }}</p>
+          <p>Time: {{ msg.createdAt | date }}</p>
+          <p>Message: {{ msg.body }}</p>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="hide()">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Submit</button>
       </div>
     </div>
   </div>

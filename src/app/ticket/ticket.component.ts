@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 import { TicketModalComponent } from './ticket-modal/ticket-modal.component';
+import { AuthenticationService } from '../services/authenticationService';
 
 @Component({
   selector: 'app-ticket',
@@ -20,13 +21,19 @@ export class TicketComponent implements OnInit {
     2: 'Pending',
     3: 'Closed'
   };
+  subjectReform: any = {
+    "crypto_deposit": "Crypto Deposit",
+    "YOLO": "YOLO"
+  }
 
   @ViewChild('ticketModal') ticketModal: TicketModalComponent;
 
   constructor(
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -59,7 +66,7 @@ export class TicketComponent implements OnInit {
       data => {
         this.data = data;
         if (this.data.code === 200) {
-          this.ticketModal.show(ticket[0], this.data.msg[0].msgs[0]);
+          this.ticketModal.show(ticket[0], this.data.msg[0].msgs);
         }
       },
       error => {
@@ -75,15 +82,35 @@ export class TicketComponent implements OnInit {
     this.userService.submitTicket(this.f.subject.value, this.f.message.value).pipe().subscribe(
       data => {
         this.data = data;
-        this.toastr.success('Submitted');
+        if (this.data.code === 200) {
+          this.toastr.success('Submitted');
+        }
       },
       error => {
         this.data = error.error;
         console.log(this.data);
+        if (this.data.code === 401) {
+          return this.logout();
+        }
         this.toastr.warning('Some error occurred');
       }
     );
 
+  }
+
+  logout() {
+    this.authenticationService.logout().pipe().subscribe(
+      data => {
+        this.data = data;
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      },
+      error => {
+        this.data = error.error;
+        window.sessionStorage.clear();
+        this.router.navigate(['/auth']);
+      }
+    );
   }
 
 }
