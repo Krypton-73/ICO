@@ -42,9 +42,14 @@ export class TicketComponent implements OnInit {
       message: ['', [Validators.required]]
     });
 
+    this.getTickets();
+  }
+
+  getTickets() {
     this.userService.getTickets().pipe().subscribe(
       data => {
         this.data = data;
+        this.tickets = [];
         let i: any;
         for (i = 0; i < this.data.msg.length; i++) {
           this.tickets.push(this.data.msg[i]);
@@ -83,6 +88,8 @@ export class TicketComponent implements OnInit {
       data => {
         this.data = data;
         if (this.data.code === 200) {
+          this.getTickets();
+          this.ticketForm.reset();
           this.toastr.success('Submitted');
         }
       },

@@ -88,6 +88,7 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
     }
 
     hide() {
+        this.buyForm.reset();
         this.buyAcex.hide();
     }
 
@@ -145,7 +146,6 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
                         this.data = data;
                         if (this.data.code === 200) {
                             this.toastr.success('Tokens Purchased');
-                            window.location.reload();
                             this.router.navigate(['/dashboard']);
                         }
                         this.buyAcex.hide();

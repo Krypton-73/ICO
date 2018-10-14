@@ -85,15 +85,14 @@ export class SettingsComponent implements OnInit {
       data => {
         this.data = data;
         console.log(this.data);
-        this.getProfile();
         this.toastr.success('Uploaded Successfully');
+        this.getProfile();
       },
       error => {
         this.error = error.error;
         if (this.error.code === 401) {
           return this.logout();
         }
-        // window.location.reload();
         console.log(error);
         this.toastr.info('Invalid Request');
       }
