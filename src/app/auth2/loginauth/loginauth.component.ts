@@ -73,7 +73,7 @@ export class LoginauthComponent implements OnInit {
     this.registerForm.get('countryISO2Code').setValue(flag.iso2);
 
     const phone = this.registerForm.value.mobile;
-    if (phone.toString().length === 10) {
+    if (phone.toString().length > 7 && phone.toString().length < 12) {
       this.registerForm.controls['mobile'].setErrors(null); // {'validatePhone': true}
       this.registerForm.controls['mobile'].setValidators(null);
     } else {
@@ -102,7 +102,7 @@ export class LoginauthComponent implements OnInit {
           this.data = error;
           if (this.data.error.code === 500 && this.data.error.msg === 'user not verified') {
             this.verified = true;
-            return this.toastr.warning('Please confirm verfication link sent to your registered email')
+            return this.toastr.warning('Please confirm verfication link sent to your registered email');
           } else {
             this.toastr.warning('Invalid Password');
           }
@@ -114,7 +114,7 @@ export class LoginauthComponent implements OnInit {
       // console.log(this.registerForm, this.registerForm.value, this.registerForm.valid);
 
       const phone = this.registerForm.value.mobile;
-      if (phone.toString().length !== 10) {
+      if (phone.toString().length < 7 && phone.toString().length > 12 ) {
         this.toastr.error('Mobile number must be 10 digits', null, { timeOut: 4000 });
         return;
       }
