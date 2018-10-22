@@ -102,7 +102,7 @@ export class LoginauthComponent implements OnInit {
           this.data = error;
           if (this.data.error.code === 500 && this.data.error.msg === 'user not verified') {
             this.verified = true;
-            return this.toastr.warning('Please confirm verfication link sent to your registered email');
+            return this.toastr.warning('Please click on the Verification link sent to your Registered Email');
           } else {
             this.toastr.warning('Invalid Password');
           }
@@ -115,12 +115,12 @@ export class LoginauthComponent implements OnInit {
 
       const phone = this.registerForm.value.mobile;
       if (phone.toString().length < 7 && phone.toString().length > 12 ) {
-        this.toastr.error('Mobile number must be 10 digits', null, { timeOut: 4000 });
+        this.toastr.error('Mobile number must be valid', null, { timeOut: 4000 });
         return;
       }
       if (this.registerForm.invalid) { return; }
       if (this.t.password.value !== this.t.cPassword.value) {
-        return this.toastr.warning('Password and Confirm Password does not match');
+        return this.toastr.warning('Password and Confirm Password mismatch');
       }
       this.authenticationService.register(this.registerForm.value).pipe().subscribe(
         data => {
@@ -138,7 +138,7 @@ export class LoginauthComponent implements OnInit {
             return this.toastr.error('User email already Registered');
           }
           if (this.data.error.code === 500 && this.data.error.msg === 'invalid mobile') {
-            return this.toastr.error('Mobile No must be a number');
+            return this.toastr.error('Mobile Number must be a Number');
           }
           this.toastr.error('error', null, { timeOut: 4000 });
         }
@@ -154,7 +154,7 @@ export class LoginauthComponent implements OnInit {
         data => {
           this.data = data;
           if (this.data.code === 200 && this.data.msg === 'confirmation mail resent') {
-            return this.toastr.info('Verification link has been sent to your email.');
+            return this.toastr.info('Verification link has been re-sent to your Registered Email.');
           }
         },
         error => {
