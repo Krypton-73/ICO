@@ -22,7 +22,7 @@ export class AuthenticationService {
     return this.http.post(`${baseUrl}/register`
       , {
         email: newUser.email, password: sha256(newUser.password)
-        , ref_id: newUser.refId, name: newUser.name, mobile: newUser.dialCode + newUser.mobile
+        , ref_id: newUser.refId, name: newUser.name, mobile: `+${newUser.dialCode} ${newUser.mobile}`
       });
   }
 
