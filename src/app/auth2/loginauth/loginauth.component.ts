@@ -25,9 +25,6 @@ export class LoginauthComponent implements OnInit {
 
   @ViewChild('phoneSelect') phoneSelect;
 
-  setCountry(countryCode) {
-    this.phoneSelect.setCountry(countryCode);
-  }
   getCountryData() {
     return this.phoneSelect.getCountryData();
   }
@@ -60,7 +57,7 @@ export class LoginauthComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       cPassword: ['', Validators.required],
       agree: ['', Validators.required],
-      phoneCode: ['', []],
+      dialCode: ['', []],
       country: ['', []],
       countryISO2Code: ['', []],
     });
@@ -68,7 +65,7 @@ export class LoginauthComponent implements OnInit {
 
   appendTOForm($event) {
     const flag = this.getCountryData();
-    this.registerForm.get('phoneCode').setValue(flag.dialCode);
+    this.registerForm.get('dialCode').setValue(flag.dialCode);
     this.registerForm.get('country').setValue(flag.name);
     this.registerForm.get('countryISO2Code').setValue(flag.iso2);
 
@@ -118,7 +115,10 @@ export class LoginauthComponent implements OnInit {
         this.toastr.error('Mobile number must be valid', null, { timeOut: 4000 });
         return;
       }
-      if (this.registerForm.invalid) { return; }
+      if (this.registerForm.invalid) {
+        console.log(this.registerForm.errors);
+        return this.toastr.warning('Invalid Form'); 
+      }
       if (this.t.password.value !== this.t.cPassword.value) {
         return this.toastr.warning('Password and Confirm Password mismatch');
       }

@@ -58,7 +58,8 @@
                       formControlName="mobile"
                       #phoneSelect="ngx-phone-select"
                       placeholder="Mobile number"
-                      data-error=" " data-success=" " 
+                      data-error=" " data-success=" "
+                      [mdbValidate]="false"
                       (blur)="appendTOForm($event)"
                       [preferredCountries]="preferredCountries"
                        ngxPhoneSelect
