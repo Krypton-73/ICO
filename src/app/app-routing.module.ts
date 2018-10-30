@@ -102,11 +102,11 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: '/maintenance'
     },
-    {
-        path: 'maintenance',
-        component: MaintenanceComponent,
-        data: {title: 'AceX | Maintenance'}
-    }
+    // {
+    //     path: 'maintenance',
+    //     component: MaintenanceComponent,
+    //     data: {title: 'AceX | Maintenance'}
+    // }
 ];
 
 @NgModule({
