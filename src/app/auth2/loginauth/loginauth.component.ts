@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { AuthenticationService } from '../../services/authenticationService';
 import { ToastrService } from 'ngx-toastr';
 
@@ -23,7 +23,7 @@ export class LoginauthComponent implements OnInit {
 
   preferredCountries = ['my', 'au', 'ru', 'gb', 'in'];
 
-  @ViewChild('phoneSelect') phoneSelect;
+  @ViewChild ('phoneSelect') phoneSelect;
 
   getCountryData() {
     return this.phoneSelect.getCountryData();
@@ -112,12 +112,11 @@ export class LoginauthComponent implements OnInit {
 
       const phone = this.registerForm.value.mobile;
       if (phone.toString().length < 7 && phone.toString().length > 12 ) {
-        this.toastr.error('Mobile number must be valid', null, { timeOut: 4000 });
+        this.toastr.warning('Mobile number must be valid', null, { timeOut: 4000 });
         return;
       }
       if (this.registerForm.invalid) {
-        console.log(this.registerForm.errors);
-        return this.toastr.warning('Invalid Form'); 
+        return this.getFormValidationErrors();
       }
       if (this.t.password.value !== this.t.cPassword.value) {
         return this.toastr.warning('Password and Confirm Password mismatch');
@@ -147,6 +146,20 @@ export class LoginauthComponent implements OnInit {
     // 'signup', 'signin'
 
   }
+
+  getFormValidationErrors() {
+    Object.keys(this.registerForm.controls).forEach(key => {
+    const controlErrors: ValidationErrors = this.registerForm.get(key).errors;
+    if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+            // console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+            if (key === 'agree') { 
+              return this.toastr.info('Please agree to terms of use and privacy.');
+            }
+          });
+        }
+      });
+    }
 
   resendVerifyEmail() {
     this.authenticationService.resendVerifyEmail(this.f.email.value).pipe()
