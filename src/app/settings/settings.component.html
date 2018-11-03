@@ -65,32 +65,21 @@
                             <div class="container">
 
                                 <div class="row">
-                                    <h2>
-                                        Required Documents
-                                    </h2>
 
                                     <div class="docs_list">
-
                                         <div class="left_docs_out">
                                             <div class="doc_blocks">
-                                                <p>Individual</p>
-                                                <ul>
-                                                    <li>Gov issued ID (Passport, Driver’s License, Other)</li>
-                                                    <li>Selfie holding the government issued ID</li>
-                                                    <li>Proof of Home Address (Utility Bill or Bank Statement) issued
-                                                        within the last 3 months containing your name on the account</li>
+                                                <p>Photo Guide</p>
+                                                <ul class="star_style">
+                                                    <li>Look straight into the camera</li>
+                                                    <li>Your face and document information should be clearly
+                                                        visible</li>
+                                                    <li>Do not wear sunglasses, a hat or a headband</li>
+                                                    <li>Photo should be recent</li>
+                                                    <li>Photo should be in color</li>
+                                                    <li>Image should be in high resolution (min 300 dpi)</li>
                                                 </ul>
-                                                <!-- - Gov Issued ID (Passport,Drivers License, Other)<br>-->
-                                                <!-- - Selfie Picture of You Holding Gov Issued ID<br>-->
-                                                <!-- - Proof of Home Address( Utility Bill or Bank Statement) issued within the last 3 months containing your name on the account-->
-                                            </div>
-                                            <div class="image_upload">
-                                                <div class="file_upload">
-                                                    <input name="file" type="file" id="file1" class="uploadFile uploadFile1"
-                                                        (change)="uploadKycDoc($event)" />
-                                                </div>
-                                            </div>
-                                            <div class="doc_blocks">
+                                                <br>
                                                 <p>Document Guide</p>
                                                 <ul>
                                                     <li>Documents must be in the following format: jpg, png, gif, pdf</li>
@@ -98,81 +87,55 @@
                                                     <li>Documents must be clearly visible</li>
                                                     <li>Selfie with the required IDs</li>
                                                 </ul>
-                                                <!-- - Documents must be in the following format : jpg, png, gif, pdf<br>-->
-                                                <!-- - Documents must be scanned in color <br>-->
-                                                <!-- - Documents must be clearly visible<br>-->
-                                                <!-- - Selfie with ID requirements<br>-->
-
-                                            </div>
-                                            <div class="image_upload">addUserInformation
-                                                <div class="file_upload">
-                                                    <input name="file" type="file" id="file2" class="uploadFile uploadFile2"
-                                                        (change)="uploadKycDoc($event)" />
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="left_docs_out">
-                                            <div class="doc_blocks">
-                                                <p>Photo Guide</p>
-                                                <ul class="star_style">
-                                                    <li>Look straight into the camera</li>
-                                                    <li>Your face and card information should be clearly visible</li>
-                                                    <li>Do not wear sunglasses, a hat or a headband</li>
-                                                    <li>Photo should be recent</li>
-                                                    <li>Photo should be in color</li>
-                                                    <li>Image should be in high resolution (min 300 dpi)</li>
+                                                <br>
+                                                <p>
+                                                    Required Documents
+                                                </p>
+                                                <ul>
+                                                    <li>1.  Scanned copy of Gov issued ID (Passport, Others)</li>
+                                                    <li>2.  Selfie holding the government issued ID</li>
                                                 </ul>
                                             </div>
-                                            <div class="image_upload">
-                                                <!-- addUserInformation -->
-                                                <div class="file_upload">
-                                                    <!-- <input name="file" type="file" id="file1" class="uploadFile uploadFile1" (change)="uploadKycDoc($event)" /> -->
-                                                    <!-- <br /><br /> -->
-                                                    <input name="file" type="file" id="file3" class="uploadFile uploadFile2"
-                                                        (change)="uploadKycDoc($event)" />
+                                            <div class="row">
+                                                <div class="col-md-6 image_upload">
+                                                    <div class="file_upload" style="cursor: pointer;">
+                                                        <input name="file" type="file" id="file1" class="uploadFile uploadFile1"
+                                                            (change)="uploadKycDoc($event)" />
+                                                    </div>
                                                 </div>
-                                                <!-- <div class="add_new">Attach More</div> -->
+                                                <div class="col-md-6 image_upload">
+                                                    <div class="file_upload" style="cursor: pointer;">
+                                                        <input name="file" type="file" id="file2" class="uploadFile uploadFile2"
+                                                            (change)="uploadKycDoc($event)" />
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <!--<div class="doc_blocks">-->
-                                        <!---->
-                                        <!--</div>-->
                                     </div>
-
-                                    <p>No. of Documents Submitted: </p>
-                                    <!--<form class="dropzone" ng-model="data.images" id="my-awesome-dropzone"></form>-->
+                                    <br>
                                     <div class="declaration">
-                                        <input type="checkbox" id="declaration" />
-                                        <label for="declaration">I hereby solemnly declare that the information
-                                            provided is up-to-date and
-                                            correct. The documents provided as proof of identity and proof of address
-                                            has been self-attested. I authorize CrypBrokers to verify the information
-                                            provided to confirm its accuracy.
-                                        </label>
+                                        <div class="custom-control custom-checkbox mb-4">
+                                            <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
+                                            <label class="custom-control-label" for="defaultContactFormCopy">I hereby
+                                                solemnly declare that the information
+                                                provided is up-to-date and
+                                                correct. The documents provided as proof of identity and proof of
+                                                address
+                                                has been self-attested. I authorize ACEX SDN. BHD. to verify the
+                                                information
+                                                provided to confirm its accuracy.
+                                            </label>
+                                        </div>
                                     </div>
-
-                                    <div class="bottom_button_wrap">
+                                    <br>
+                                    <div class="bottom_button_wrap" style="display:block; text-align:center; margin-left: auto; margin-right: auto;">
                                         <div class="text-center">
                                             <button type="submit" (click)="verifyKyc()" class="btn waves-light acex-btn-submit"
                                                 mdbWavesEffect>Verify</button>
                                         </div>
                                     </div>
                                 </div>
-
-                                <!-- <div class="thankyou" *ngIf="thankshow">
-                                    <div>
-                                        <img class="thankyou_image fa-thumbs-up">
-                                    </div>
-                                    <div class="thankyou_content">
-                                        <h2>Thank You , </h2>
-                                        <p>Thank you for providing your documents. We will notify you via email with updates
-                                            regarding your KYC.</p>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>

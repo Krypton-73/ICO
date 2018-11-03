@@ -1,6 +1,6 @@
 @import '../../assets/scss/variable.scss';
 
-@media screen and (min-width:768px) {
+@media screen and (min-width:769px) {
   .main-div {
     margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
     padding: 0px 10px;
@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width:768px) {
   .main-div {
       // margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
       padding: 0px 0px;
@@ -132,7 +132,7 @@ p.acex-p-1 {
 
 .mask-button {
   object-fit: contain;
-  width: 160px;
+  width: 80%;
   border: 3px solid #1ca5ff;
   background: transparent;
   border-radius: 5px;

@@ -153,7 +153,7 @@ export class LoginauthComponent implements OnInit {
     if (controlErrors != null) {
           Object.keys(controlErrors).forEach(keyError => {
             // console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-            if (key === 'agree') { 
+            if (key === 'agree') {
               return this.toastr.info('Please agree to terms of use and privacy.');
             }
           });
