@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from '../layouts/loading/loading.service';
 
 import { BuyTokensComponent } from '../buy-tokens/buy-tokens.component';
-import  BigNumber  from 'bignumber.js';
+import BigNumber from 'bignumber.js';
 import { Balance } from '../_models/balance';
 import { DataService } from '../services/data.service';
 
