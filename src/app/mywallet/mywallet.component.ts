@@ -10,6 +10,7 @@ import { ModalComponent } from '../modal/modal.component';
 import { LoaderService } from '../layouts/loading/loading.service';
 import { Txn } from '../_models/txn';
 import { DataService } from '../services/data.service';
+import { Balance } from '../_models/balance';
 
 @Component({
   selector: 'app-wallet',
