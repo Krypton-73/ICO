@@ -25,7 +25,15 @@ export class TicketModalComponent implements OnInit {
 
   subjectReform: any = {
     "crypto_deposit": "Crypto Deposit",
-    "YOLO": "YOLO"
+    "account_frozen": "Account being Monitored",
+    "crypto_withdrawal": "Crypto Withdrawal",
+    "bank_details_change": "Bank Details Change",
+    "kyc": "KYC",
+    "email_change": "Email Change",
+    "mobile_number_change": "Mobile Number Change",
+    "recovery_password": "Recovery Password",
+    "suggestions": "Suggestions",
+    "others": "Others"
   }
 
   ngOnInit() {
