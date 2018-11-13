@@ -53,34 +53,40 @@ export class MywalletComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getTxns();
+  }
+
+  getTxns() {
     this.userService
-      .getTxns()
-      .pipe()
-      .subscribe(
-        data => {
-          this.data = data;
-          if (this.data.code === 200) {
-            let i: any;
-            for (i = 0; i < this.data.msg.length; i++) {
-              this.txns.push(this.data.msg[i]);
-              if (this.data.msg[i].type === 2) {
-                this.txns[i].currency = 'acex';
-              }
+    .getTxns()
+    .pipe()
+    .subscribe(
+      data => {
+        this.data = data;
+        if (this.data.code === 200) {
+          let i: any;
+          for (i = 0; i < this.data.msg.length; i++) {
+            this.txns.push(this.data.msg[i]);
+            if (this.data.msg[i].type === 2) {
+              this.txns[i].currency = 'acex';
             }
           }
-        },
-        error => {
-          this.error = error.error;
-          if (this.error.code === 401) {
-            return this.logout();
-          }
-          this.toastr.error('Error connecting to server');
         }
-      );
-    this.dataService.currentBalance.subscribe(balance => {
-      this.balance = balance;
-    });
+      },
+      error => {
+        this.error = error.error;
+        if (this.error.code === 401) {
+          return this.logout();
+        }
+        this.toastr.error('Error connecting to server');
+      }
+    );
+  this.dataService.currentBalance.subscribe(balance => {
+    this.balance = balance;
+  });
   }
+
+
   prefixNosByFix(no: any) {
     try {
       if (no !== 0) {
