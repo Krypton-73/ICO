@@ -4,4 +4,5 @@ export class Txn {
     value: any;
     currency: any;
     type: any;
+    bonus: any;
 }

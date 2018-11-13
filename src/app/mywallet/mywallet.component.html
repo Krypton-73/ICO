@@ -109,6 +109,7 @@
                                                 <th>Transaction ID</th>
                                                 <th>Currency</th>
                                                 <th>Amount</th>
+                                                <th>Bonus</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -118,6 +119,7 @@
                                                 <th>{{ txn.txid }}</th>
                                                 <td>{{ currencyType[txn.currency] }}</td>
                                                 <td>{{ txn.value }}</td>
+                                                <td>{{ txn.value*(txn.bonus[0]+txn.bonus[1])/100 }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
