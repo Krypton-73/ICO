@@ -1,23 +1,19 @@
-# Ocgdemo
+# ICO-Platform (ACEX)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
+## upgrading application from v6 to v7
+***```1 - rm -rf node_modules package-lock.json```
 
-## running application
-***```1- check node 8.11.3 & npm 6.2.0```
+***```2 - npm i```
 
-***```2- should have angular 6.1.0 install to install angular```
+## updating application
 
->sudo npm install -g @angular/cli
-
-***```3- git clone this repo```
-
-***```4- npm install --save```
-
-***```5- ng serve -o```
+***```1 - npm i```
 
 ## deploy application
->ng build --prod
 
-the production file will be in dist/ocgdemo/
+> npm run prod
 
-### https://github.com/highcharts/highcharts-angular
+- ./dist folder will be recursively removed using rimraf.
+- The production file will generated be in dist/ico-platform/
+- This will then be copied in /var/www/$CURDIR/
+- Post successful completion, nginx service will be restarted.

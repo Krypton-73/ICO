@@ -4,7 +4,7 @@ CURDIR=${PWD##*/}
 
 remove_oldfiles() {
 	rm -rf $PWD/dist/*
-	rm -rf /var/www/$CURDIR/*	
+	rm -rf /var/www/$CURDIR/*
 }
 
 build(){
@@ -14,7 +14,7 @@ build(){
 move_files(){
 	echo "making directory and copying to /var/www/$CURDIR/"
 	mkdir /var/www/$CURDIR/
-	cp -r $PWD/dist/ocgdemo/* /var/www/$CURDIR/
+	cp -r $PWD/dist/ico-platform/* /var/www/$CURDIR/
 	nginx -s reload
 }
 
