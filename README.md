@@ -1,19 +1,33 @@
 # ICO-Platform (ACEX)
 
-## upgrading application from v6 to v7
-***```1 - rm -rf node_modules package-lock.json```
+The ICO platform developed for ACEX Token sale.
 
-***```2 - npm i```
+## Upgrading Application from Angular v6 to v7
 
-## updating application
+```bash
+rm -rf node_modules package-lock.json
+npm i
+```
 
-***```1 - npm i```
+## Updating Application for minor releases
 
-## deploy application
+```bash
+npm i
+```
 
-> npm run prod
+## Deploying Application
 
-- ./dist folder will be recursively removed using rimraf.
-- The production file will generated be in dist/ico-platform/
-- This will then be copied in /var/www/$CURDIR/
-- Post successful completion, nginx service will be restarted.
+```bash
+npm run prod
+```
+
+>- ./dist folder will be recursively removed using rimraf.
+>- The production file will generated be in dist/ico-platform/
+>- This will then be copied in /var/www/$CURDIR/
+>- Post successful completion, nginx service will be restarted.
+
+## Deploying Application using Bash Script
+
+```bash
+bash deploy.sh
+```

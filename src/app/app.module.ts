@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ClipboardModule } from 'ngx-clipboard';
+import { OrgChartModule } from 'ng2-org-chart';
 
 import { GlobalsService } from './services/globals.service';
 import { AuthService } from './services/auth.service';
@@ -79,7 +80,8 @@ import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.compone
     TicketModalComponent
   ],
   imports: [
-    BrowserModule,
+		BrowserModule,
+		OrgChartModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
