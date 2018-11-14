@@ -13,10 +13,9 @@ import { CryptostoreService } from '../../services/cryptostore.service';
   styleUrls: ['./verifyotp.component.scss']
 })
 export class VerifyotpComponent implements OnInit {
-
   otpForm: FormGroup;
   userEmail: any;
-  data:any;
+  data: any;
 
   constructor(
     private fb: FormBuilder,
@@ -28,9 +27,9 @@ export class VerifyotpComponent implements OnInit {
     private keyevent: KeyeventService,
     private cryptostore: CryptostoreService
   ) {
-      this.otpForm = fb.group({
-        otp: ['', Validators.required]
-      });
+    this.otpForm = fb.group({
+      otp: ['', Validators.required]
+    });
   }
 
   ngOnInit() {
@@ -45,27 +44,25 @@ export class VerifyotpComponent implements OnInit {
       this.toastr.error('Invalid OTP', null, { timeOut: 4000 });
     } else {
       this.load.show();
-      this.authenticationService.verifyOtp(this.userEmail, this.otpForm.controls.otp.value)
-      .subscribe(
-        data => {
-          this.data = data;
-          this.load.hide();
-          if (this.data.code === 200 && this.data.msg.jwt) {
-            this.toastr.success('Welcome to AceX!', null, { timeOut: 4000 });
-            this.router.navigate(['/dashboard']);
+      this.authenticationService
+        .verifyOtp(this.userEmail, this.otpForm.controls.otp.value)
+        .subscribe(
+          data => {
+            this.data = data;
+            this.load.hide();
+            if (this.data.code === 200 && this.data.msg.jwt) {
+              this.toastr.success('Welcome to AceX!', null, { timeOut: 4000 });
+              this.router.navigate(['/dashboard']);
+            }
+          },
+          e => {
+            // console.log(e);
+            this.load.hide();
+            this.toastr.error('Invalid OTP', null, { timeOut: 4000 });
           }
-        },
-        e => {
-          // console.log(e);
-          this.load.hide();
-          this.toastr.error('Invalid OTP', null, { timeOut: 4000 });
-        }
-      );
+        );
     }
   }
 
-  resendOtp() {
-    
-  }
-
+  resendOtp() {}
 }

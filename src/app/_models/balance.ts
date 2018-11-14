@@ -1,6 +1,6 @@
 export class Balance {
-    btc: any;
-    eth: any;
-    ltc: any;
-    acex: any;
+  btc: any;
+  eth: any;
+  ltc: any;
+  acex: any;
 }

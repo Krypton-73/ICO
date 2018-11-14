@@ -8,9 +8,8 @@ describe('BuyTokensComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BuyTokensComponent ]
-    })
-    .compileComponents();
+      declarations: [BuyTokensComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

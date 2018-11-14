@@ -12,181 +12,188 @@ import { DataService } from '../services/data.service';
 import { Balance } from '../_models/balance';
 import { Rate } from '../_models/rate';
 
-
 @Component({
-    selector: 'app-buy-tokens',
-    templateUrl: './buy-tokens.component.html',
-    styleUrls: ['./buy-tokens.component.scss']
+  selector: 'app-buy-tokens',
+  templateUrl: './buy-tokens.component.html',
+  styleUrls: ['./buy-tokens.component.scss']
 })
 export class BuyTokensComponent implements OnInit, OnDestroy {
-    buyForm: FormGroup;
-    currentJustify = 'fill';
-    data: any;
-    error: any;
-    balance: Balance;
-    rate: Rate;
-    balanceUsd: number;
-    requiredBal: any;
-    maxAcexTokens: number;
-    amountOfCurrencyReq: number;
-    currency: string;
+  buyForm: FormGroup;
+  currentJustify = 'fill';
+  data: any;
+  error: any;
+  balance: Balance;
+  rate: Rate;
+  balanceUsd: number;
+  requiredBal: any;
+  maxAcexTokens: number;
+  amountOfCurrencyReq: number;
+  currency: string;
 
-    @ViewChild('buyAcex') buyAcex: ModalDirective;
+  @ViewChild('buyAcex') buyAcex: ModalDirective;
 
-    @Output() successEvent = new EventEmitter<boolean>();
+  @Output() successEvent = new EventEmitter<boolean>();
 
-    constructor(public modalService: NgbModal,
-        private userService: UserService,
-        private authenticationService: AuthenticationService,
-        private load: LoaderService,
-        private toastr: ToastrService,
-        public dataService: DataService,
-        private router: Router,
-        private formBuilder: FormBuilder
-    ) { }
+  constructor(
+    public modalService: NgbModal,
+    private userService: UserService,
+    private authenticationService: AuthenticationService,
+    private load: LoaderService,
+    private toastr: ToastrService,
+    public dataService: DataService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {}
 
-    ngOnInit() {
-        this.buyForm = this.formBuilder.group({
-            currency: ['', Validators.required],
-            amountOfAcex: [100, [Validators.required, Validators.min(100), Validators.pattern]]
-        });
+  ngOnInit() {
+    this.buyForm = this.formBuilder.group({
+      currency: ['', Validators.required],
+      amountOfAcex: [100, [Validators.required, Validators.min(100), Validators.pattern]]
+    });
 
-        this.dataService.currentBalance.subscribe(balance => { this.balance = balance; });
-        this.dataService.currentRate.subscribe(
-            rate => {
-                this.rate = rate;
-                if (this.rate) {
-                    this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
-                    console.log(this.amountOfCurrencyReq);
-                }
-            },
-            error => {
-                console.log(error);
-            });
+    this.dataService.currentBalance.subscribe(balance => {
+      this.balance = balance;
+    });
+    this.dataService.currentRate.subscribe(
+      rate => {
+        this.rate = rate;
+        if (this.rate) {
+          this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
+          console.log(this.amountOfCurrencyReq);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    // this.buyForm.reset();
+  }
+
+  prefixNosByFix(no: any) {
+    try {
+      if (no !== 0) {
+        return Number.parseFloat(no).toFixed(8);
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      return 0;
     }
+  }
 
-    ngOnDestroy() {
-        // this.buyForm.reset();
+  get f() {
+    return this.buyForm.controls;
+  }
+
+  show() {
+    this.buyAcex.show();
+  }
+
+  hide() {
+    this.buyForm.reset();
+    this.buyAcex.hide();
+  }
+
+  checkBalance(currency: string) {
+    this.currency = currency;
+    switch (this.currency) {
+      case 'btc':
+        this.balanceUsd = this.balance.btc * this.rate.btc;
+        this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
+        break;
+      case 'eth':
+        this.balanceUsd = this.balance.eth * this.rate.eth;
+        this.amountOfCurrencyReq = (100 * 0.1) / this.rate.eth;
+        break;
+      case 'ltc':
+        this.balanceUsd = this.balance.ltc * this.rate.ltc;
+        this.amountOfCurrencyReq = (100 * 0.1) / this.rate.ltc;
+        break;
     }
+    this.maxAcexTokens = Math.floor(this.balanceUsd / 0.1);
+    console.log(this.balanceUsd, this.maxAcexTokens);
+  }
 
-    prefixNosByFix (no: any) {
-        try {
-            if (no !== 0) {
-                return Number.parseFloat(no).toFixed(8);
-            } else {
-                return 0;
+  amountOfCurrency(amount: number) {
+    const valueUsd = amount * 0.1;
+    let rateOfPurchase: number;
+    switch (this.currency) {
+      case 'btc':
+        rateOfPurchase = this.rate.btc;
+        break;
+      case 'eth':
+        rateOfPurchase = this.rate.eth;
+        break;
+      case 'ltc':
+        rateOfPurchase = this.rate.ltc;
+        break;
+    }
+    this.amountOfCurrencyReq = valueUsd / rateOfPurchase;
+    console.log(this.amountOfCurrencyReq);
+  }
+
+  buyAcexTokens() {
+    console.log(this.f.currency.value, this.f.amountOfAcex.value);
+    if (this.buyForm.invalid) {
+      return;
+    }
+    const bool: boolean = this.balanceCheck(this.f.amountOfAcex.value);
+    if (bool === false) {
+      this.toastr.info('Insufficient Funds');
+    }
+    if (bool === true) {
+      this.userService
+        .buyAcex(this.f.currency.value, this.f.amountOfAcex.value)
+        .pipe()
+        .subscribe(
+          data => {
+            this.data = data;
+            if (this.data.code === 200) {
+              this.toastr.success('Tokens Purchased');
+              this.router.navigate(['/dashboard']);
             }
-        } catch (e) {
-            return 0;
-        }
-    }
-
-    get f() { return this.buyForm.controls; }
-
-    show() {
-        this.buyAcex.show();
-    }
-
-    hide() {
-        this.buyForm.reset();
-        this.buyAcex.hide();
-    }
-
-    checkBalance(currency: string) {
-        this.currency = currency;
-        switch (this.currency) {
-            case 'btc':
-                this.balanceUsd = this.balance.btc * this.rate.btc;
-                this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
-                break;
-            case 'eth':
-                this.balanceUsd = this.balance.eth * this.rate.eth;
-                this.amountOfCurrencyReq = (100 * 0.1) / this.rate.eth;
-                break;
-            case 'ltc':
-                this.balanceUsd = this.balance.ltc * this.rate.ltc;
-                this.amountOfCurrencyReq = (100 * 0.1) / this.rate.ltc;
-                break;
-        }
-        this.maxAcexTokens = Math.floor(this.balanceUsd / 0.1);
-        console.log(this.balanceUsd, this.maxAcexTokens);
-    }
-
-    amountOfCurrency(amount: number) {
-        const valueUsd = amount * 0.1;
-        let rateOfPurchase: number;
-        switch (this.currency) {
-            case 'btc':
-                rateOfPurchase = this.rate.btc;
-                break;
-            case 'eth':
-                rateOfPurchase = this.rate.eth;
-                break;
-            case 'ltc':
-                rateOfPurchase = this.rate.ltc;
-                break;
-        }
-        this.amountOfCurrencyReq = valueUsd / rateOfPurchase;
-        console.log(this.amountOfCurrencyReq);
-    }
-
-    buyAcexTokens() {
-        console.log(this.f.currency.value, this.f.amountOfAcex.value);
-        if (this.buyForm.invalid) {
-            return;
-        }
-        const bool: boolean = this.balanceCheck(this.f.amountOfAcex.value);
-        if (bool === false) {
-            this.toastr.info('Insufficient Funds');
-        }
-        if (bool === true) {
-            this.userService.buyAcex(this.f.currency.value, this.f.amountOfAcex.value)
-                .pipe().subscribe(
-                    data => {
-                        this.data = data;
-                        if (this.data.code === 200) {
-                            this.toastr.success('Tokens Purchased');
-                            this.router.navigate(['/dashboard']);
-                        }
-                        this.buyAcex.hide();
-                        this.successEvent.emit(true);
-                    },
-                    error => {
-                        this.error = error.error;
-                        if (this.error.code === 401) {
-                            this.toastr.info('Unable to connect to server. Please retry login.');
-                            return this.logout();
-                        }
-                        this.toastr.error('Error');
-                    }
-                );
-        }
-        // this.load.hide();
-    }
-
-    balanceCheck(amountOfAcex) {
-        this.requiredBal = amountOfAcex * 0.1;
-
-        if (this.requiredBal <= this.balanceUsd) {
-            return true;
-        }
-
-        return false;
-
-    }
-
-
-    logout() {
-        this.authenticationService.logout().pipe().subscribe(
-            data => {
-                window.sessionStorage.clear();
-                this.router.navigate(['/auth']);
-            },
-            error => {
-                window.sessionStorage.clear();
-                this.router.navigate(['/auth']);
+            this.buyAcex.hide();
+            this.successEvent.emit(true);
+          },
+          error => {
+            this.error = error.error;
+            if (this.error.code === 401) {
+              this.toastr.info('Unable to connect to server. Please retry login.');
+              return this.logout();
             }
+            this.toastr.error('Error');
+          }
         );
     }
+    // this.load.hide();
+  }
 
+  balanceCheck(amountOfAcex) {
+    this.requiredBal = amountOfAcex * 0.1;
+
+    if (this.requiredBal <= this.balanceUsd) {
+      return true;
+    }
+
+    return false;
+  }
+
+  logout() {
+    this.authenticationService
+      .logout()
+      .pipe()
+      .subscribe(
+        data => {
+          window.sessionStorage.clear();
+          this.router.navigate(['/auth']);
+        },
+        error => {
+          window.sessionStorage.clear();
+          this.router.navigate(['/auth']);
+        }
+      );
+  }
 }

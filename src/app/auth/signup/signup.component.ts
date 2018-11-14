@@ -13,7 +13,6 @@ import { CryptostoreService } from '../../services/cryptostore.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
   signupForm: FormGroup;
 
   constructor(
@@ -25,17 +24,15 @@ export class SignupComponent implements OnInit {
     private router: Router,
     private cryptostore: CryptostoreService
   ) {
-      this.signupForm = fb.group({
-          signupFormPassword: ['', Validators.required],
-          signupFormEmail: ['', [Validators.required, Validators.email]],
-          signupFormRefid: ['', []],
-          signupFormCPassword: ['', Validators.required],
-      });
+    this.signupForm = fb.group({
+      signupFormPassword: ['', Validators.required],
+      signupFormEmail: ['', [Validators.required, Validators.email]],
+      signupFormRefid: ['', []],
+      signupFormCPassword: ['', Validators.required]
+    });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   signup() {
     // console.log(this.signupForm.value);
@@ -45,33 +42,43 @@ export class SignupComponent implements OnInit {
       // this.load.show();
       if (!this.keyevent.validateEmail(this.signupForm.value.signupFormEmail)) {
         this.toastr.warning('Invalid email', null, { timeOut: 4000 });
-      } else if (!this.keyevent.checkPassword(this.signupForm.value.signupFormPassword) ||
-      !this.keyevent.checkPassword(this.signupForm.value.signupFormCPassword)) {
-        this.toastr.warning('Password must be minimum eight characters, at least one letter and one number and one special character.',
-         null, { timeOut: 4000 });
-      } else if (this.signupForm.value.signupFormPassword !== this.signupForm.value.signupFormCPassword) {
+      } else if (
+        !this.keyevent.checkPassword(this.signupForm.value.signupFormPassword) ||
+        !this.keyevent.checkPassword(this.signupForm.value.signupFormCPassword)
+      ) {
+        this.toastr.warning(
+          'Password must be minimum eight characters, at least one letter and one number and one special character.',
+          null,
+          { timeOut: 4000 }
+        );
+      } else if (
+        this.signupForm.value.signupFormPassword !== this.signupForm.value.signupFormCPassword
+      ) {
         this.toastr.warning('Password not matched', null, { timeOut: 4000 });
       } else {
         const data = {
-          email : this.signupForm.value.signupFormEmail,
-          password : this.signupForm.value.signupFormPassword,
-          ref_id : this.signupForm.value.signupFormRefid
+          email: this.signupForm.value.signupFormEmail,
+          password: this.signupForm.value.signupFormPassword,
+          ref_id: this.signupForm.value.signupFormRefid
         };
         // console.log(data);
-        this.auth.signup(data)
-        .subscribe(
+        this.auth.signup(data).subscribe(
           d => {
             // console.log(d);
             this.load.hide();
             if (d.code === 200 && d.msg === 'successfully_added') {
-              this.toastr.success('Successfully registered', null, { timeOut: 4000 });
+              this.toastr.success('Successfully registered', null, {
+                timeOut: 4000
+              });
               const email = this.signupForm.value.signupFormEmail;
               this.cryptostore.saveToLocal('AcexUserEmail', email);
               const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
               // console.log(getEmail, this.cryptostore.retrieveFromLocal('AcexUserEmail'));
               this.router.navigate(['/auth/otp', getEmail]);
             } else {
-              this.toastr.error('Not registered successfully', null, { timeOut: 4000 });
+              this.toastr.error('Not registered successfully', null, {
+                timeOut: 4000
+              });
             }
           },
           e => {
@@ -79,7 +86,9 @@ export class SignupComponent implements OnInit {
             this.load.hide();
             if (e && e.error.code === 500) {
               if (e.error.msg === 'already exists') {
-                this.toastr.info('You are already registered', null, { timeOut: 4000 });
+                this.toastr.info('You are already registered', null, {
+                  timeOut: 4000
+                });
                 const email = this.signupForm.value.signupFormEmail;
                 this.cryptostore.saveToLocal('AcexUserEmail', email);
                 const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
@@ -99,5 +108,4 @@ export class SignupComponent implements OnInit {
   redirectToLogin() {
     this.router.navigate(['/auth/login']);
   }
-
 }

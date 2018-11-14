@@ -4,8 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class KeyeventService {
-
-  constructor() { }
+  constructor() {}
 
   checkPassword(password) {
     try {
@@ -28,9 +27,9 @@ export class KeyeventService {
 
   toSubmit(evt) {
     try {
-      const val =  evt.target.value;
-      evt = (evt) ? evt : window.event;
-      const charCode = (evt.which) ? evt.which : evt.keyCode;
+      const val = evt.target.value;
+      evt = evt ? evt : window.event;
+      const charCode = evt.which ? evt.which : evt.keyCode;
       // console.log(charCode,val)
       if (charCode === 13) {
         // this.submit();
@@ -44,9 +43,9 @@ export class KeyeventService {
 
   keyboardAllowEvent(evt) {
     try {
-      const val =  evt.target.value;
-      evt = (evt) ? evt : window.event;
-      const charCode = (evt.which) ? evt.which : evt.keyCode;
+      const val = evt.target.value;
+      evt = evt ? evt : window.event;
+      const charCode = evt.which ? evt.which : evt.keyCode;
       // console.log(charCode,val)
       if (charCode === 60 || charCode === 62 || charCode === 123 || charCode === 125) {
         return false;

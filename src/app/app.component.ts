@@ -12,23 +12,24 @@ import 'rxjs/add/operator/mergeMap';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
   constructor(
     private activeroute: ActivatedRoute,
     private router: Router,
     private titleService: Title
   ) {
     this.router.events
-    .filter((event) => event instanceof NavigationEnd)
-    .map(() => this.activeroute)
-    .map( (route) => {
-      while (route.firstChild) { route = route.firstChild; }
-      return route;
-    })
-    .filter((route) => route.outlet === 'primary')
-    .mergeMap((route) => route.data)
-    .subscribe((event) => {
-      this.titleService.setTitle(event['title']);
-    });
+      .filter(event => event instanceof NavigationEnd)
+      .map(() => this.activeroute)
+      .map(route => {
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
+        return route;
+      })
+      .filter(route => route.outlet === 'primary')
+      .mergeMap(route => route.data)
+      .subscribe(event => {
+        this.titleService.setTitle(event['title']);
+      });
   }
 }

@@ -12,7 +12,6 @@ import { User } from '../_models/user';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-
   user: User;
   base64String = [];
   data: any;
@@ -20,14 +19,13 @@ export class SettingsComponent implements OnInit {
   userKycDocImgs = [];
   image: any;
 
-
   constructor(
     private userService: UserService,
     public toastr: ToastrService,
     private authenticationService: AuthenticationService,
     private router: Router,
     private domSanitizer: DomSanitizer
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getProfile();
@@ -39,26 +37,29 @@ export class SettingsComponent implements OnInit {
       this.userKycDocImgs.push(this.user.kyc.kyc_doc);
       this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
     } else {
-      this.userService.getProfile().pipe().subscribe(
-        data => {
-          this.data = data;
-          this.user = this.data.msg;
-          if (this.user.kyc.kyc_status !== -1) {
-            sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
+      this.userService
+        .getProfile()
+        .pipe()
+        .subscribe(
+          data => {
+            this.data = data;
+            this.user = this.data.msg;
+            if (this.user.kyc.kyc_status !== -1) {
+              sessionStorage.setItem('userProfile', JSON.stringify(this.data.msg));
+            }
+            this.userKycDocImgs.push(this.user.kyc.kyc_doc);
+            this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
+            console.log(this.userKycDocImgs);
+          },
+          error => {
+            console.log(error);
+            this.error = error.error;
+            if (this.error.code === 401) {
+              return this.logout();
+            }
+            this.toastr.error('Error connecting to server.');
           }
-          this.userKycDocImgs.push(this.user.kyc.kyc_doc);
-          this.userKycDocImgs.push(this.user.kyc.kyc_selfie);
-          console.log(this.userKycDocImgs);
-        },
-        error => {
-          console.log(error);
-          this.error = error.error;
-          if (this.error.code === 401) {
-            return this.logout();
-          }
-          this.toastr.error('Error connecting to server.');
-        }
-      );
+        );
     }
   }
 
@@ -81,38 +82,44 @@ export class SettingsComponent implements OnInit {
   }
 
   verifyKyc() {
-    this.userService.setKyc(this.base64String[0], this.base64String[1]).pipe().subscribe(
-      data => {
-        this.data = data;
-        console.log(this.data);
-        this.toastr.success('Uploaded Successfully');
-        this.getProfile();
-      },
-      error => {
-        this.error = error.error;
-        if (this.error.code === 401) {
-          return this.logout();
+    this.userService
+      .setKyc(this.base64String[0], this.base64String[1])
+      .pipe()
+      .subscribe(
+        data => {
+          this.data = data;
+          console.log(this.data);
+          this.toastr.success('Uploaded Successfully');
+          this.getProfile();
+        },
+        error => {
+          this.error = error.error;
+          if (this.error.code === 401) {
+            return this.logout();
+          }
+          console.log(error);
+          this.toastr.info('Invalid Request');
         }
-        console.log(error);
-        this.toastr.info('Invalid Request');
-      }
-    );
+      );
     // window.location.reload();
     // this.router.navigate(['/settings']);
   }
 
   logout() {
-    this.authenticationService.logout().pipe().subscribe(
-      data => {
-        this.data = data;
-        window.sessionStorage.clear();
-        this.router.navigate(['/auth']);
-      },
-      error => {
-        this.data = error.error;
-        window.sessionStorage.clear();
-        this.router.navigate(['/auth']);
-      }
-    );
+    this.authenticationService
+      .logout()
+      .pipe()
+      .subscribe(
+        data => {
+          this.data = data;
+          window.sessionStorage.clear();
+          this.router.navigate(['/auth']);
+        },
+        error => {
+          this.data = error.error;
+          window.sessionStorage.clear();
+          this.router.navigate(['/auth']);
+        }
+      );
   }
 }

@@ -8,14 +8,11 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class HomeService {
-
-  constructor(
-    public http: HttpClient,
-    private globals: GlobalsService
-  ) { }
+  constructor(public http: HttpClient, private globals: GlobalsService) {}
 
   chartQuery() {
-    const url = 'https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
+    const url =
+      'https://cdn.rawgit.com/highcharts/highcharts/057b672172ccc6c08fe7dbb27fc17ebca3f5b770/samples/data/usdeur.json';
     return this.http.get(url);
   }
 }

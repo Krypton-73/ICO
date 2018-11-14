@@ -5,13 +5,9 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
   providedIn: 'root'
 })
 export class LoggedIn implements CanActivate {
-
-  constructor(
-    public router: Router
-  ) { }
+  constructor(public router: Router) {}
 
   canActivate(): boolean {
-
     if (sessionStorage.getItem('currentUser')) {
       this.router.navigate(['/dashboard']);
     }

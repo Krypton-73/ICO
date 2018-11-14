@@ -9,7 +9,6 @@ import { LoadingModule } from 'ngx-loading';
 import { ANIMATION_TYPES } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-import { HighchartsChartModule } from 'highcharts-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -83,7 +82,8 @@ import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.compone
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     Ng2Webstorage,
     QRCodeModule,
@@ -100,11 +100,10 @@ import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.compone
       preventDuplicates: true
     }),
     HttpClientModule,
-    HighchartsChartModule,
     NgbModule.forRoot(),
     ClipboardModule,
     InternationalPhoneModule,
-    NgxPhoneSelectModule,
+    NgxPhoneSelectModule
   ],
   providers: [
     GlobalsService,
@@ -121,6 +120,6 @@ import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.compone
     UserService
   ],
   bootstrap: [AppComponent],
-  schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {}

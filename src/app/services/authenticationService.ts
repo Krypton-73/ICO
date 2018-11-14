@@ -10,36 +10,39 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   user: any;
   yolo: any;
   httpOptions: any;
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   register(newUser: any) {
-    return this.http.post(`${baseUrl}/register`
-      , {
-        email: newUser.email, password: sha256(newUser.password)
-        , ref_id: newUser.refId, name: newUser.name, mobile: `+${newUser.dialCode} ${newUser.mobile}`
-      });
+    return this.http.post(`${baseUrl}/register`, {
+      email: newUser.email,
+      password: sha256(newUser.password),
+      ref_id: newUser.refId,
+      name: newUser.name,
+      mobile: `+${newUser.dialCode} ${newUser.mobile}`
+    });
   }
 
   login(email: string, password: string) {
-    return this.http.post(`${baseUrl}/sign_in`, { email: email, password: sha256(password) });
+    return this.http.post(`${baseUrl}/sign_in`, {
+      email: email,
+      password: sha256(password)
+    });
   }
 
   verifyOtp(userEmail: any, userOtp: any) {
-    return this.http.post(`${baseUrl}/validate_otp`, { email: userEmail, otp: userOtp })
-      .pipe(map(user => {
+    return this.http.post(`${baseUrl}/validate_otp`, { email: userEmail, otp: userOtp }).pipe(
+      map(user => {
         this.user = user;
         if (this.user.code === 200 && this.user.msg.jwt) {
           console.log('map: ' + this.user.msg.jwt);
           sessionStorage.setItem('currentUser', JSON.stringify(user));
         }
         return user;
-      }));
+      })
+    );
   }
 
   verifyEmail(email: string, verCode: string) {
@@ -55,8 +58,11 @@ export class AuthenticationService {
   }
 
   resetPassword(email: string, password: string, verCode: string) {
-    return this.http.post(`${baseUrl}/reset_password`
-      , { email: email, password: sha256(password), verCode: verCode });
+    return this.http.post(`${baseUrl}/reset_password`, {
+      email: email,
+      password: sha256(password),
+      verCode: verCode
+    });
   }
 
   logout() {
@@ -68,5 +74,4 @@ export class AuthenticationService {
     };
     return this.http.post(`${baseUrl}/logout`, { email: this.yolo.msg.email }, this.httpOptions);
   }
-
 }

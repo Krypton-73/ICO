@@ -1,13 +1,12 @@
-@import '../../assets/scss/variable.scss';
+@import "../../assets/scss/variable.scss";
 
-@media screen and (min-width:768px) {
+@media screen and (min-width: 768px) {
   .main-div {
     margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
     padding: 0px 10px;
     background-color: #fcfdff;
     background-color: var(--ice-blue);
   }
-
 
   // side btn
   .acex-btn-buy-0 {
@@ -25,13 +24,12 @@
     //   border: solid 2px var(--clear-blue);
   }
 
-
   .main-row {
     margin-top: 2%;
   }
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .main-div {
     // margin-left: $marginLeftsideForAll; /* Same as the width of the sidenav */
     padding: 0px 0px;
@@ -82,7 +80,6 @@
   color: #232d41;
 }
 
-
 // balances cards
 div.card.acex-bal-card-0 {
   // width: 210.6px;
@@ -104,7 +101,7 @@ p.acex-p-0 {
   letter-spacing: 0.9px;
   color: var(--clear-blue);
   color: #1f8efa;
-  margin-top:6px;
+  margin-top: 6px;
   margin-left: 2.5%;
 }
 
@@ -124,8 +121,7 @@ p.acex-p-1 {
   // margin-top: 50px;
 }
 
-
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .row.stepper-rows {
     margin-top: 5%;
   }
@@ -166,7 +162,7 @@ p.acex-p-1 {
   }
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width: 768px) {
   // buy steps
   .acex-steps-0-0 {
     // width: 100%;

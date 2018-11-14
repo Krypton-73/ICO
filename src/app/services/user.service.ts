@@ -13,9 +13,7 @@ export class UserService {
   httpOptions: any;
   data: any;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   setKyc(kyc_doc, kyc_selfie) {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -25,9 +23,15 @@ export class UserService {
       })
     };
     console.log(kyc_doc, kyc_selfie);
-    return this.http.post(`${baseUrl}/set_kyc`, {
-      email: this.yolo.msg.email, kyc_doc: kyc_doc, kyc_selfie: kyc_selfie
-    }, this.httpOptions);
+    return this.http.post(
+      `${baseUrl}/set_kyc`,
+      {
+        email: this.yolo.msg.email,
+        kyc_doc: kyc_doc,
+        kyc_selfie: kyc_selfie
+      },
+      this.httpOptions
+    );
   }
 
   getProfile() {
@@ -40,7 +44,6 @@ export class UserService {
     return this.http.get(`${baseUrl}/get_profile?email=${this.yolo.msg.email}`, this.httpOptions);
   }
 
-
   getBalances() {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
     this.httpOptions = {
@@ -48,7 +51,11 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     };
-    return this.http.post(`${baseUrl}/get_balances`, { email: this.yolo.msg.email }, this.httpOptions);
+    return this.http.post(
+      `${baseUrl}/get_balances`,
+      { email: this.yolo.msg.email },
+      this.httpOptions
+    );
   }
 
   getWallet(currency) {
@@ -58,17 +65,21 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     };
-    return this.http.post(`${baseUrl}/get_wallet`
-      , { email: this.yolo.msg.email, currency: currency }
-      , this.httpOptions).pipe(map(
-        data => {
+    return this.http
+      .post(
+        `${baseUrl}/get_wallet`,
+        { email: this.yolo.msg.email, currency: currency },
+        this.httpOptions
+      )
+      .pipe(
+        map(data => {
           this.data = data;
           if (this.data.code === 200) {
             sessionStorage.setItem(currency, JSON.stringify(this.data.msg.address));
           }
           return data;
-        }
-      ));
+        })
+      );
   }
 
   getRate() {
@@ -88,9 +99,11 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     };
-    return this.http.post(`${baseUrl}/buy_acex`
-      , { email: this.yolo.msg.email, currency: currency, amount: amount }
-      , this.httpOptions);
+    return this.http.post(
+      `${baseUrl}/buy_acex`,
+      { email: this.yolo.msg.email, currency: currency, amount: amount },
+      this.httpOptions
+    );
   }
 
   getTxns() {
@@ -110,9 +123,11 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     };
-    return this.http.post(`${baseUrl}/submit_ticket`
-    , { email: this.yolo.msg.email, subject: subject, description: message }
-    , this.httpOptions);
+    return this.http.post(
+      `${baseUrl}/submit_ticket`,
+      { email: this.yolo.msg.email, subject: subject, description: message },
+      this.httpOptions
+    );
   }
 
   submitMessage(ticketNo: string, message: string) {
@@ -122,9 +137,11 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     };
-    return this.http.post(`${baseUrl}/submit_message`
-    , { email: this.yolo.msg.email, ticket_no: ticketNo, message: message }
-    , this.httpOptions);
+    return this.http.post(
+      `${baseUrl}/submit_message`,
+      { email: this.yolo.msg.email, ticket_no: ticketNo, message: message },
+      this.httpOptions
+    );
   }
 
   getTickets() {
@@ -134,7 +151,11 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     };
-    return this.http.post(`${baseUrl}/get_tickets`, { email: this.yolo.msg.email }, this.httpOptions);
+    return this.http.post(
+      `${baseUrl}/get_tickets`,
+      { email: this.yolo.msg.email },
+      this.httpOptions
+    );
   }
 
   getTicket(ticketNo: string) {
@@ -144,7 +165,10 @@ export class UserService {
         'x-access-token': this.yolo.msg.jwt
       })
     };
-    return this.http.post(`${baseUrl}/get_tickets/${ticketNo}`, { email: this.yolo.msg.email }, this.httpOptions);
+    return this.http.post(
+      `${baseUrl}/get_tickets/${ticketNo}`,
+      { email: this.yolo.msg.email },
+      this.httpOptions
+    );
   }
-
 }

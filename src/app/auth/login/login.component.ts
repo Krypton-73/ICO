@@ -13,7 +13,6 @@ import { CryptostoreService } from '../../services/cryptostore.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
 
   constructor(
@@ -26,15 +25,16 @@ export class LoginComponent implements OnInit {
     private keyevent: KeyeventService,
     private cryptostore: CryptostoreService
   ) {
-      this.loginForm = fb.group({
-          loginFormPassword: ['', Validators.required],
-          loginFormEmail: ['', [Validators.required, Validators.email]]
-      });
+    this.loginForm = fb.group({
+      loginFormPassword: ['', Validators.required],
+      loginFormEmail: ['', [Validators.required, Validators.email]]
+    });
   }
 
   ngOnInit() {
     const email = this.activeroute.snapshot.paramMap.get('email');
-    if (email) { // this.keyevent.validateEmail(email)
+    if (email) {
+      // this.keyevent.validateEmail(email)
       const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
       const cryptEmail = this.cryptostore.getCryptValue(email);
       if (getEmail === email && this.keyevent.validateEmail(cryptEmail)) {
@@ -50,21 +50,24 @@ export class LoginComponent implements OnInit {
     } else {
       this.load.show();
       const data = {
-        email : this.loginForm.value.loginFormEmail,
-        password : this.loginForm.value.loginFormPassword
+        email: this.loginForm.value.loginFormEmail,
+        password: this.loginForm.value.loginFormPassword
       };
-      this.auth.login(data)
-      .subscribe(
+      this.auth.login(data).subscribe(
         d => {
           console.log(d);
           this.load.hide();
           if (d.code === 200 && d.msg === 'successfully_added') {
-            this.toastr.success('Successfully registered', null, { timeOut: 4000 });
+            this.toastr.success('Successfully registered', null, {
+              timeOut: 4000
+            });
             const email = this.loginForm.value.loginFormEmail;
             this.cryptostore.saveToLocal('AcexUserEmail', email);
             this.router.navigate(['/home']);
           } else {
-            this.toastr.error('Invalid email and password', null, { timeOut: 4000 });
+            this.toastr.error('Invalid email and password', null, {
+              timeOut: 4000
+            });
           }
         },
         e => {
@@ -72,7 +75,9 @@ export class LoginComponent implements OnInit {
           this.load.hide();
           if (e && e.error.code === 500) {
             if (e.error.msg === 'no such user found') {
-              this.toastr.info('You are not registered user', null, { timeOut: 4000 });
+              this.toastr.info('You are not registered user', null, {
+                timeOut: 4000
+              });
               const email = this.loginForm.value.loginFormEmail;
               this.cryptostore.saveToLocal('AcexUserEmail', email);
               const getEmail = this.cryptostore.getLocalValue('AcexUserEmail');
@@ -87,5 +92,4 @@ export class LoginComponent implements OnInit {
       );
     }
   }
-
 }

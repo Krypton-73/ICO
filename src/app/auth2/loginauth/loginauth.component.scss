@@ -1,85 +1,84 @@
 .acex-auth-row {
-    margin-top: 10%;
+  margin-top: 10%;
 }
 
-@import '../../../assets/scss/variable.scss';
+@import "../../../assets/scss/variable.scss";
 
 .acex-login-text {
-    color: $welcomeNavbar;
+  color: $welcomeNavbar;
 }
 
 // ngb-tabset ul .nav-tabs {
 //     border-bottom: 1px solid $welomeBodyColor;
 // }
 
-.intl-tel-input { 
-    .form-control {
-      padding-left: 35px;
-    }
-    .flag-dropdown {
-      .selected-flag {
-        padding: 0;
-        width: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-right: 1px solid #dbe0e2;
-        .iti-flag {
-          background: none;
-          margin-top: 0;
-          top: 0;
-          position: relative;
-          .arrow {
-            top:33%;
-            left: 0; 
-            right: 0;
-            margin: 0 auto;
-          }
+.intl-tel-input {
+  .form-control {
+    padding-left: 35px;
+  }
+  .flag-dropdown {
+    .selected-flag {
+      padding: 0;
+      width: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid #dbe0e2;
+      .iti-flag {
+        background: none;
+        margin-top: 0;
+        top: 0;
+        position: relative;
+        .arrow {
+          top: 33%;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
         }
       }
     }
   }
-
-
-
+}
 
 a.forgot-user {
-    color: slategray;
-    font-size: 14px;
+  color: slategray;
+  font-size: 14px;
 }
 
 .card-body {
-    padding: 10%;
+  padding: 10%;
 }
 
 // function
 @mixin acexbtnsignin() {
-    background-color: $welcomeNavbar;
-    border-radius: 50px;
-    border: 2px solid;
-    border-color: $btnBorder;
-    color: $btnBorder;
-    font-size: 16px;
-    font-weight: 600;
-    height: 40px;
-    width: 58%;
-    padding-top: 6px;
+  background-color: $welcomeNavbar;
+  border-radius: 50px;
+  border: 2px solid;
+  border-color: $btnBorder;
+  color: $btnBorder;
+  font-size: 16px;
+  font-weight: 600;
+  height: 40px;
+  width: 58%;
+  padding-top: 6px;
 }
 
-@media screen and (min-width: 768px){
-    .card {
-        box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.16), 2px 2px 15px 5px rgba(0, 0, 0, 0.12);
-    }
-    .acex-btn-signin {
-        @include acexbtnsignin();
-    }
+@media screen and (min-width: 768px) {
+  .card {
+    box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.16),
+      2px 2px 15px 5px rgba(0, 0, 0, 0.12);
+  }
+  .acex-btn-signin {
+    @include acexbtnsignin();
+  }
 }
 
-@media screen and (max-width: 767px){
-    .card {
-        box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.16), 2px 2px 15px 5px rgba(0, 0, 0, 0.12);
-    }
-    .acex-btn-signin {
-        @include acexbtnsignin();
-    }
+@media screen and (max-width: 767px) {
+  .card {
+    box-shadow: 0px 5px 5px -1px rgba(0, 0, 0, 0.16),
+      2px 2px 15px 5px rgba(0, 0, 0, 0.12);
+  }
+  .acex-btn-signin {
+    @include acexbtnsignin();
+  }
 }

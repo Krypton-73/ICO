@@ -8,9 +8,8 @@ describe('VerifyotpComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VerifyotpComponent ]
-    })
-    .compileComponents();
+      declarations: [VerifyotpComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

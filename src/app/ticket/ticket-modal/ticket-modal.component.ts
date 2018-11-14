@@ -8,10 +8,9 @@ import { tick } from '@angular/core/testing';
   styleUrls: ['./ticket-modal.component.scss']
 })
 export class TicketModalComponent implements OnInit {
-
   @ViewChild('ticketModal') ticketModal: ModalDirective;
 
-  constructor() { }
+  constructor() {}
 
   ticket: any;
   messages: any = [];
@@ -24,22 +23,21 @@ export class TicketModalComponent implements OnInit {
   };
 
   subjectReform: any = {
-    "crypto_deposit": "Crypto Deposit",
-    "account_frozen": "Account being Monitored",
-    "crypto_withdrawal": "Crypto Withdrawal",
-    "bank_details_change": "Bank Details Change",
-    "kyc": "KYC",
-    "email_change": "Email Change",
-    "mobile_number_change": "Mobile Number Change",
-    "recovery_password": "Recovery Password",
-    "suggestions": "Suggestions",
-    "others": "Others"
-  }
+    crypto_deposit: 'Crypto Deposit',
+    account_frozen: 'Account being Monitored',
+    crypto_withdrawal: 'Crypto Withdrawal',
+    bank_details_change: 'Bank Details Change',
+    kyc: 'KYC',
+    email_change: 'Email Change',
+    mobile_number_change: 'Mobile Number Change',
+    recovery_password: 'Recovery Password',
+    suggestions: 'Suggestions',
+    others: 'Others'
+  };
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  show(ticket: any, body: string ) {
+  show(ticket: any, body: string) {
     // console.log(ticket, body);
     this.ticket = ticket;
     this.messages = body;
@@ -50,5 +48,4 @@ export class TicketModalComponent implements OnInit {
   hide() {
     this.ticketModal.hide();
   }
-
 }

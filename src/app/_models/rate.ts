@@ -1,5 +1,5 @@
 export class Rate {
-    btc: any;
-    eth: any;
-    ltc: any;
+  btc: any;
+  eth: any;
+  ltc: any;
 }

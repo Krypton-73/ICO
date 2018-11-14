@@ -16,8 +16,7 @@ function getUrl() {
   providedIn: 'root'
 })
 export class GlobalsService {
-
   url: any = getUrl();
 
-  constructor() { }
+  constructor() {}
 }

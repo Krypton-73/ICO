@@ -8,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
-
   @ViewChild('depositModal') depositModal: ModalDirective;
   @ViewChild('withdrawModal') withdrawModal: ModalDirective;
   currency: string;
@@ -17,19 +16,15 @@ export class ModalComponent implements OnInit {
   amount: string;
   QRaddress = '';
   currencyType: any = {
-    'btc': 'BTC',
-    'eth': 'ETH',
-    'ltc': 'LTC',
-    'acex': 'ACEX'
+    btc: 'BTC',
+    eth: 'ETH',
+    ltc: 'LTC',
+    acex: 'ACEX'
   };
 
-  constructor(
-    public toastr: ToastrService
-  ) {
-  }
+  constructor(public toastr: ToastrService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   show(currency: string, address: string) {
     this.currency = currency;

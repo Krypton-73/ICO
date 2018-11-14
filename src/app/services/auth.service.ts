@@ -8,13 +8,9 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-
   resourceURL: any;
 
-  constructor(
-    public http: HttpClient,
-    private globals: GlobalsService
-  ) {
+  constructor(public http: HttpClient, private globals: GlobalsService) {
     this.resourceURL = this.globals.url;
   }
 
@@ -43,8 +39,11 @@ export class AuthService {
     return body || {};
   }
   private handleError(error: any) {
-      const errMsg = (error.message) ? error.message :
-          error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-      return Observable.throw(errMsg);
+    const errMsg = error.message
+      ? error.message
+      : error.status
+      ? `${error.status} - ${error.statusText}`
+      : 'Server error';
+    return Observable.throw(errMsg);
   }
 }

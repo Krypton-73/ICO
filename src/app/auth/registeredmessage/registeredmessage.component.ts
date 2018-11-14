@@ -13,7 +13,6 @@ import { CryptostoreService } from '../../services/cryptostore.service';
   styleUrls: ['./registeredmessage.component.scss']
 })
 export class RegisteredmessageComponent implements OnInit {
-
   message: any;
 
   constructor(
@@ -25,7 +24,7 @@ export class RegisteredmessageComponent implements OnInit {
     private router: Router,
     private keyevent: KeyeventService,
     private cryptostore: CryptostoreService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const email = this.activeroute.snapshot.paramMap.get('token');
@@ -38,5 +37,4 @@ export class RegisteredmessageComponent implements OnInit {
       }
     }
   }
-
 }

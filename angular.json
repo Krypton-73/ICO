@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ocgdemo": {
+    "ico-frontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ocgdemo",
+            "outputPath": "dist/ico-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -58,25 +58,55 @@
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true
+							"buildOptimizer": true,
+							"budgets": [
+                {
+                  "type": "bundle",
+                  "name": "polyfills",
+                  "baseline": "250kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "vendor",
+                  "baseline": "1800kb",
+                  "maximumWarning": "100kb",
+                  "maximumError": "200kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "styles",
+                  "baseline": "380kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "main",
+                  "baseline": "200kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ocgdemo:build"
+            "browserTarget": "ico-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ocgdemo:build:production"
+              "browserTarget": "ico-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ocgdemo:build"
+            "browserTarget": "ico-frontend:build"
           }
         },
         "test": {
@@ -110,7 +140,7 @@
         }
       }
     },
-    "ocgdemo-e2e": {
+    "ico-frontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -118,11 +148,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ocgdemo:serve"
+            "devServerTarget": "ico-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ocgdemo:serve:production"
+              "devServerTarget": "ico-frontend:serve:production"
             }
           }
         },
@@ -138,5 +168,5 @@
       }
     }
   },
-  "defaultProject": "ocgdemo"
+  "defaultProject": "ico-frontend"
 }

@@ -8,11 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-
-  constructor(
-    public crypt: CryptostoreService,
-    public router: Router
-  ) { }
+  constructor(public crypt: CryptostoreService, public router: Router) {}
 
   ngOnInit() {
     this.crypt.InitKeySet();
@@ -21,12 +17,11 @@ export class WelcomeComponent implements OnInit {
   authto(type) {
     switch (type) {
       case 'login':
-          this.router.navigate(['/auth/login']);
+        this.router.navigate(['/auth/login']);
         break;
       case 'sign':
-          this.router.navigate(['/auth/signup']);
+        this.router.navigate(['/auth/signup']);
         break;
     }
   }
-
 }

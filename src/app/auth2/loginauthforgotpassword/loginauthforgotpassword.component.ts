@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./loginauthforgotpassword.component.scss']
 })
 export class LoginauthforgotpasswordComponent implements OnInit {
-
   currentJustify: any = 'center';
   data: any;
   email: string;
@@ -19,22 +18,21 @@ export class LoginauthforgotpasswordComponent implements OnInit {
     public router: Router,
     private authenticationService: AuthenticationService,
     private toastr: ToastrService
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   reset() {
     this.authenticationService.requestPassword(this.email).subscribe(
       data => {
         this.data = data;
-        if(this.data.code===200 && this.data.msg==="reset mail sent") {
+        if (this.data.code === 200 && this.data.msg === 'reset mail sent') {
           this.toastr.info('An e-mail to reset password has been sent to your email address');
         }
       },
       error => {
         this.toastr.error('Invalid Email');
       }
-    )
+    );
   }
 }

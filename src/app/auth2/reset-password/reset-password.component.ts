@@ -20,7 +20,7 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private authenticationService: AuthenticationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.email = this.route.snapshot.paramMap.get('email');
@@ -29,23 +29,24 @@ export class ResetPasswordComponent implements OnInit {
 
   reset() {
     if (this.password !== this.cpassword) {
-      return this.toastr.warning('Password and Confirm Password does not match')
+      return this.toastr.warning('Password and Confirm Password does not match');
     }
-    this.authenticationService.resetPassword(this.email, this.password, this.verCode)
-    .pipe().subscribe(
-      data => {
-        this.data = data;
-        if (this.data.code===200 && this.data.msg==='password reset successfully') {
-          this.toastr.success('Password has been successfully reset.');
-          this.router.navigate(['/auth']);
-        } else {
-          this.toastr.warning('Invalid Email');
-        } 
-      },
-      error => {
-        this.toastr.info('Error connecting to server');
-      }
-    )
+    this.authenticationService
+      .resetPassword(this.email, this.password, this.verCode)
+      .pipe()
+      .subscribe(
+        data => {
+          this.data = data;
+          if (this.data.code === 200 && this.data.msg === 'password reset successfully') {
+            this.toastr.success('Password has been successfully reset.');
+            this.router.navigate(['/auth']);
+          } else {
+            this.toastr.warning('Invalid Email');
+          }
+        },
+        error => {
+          this.toastr.info('Error connecting to server');
+        }
+      );
   }
-
 }

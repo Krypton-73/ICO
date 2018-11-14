@@ -32,43 +32,50 @@ export class HomenavsComponent implements OnInit {
     private toastr: ToastrService,
     public dataService: DataService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('currentUser'));
 
     this.load.show();
-    this.userService.getBalances().pipe().subscribe(
-      data => {
-        this.data = data;
-        if (this.data.code === 200) {
-          this.balance = this.data.msg;
-          this.newBalance();
+    this.userService
+      .getBalances()
+      .pipe()
+      .subscribe(
+        data => {
+          this.data = data;
+          if (this.data.code === 200) {
+            this.balance = this.data.msg;
+            this.newBalance();
+          }
+        },
+        error => {
+          this.error = error.error;
+          if (this.error.code === 401) {
+            return this.logout();
+          }
+          this.toastr.error('Error connecting to server');
         }
-      },
-      error => {
-        this.error = error.error;
-        if (this.error.code === 401) {
-          return this.logout();
+      );
+    this.userService
+      .getRate()
+      .pipe()
+      .subscribe(
+        data => {
+          this.data = data;
+          if (this.data.code === 200) {
+            this.rate = this.data.msg;
+            this.newRate();
+          }
+        },
+        error => {
+          this.error = error.error;
+          if (this.error.code === 401) {
+            return this.logout();
+          }
+          this.toastr.error('Error connecting to server');
         }
-        this.toastr.error('Error connecting to server');
-      });
-    this.userService.getRate().pipe().subscribe(
-      data => {
-        this.data = data;
-        if (this.data.code === 200) {
-          this.rate = this.data.msg;
-          this.newRate();
-        }
-      },
-      error => {
-        this.error = error.error;
-        if (this.error.code === 401) {
-          return this.logout();
-        }
-        this.toastr.error('Error connecting to server');
-      }
-    );
+      );
     this.load.hide();
   }
 
@@ -101,15 +108,18 @@ export class HomenavsComponent implements OnInit {
   }
 
   logout() {
-    this.authenticationService.logout().pipe().subscribe(
-      data => {
-        window.sessionStorage.clear();
-        this.router.navigate(['/auth']);
-      },
-      error => {
-        window.sessionStorage.clear();
-        this.router.navigate(['/auth']);
-      }
-    );
+    this.authenticationService
+      .logout()
+      .pipe()
+      .subscribe(
+        data => {
+          window.sessionStorage.clear();
+          this.router.navigate(['/auth']);
+        },
+        error => {
+          window.sessionStorage.clear();
+          this.router.navigate(['/auth']);
+        }
+      );
   }
 }

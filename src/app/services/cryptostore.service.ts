@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { LocalStorageService , SessionStorageService } from 'ngx-webstorage';
+import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 import * as CryptJS from 'crypto-js';
 import * as sha256 from 'js-sha512';
 
@@ -8,7 +8,6 @@ import * as sha256 from 'js-sha512';
   providedIn: 'root'
 })
 export class CryptostoreService {
-
   constructor(
     private localStorageService: LocalStorageService,
     private sessionStorageService: SessionStorageService
@@ -17,8 +16,8 @@ export class CryptostoreService {
   }
 
   InitKeySet() {
-    const  chk = this.InitKeyGet();
-    if ( chk === '' || chk === undefined || chk == null) {
+    const chk = this.InitKeyGet();
+    if (chk === '' || chk === undefined || chk == null) {
       // console.log('im in');
       const key = 'This is just a demo ' + new Date();
       const val = sha256(key);
@@ -36,27 +35,23 @@ export class CryptostoreService {
   saveToLocal(name, s) {
     try {
       const key = this.InitKeyGet();
-      const str = (CryptJS.AES.encrypt(s, key)).toString();
+      const str = CryptJS.AES.encrypt(s, key).toString();
       this.localStorageService.store(name, str);
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   retrieveFromLocal(name): String {
     try {
       const key = this.InitKeyGet();
       const fromStore = this.localStorageService.retrieve(name);
-      if ( fromStore === '' || fromStore == null || fromStore === undefined ) {
+      if (fromStore === '' || fromStore == null || fromStore === undefined) {
         return '';
       } else {
         const decrypt = CryptJS.AES.decrypt(fromStore, key);
         const str = decrypt.toString(CryptJS.enc.Utf8);
         return str;
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   getLocalValue(name) {
@@ -72,28 +67,25 @@ export class CryptostoreService {
     try {
       const key = this.InitKeyGet();
       const fromStore = value;
-      if ( fromStore === '' || fromStore == null || fromStore === undefined ) {
+      if (fromStore === '' || fromStore == null || fromStore === undefined) {
         return '';
       } else {
         const decrypt = CryptJS.AES.decrypt(fromStore, key);
         const str = decrypt.toString(CryptJS.enc.Utf8);
         return str;
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   clearStorage(): String {
     this.localStorageService.clear();
     const chk = this.InitKeyGet();
     let val;
-    if ( chk === '' || chk === undefined || chk == null) {
+    if (chk === '' || chk === undefined || chk == null) {
       const key = 'This is just a demo' + new Date();
       val = sha256(key);
       this.localStorageService.store('AcexKeystore', val);
     }
     return val;
   }
-
 }

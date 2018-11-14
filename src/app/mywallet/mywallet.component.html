@@ -18,7 +18,7 @@
                                     <div class="card-body text-center">
                                         <p class="acex-p-0"><img src="assets/img/bitcoin.svg" class="bitcoin">BITCOIN</p>
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.btc ? prefixNosByFix(balance.btc) : '0' }}
+                                            {{ balance.btc ? floatToFixed(balance.btc) : '0' }}
                                         </p>
                                         <hr>
                                         <p class="">
@@ -36,7 +36,7 @@
                                     <div class="card-body text-center">
                                         <p class="acex-p-0"><img src="assets/img/ethereum.svg" class="ethereum">ETHEREUM</p>
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.eth ? prefixNosByFix(balance.eth) : '0' }}
+                                            {{ balance.eth ? floatToFixed(balance.eth) : '0' }}
                                         </p>
                                         <hr>
                                         <p class="">
@@ -54,7 +54,7 @@
                                     <div class="card-body text-center">
                                         <p class="acex-p-0"><img src="assets/img/litecoin.svg" class="litecoin">LITECOIN</p>
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.ltc ? prefixNosByFix(balance.eth) : '0' }}
+                                            {{ balance.ltc ? floatToFixed(balance.eth) : '0' }}
                                         </p>
                                         <hr>
                                         <p class="">
@@ -69,9 +69,9 @@
                             <div class="col col-md-3">
                                 <div class="card acex-bal-card-0">
                                     <div class="card-body text-center">
-                                        <p class="acex-p-0"><img src="assets/img/ace-x.svg" class="ace-x">&nbsp;&nbsp;ACEX</p>
+                                        <p class="acex-p-0"><img src="assets/img/ace-x.svg" class="ace-x">ACEX</p>
                                         <p *ngIf="balance" class="acex-p-1">
-                                            {{ balance.acex ? prefixNosByFix(balance.acex) : '0' }}
+                                            {{ balance.acex ? floatToFixed(balance.acex) : '0' }}
                                         </p>
                                         <hr>
                                         <p class="">
