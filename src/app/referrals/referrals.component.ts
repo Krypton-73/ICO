@@ -40,9 +40,13 @@ export class ReferralsComponent implements OnInit {
 		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
 		this.refId = this.yolo.msg.user_id;
 
+	}
+
+	ngOnInit() {
+		// chart code
 		this.dataMap = {};
-    let loadData = function(_data) {
-      return new Promise(function(resolve, reject) {
+    let loadData = (_data) => {
+      return new Promise((resolve, reject) => {
         resolve(_data);
       });
     };
@@ -68,11 +72,9 @@ export class ReferralsComponent implements OnInit {
       allowHtml: true
     };
 
-    this.dataMap['ORG_DATA'] = loadData(ORG_DATA);
+    this.dataMap['ORG_DATA'] = ORG_DATA; // loadData(ORG_DATA); // pass direct array
     this.dataMap['ORG_OPTIONS'] = ORG_CONFIG;
-	}
 
-	ngOnInit() {
 		// const wrapper = this.chart.wrapper;
 		// wrapper.draw(chartData);
 
