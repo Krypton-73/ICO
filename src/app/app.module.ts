@@ -13,7 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ClipboardModule } from 'ngx-clipboard';
-import { OrgChartModule } from 'ng2-org-chart';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 import { GlobalsService } from './services/globals.service';
 import { AuthService } from './services/auth.service';
@@ -81,13 +81,13 @@ import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.compone
   ],
   imports: [
 		BrowserModule,
-		OrgChartModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
-    Ng2Webstorage,
+		Ng2Webstorage,
+		GoogleChartsModule.forRoot(),
     QRCodeModule,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.wanderingCubes,

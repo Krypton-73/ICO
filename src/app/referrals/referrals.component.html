@@ -39,7 +39,7 @@
 								</div>
 							</div>
 							<div class="col-md-7 col-sm-12">
-								<ng-org-chart [topEmployee]="topEmployee"></ng-org-chart>
+								<google-chart style="width: 100%" [chartType]="'OrgChart'" [dataPromise]="dataMap['ORG_DATA']"   [options] ="dataMap['ORG_OPTIONS']" [dynamicResize]="true"></google-chart>
 							</div>
 						</div>
 					</div>

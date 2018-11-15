@@ -33,7 +33,6 @@
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
 							"node_modules/intl-tel-input/build/css/intlTelInput.css",
-							"node_modules/ng2-org-chart/styles.css"
             ],
             "scripts": [
               "node_modules/hammerjs/hammer.min.js",

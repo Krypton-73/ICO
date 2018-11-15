@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ViewChild, Component, OnInit } from '@angular/core';
 import { Txn } from '../_models/txn';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authenticationService';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { IEmployee } from '../../../node_modules/ng2-org-chart'
 
 @Component({
 	selector: 'app-referrals',
 	templateUrl: './referrals.component.html',
 	styleUrls: ['./referrals.component.scss']
 })
-
 export class ReferralsComponent implements OnInit {
 	txns: Txn[] = [];
 	data: any;
@@ -26,51 +24,12 @@ export class ReferralsComponent implements OnInit {
 		acex: 'ACEX'
 	};
 
-	topEmployee: IEmployee = {
-		name: 'Janis Martin',
-		designation: 'CEO',
-		img: './assets/data/img/b.JPG',
-		subordinates: [
-			{
-				name: 'Matthew Wikes',
-				designation: 'VP',
-				img: './assets/data/img/b.JPG',
-				subordinates: [
-					{
-						name: 'Tina Landry',
-						designation: 'Budget Analyst',
-						img: './assets/data/img/b.JPG',
-						subordinates: []
-					}
-				]
-			},
-			{
-				name: 'Patricia Lyons',
-				designation: 'VP',
-				img: './assets/data/img/c.JPG',
-				subordinates: [
-					{
-						name: 'Dylan Wilson',
-						designation: 'Web Manager',
-						img: './assets/data/img/b.JPG',
-						subordinates: []
-					},
-					{
-						name: 'Deb Curtis',
-						designation: 'Art Director',
-						img: './assets/data/img/c.JPG',
-						subordinates: []
-					}
-				]
-			},
-			{
-				name: 'Larry Phung',
-				designation: 'VP',
-				img: './assets/data/img/a.JPG',
-				subordinates: []
-			}
-		]
-	};
+	// google chart data
+
+  dataPromise: any;
+  options: any;
+  onSelect: any;
+  dataMap: any;
 
 	constructor(
 		private userService: UserService,
@@ -80,9 +39,43 @@ export class ReferralsComponent implements OnInit {
 	) {
 		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
 		this.refId = this.yolo.msg.user_id;
+
+		this.dataMap = {};
+    let loadData = function(_data) {
+      return new Promise(function(resolve, reject) {
+        resolve(_data);
+      });
+    };
+
+    let ORG_DATA = [
+      ['Name', 'Manager', 'ToolTip'],
+      [
+        { v: 'Mike', f: 'Mike<div style="color:red; font-style:italic">President</div>' },
+        '',
+        'The President'
+      ],
+      [
+        { v: 'Jim', f: 'Jim<div style="color:red; font-style:italic">Vice President</div>' },
+        'Mike',
+        'VP'
+      ],
+      ['Alice', 'Mike', ''],
+      ['Bob', 'Jim', 'Bob Sponge'],
+      ['Carol', 'Bob', '']
+    ];
+
+    let ORG_CONFIG = {
+      allowHtml: true
+    };
+
+    this.dataMap['ORG_DATA'] = loadData(ORG_DATA);
+    this.dataMap['ORG_OPTIONS'] = ORG_CONFIG;
 	}
 
 	ngOnInit() {
+		// const wrapper = this.chart.wrapper;
+		// wrapper.draw(chartData);
+
 		this.userService
 			.getTxns()
 			.pipe()
@@ -105,7 +98,7 @@ export class ReferralsComponent implements OnInit {
 					}
 					this.toastr.error('Error connecting to server');
 				}
-			);
+		);
 	}
 
 	ref() {
