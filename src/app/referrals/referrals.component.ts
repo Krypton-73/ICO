@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ReferralsComponent implements OnInit {
 	txns: Txn[] = [];
+	refTree = [];
 	data: any;
 	error: any;
 	yolo: any;
@@ -51,23 +52,7 @@ export class ReferralsComponent implements OnInit {
       });
     };
 
-    let ORG_DATA = [
-      ['Name', 'Manager', 'ToolTip'],
-      [
-        { v: 'Mike', f: 'Mike<div style="color:red; font-style:italic">President</div>' },
-        '',
-        'The President'
-      ],
-      [
-        { v: 'Jim', f: 'Jim<div style="color:red; font-style:italic">Vice President</div>' },
-        'Mike',
-        'VP'
-      ],
-      ['Alice', 'Mike', ''],
-      ['Bob', 'Jim', 'Bob Sponge'],
-      ['Carol', 'Bob', '']
-    ];
-
+		let ORG_DATA = this.refTree ;
     let ORG_CONFIG = {
       allowHtml: true
     };
@@ -77,31 +62,58 @@ export class ReferralsComponent implements OnInit {
 
 		// const wrapper = this.chart.wrapper;
 		// wrapper.draw(chartData);
+		this.getTxns();
+		this.get_refTree();
+	}
 
+	get_refTree() {
 		this.userService
-			.getTxns()
-			.pipe()
-			.subscribe(
-				data => {
+      .get_refTree()
+      .pipe()
+      .subscribe(
+        data => {
 					this.data = data;
-					if (this.data.code === 200) {
+					if(this.data.code === 200){
+						console.log(this.data.msg);
 						let i: any;
-						for (i = 0; i < this.data.msg.length; i++) {
-							if (this.data.msg[i].type === 3) {
-								this.txns.push(this.data.msg[i]);
-							}
+						for (i=0; i<this.data.msg.length; i++) {
+							this.refTree.push(this.data.msg[i]);
 						}
 					}
-				},
-				error => {
-					this.error = error.error;
-					if (this.error.code === 401) {
-						return this.logout();
-					}
-					this.toastr.error('Error connecting to server');
-				}
-		);
+        },
+        error => {
+          this.data = error.error;
+          console.log(this.data);
+        }
+      );
 	}
+
+	getTxns() {
+    this.userService
+      .getTxns()
+      .pipe()
+      .subscribe(
+        data => {
+          this.data = data;
+          if (this.data.code === 200) {
+            let i: any;
+            for (i = 0; i < this.data.msg.length; i++) {
+              this.txns.push(this.data.msg[i]);
+              if (this.data.msg[i].type === 2) {
+                this.txns[i].currency = 'acex';
+              }
+            }
+          }
+        },
+        error => {
+          this.error = error.error;
+          if (this.error.code === 401) {
+            return this.logout();
+          }
+          this.toastr.error('Error connecting to server');
+        }
+      );
+  }
 
 	ref() {
 		this.refLink = `http://ico.acex.trade/#/auth/referral/${this.refId}`;
