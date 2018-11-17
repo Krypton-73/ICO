@@ -72,6 +72,7 @@ export class MywalletComponent implements OnInit {
               }
             }
           }
+          console.log(this.txns);
         },
         error => {
           this.error = error.error;
