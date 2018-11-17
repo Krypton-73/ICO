@@ -13,8 +13,7 @@ import { Router } from '@angular/router';
 export class ReferralsComponent implements OnInit {
 	txns: Txn[] = [];
 	refTree = [];
-	adata = [];
-	level = [];
+	level: number;
 	locked: any;
 	unlocked: any;
 	totalBonus: any;
@@ -86,7 +85,7 @@ export class ReferralsComponent implements OnInit {
 						this.data = data;
 						if(this.data.code === 200){
 							let i: any;
-							this.level.push(this.data.msg.level);
+							this.level = this.data.msg.level;
 							let _locked= 0;
 							let _unlocked= 0;
 							let _totalBonus= 0;

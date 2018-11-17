@@ -58,36 +58,7 @@
               "extractLicenses": true,
               "vendorChunk": false,
 							"buildOptimizer": true,
-							"budgets": [
-                {
-                  "type": "bundle",
-                  "name": "polyfills",
-                  "baseline": "250kb",
-                  "maximumWarning": "50kb",
-                  "maximumError": "100kb"
-                },
-                {
-                  "type": "bundle",
-                  "name": "vendor",
-                  "baseline": "1800kb",
-                  "maximumWarning": "100kb",
-                  "maximumError": "200kb"
-                },
-                {
-                  "type": "bundle",
-                  "name": "styles",
-                  "baseline": "380kb",
-                  "maximumWarning": "50kb",
-                  "maximumError": "100kb"
-                },
-                {
-                  "type": "bundle",
-                  "name": "main",
-                  "baseline": "200kb",
-                  "maximumWarning": "50kb",
-                  "maximumError": "100kb"
-                }
-              ]
+							"budgets": []
             }
           }
         },
