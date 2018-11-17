@@ -13,7 +13,7 @@ export class ModalComponent implements OnInit {
   currency: string;
   address: string;
   destAddress: string;
-  amount: string;
+  amount: number;
   QRaddress = '';
   currencyType: any = {
     btc: 'BTC',
@@ -42,6 +42,7 @@ export class ModalComponent implements OnInit {
     this.currency = currecy;
     this.withdrawModal.show();
   }
+
 
   hideWithdraw() {
     this.withdrawModal.hide();

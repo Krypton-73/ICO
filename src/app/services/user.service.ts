@@ -82,6 +82,21 @@ export class UserService {
       );
   }
 
+  withdraw(currency: string, amount: number) {
+      this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'x-access-token': this.yolo.msg.jwt
+        })
+      };
+      return this.http.post(
+        `${baseUrl}/withdraw`,
+        { email: this.yolo.msg.email, currency: currency, amount: amount },
+        this.httpOptions
+      );
+    
+  }
+
   getRate() {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
     this.httpOptions = {
