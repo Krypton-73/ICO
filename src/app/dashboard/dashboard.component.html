@@ -75,9 +75,6 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="body-title bonus-structure">BONUS STRUCTURE
-                            <button type="button" id="buyAcex" (click)="buyAcexTokens()"
-                            class="btn waves-light acex-btn-buy-0" mdbWavesEffect>BUY TOKENS
-                            </button>
                         </p>
                         <hr>
                         <div class="row">
@@ -134,9 +131,6 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="body-title bonus-structure">STEPS TO BUY ACEX
-                            <button type="button" id="buyAcex" (click)="buyAcexTokens()"
-                                    class="btn waves-light acex-btn-buy-0" mdbWavesEffect>BUY TOKENS
-                            </button>
                         </p>
                         <hr>
                         <div class="row stepper-rows">
@@ -202,6 +196,6 @@
 <!--Main Layout-->
 
 <!-- modals -->
-<!-- <button type="button" mdbBtn color="primary" class="relative waves-light" 
+<!-- <button type="button" mdbBtn color="primary" class="relative waves-light"
 (click)="buyModal.show()" mdbWavesEffect>Launch demo modal</button> -->
 <app-buy-tokens #buyAcex (successEvent)="recievedMessage($event)"></app-buy-tokens>

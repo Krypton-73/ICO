@@ -11,9 +11,11 @@
 								<p class="body-title referral">REFERRAL SCHEME</p>
 								<hr class="acex-hr" />
 								<p class="body-desc">
-									For every investor who buys ACEX tokens, your wallet gets
-									credited with 5% of the currency with which the tokens were
-									purchased.
+									Current Rank:
+									<br>
+									Referral Bonus Earned:
+									<br>
+									Community Spread Achieved:
 								</p>
 
 								<div *ngIf="refId" class="md-form col col-md-12">
@@ -39,10 +41,10 @@
 								</div>
 							</div>
 							<div class="col-md-7 col-sm-12">
-								<google-chart style="width: 100%" 
-									[type]="'OrgChart'" 
-									[data]="dataMap['ORG_DATA']"   
-									[options] ="dataMap['ORG_OPTIONS']" 
+								<google-chart style="width: 100%"
+									[type]="'OrgChart'"
+									[data]="dataMap['ORG_DATA']"
+									[options] ="dataMap['ORG_OPTIONS']"
 									></google-chart>
 							</div>
 						</div>

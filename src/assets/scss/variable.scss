@@ -10,12 +10,16 @@ $bondText2: forestgreen;
 
 $btnBorder: #007bff;
 
-$marginLeftsideForAll: 260px;
+$marginLeftsideForAll: 20%;
 
 @mixin homesidebar() {
-  width: 260px;
+  width: 20%;
   background-color: #232b3d;
   box-shadow: 0 0 30px 0 rgba(76, 147, 230, 0.1);
 }
 
 $homenavbarcolor: #232b3d;
+
+.btn {
+	padding: 5%;
+}

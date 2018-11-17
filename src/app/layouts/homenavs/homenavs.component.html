@@ -1,149 +1,251 @@
 <div class="sidenav">
-    <span class="toggleMenuForMob" (click)="openNav()">&#9776;</span>
-    <a class="logo navbar-brand text-center acex-a-logo">
-        <img src="assets/images/logo.svg" class="acex-main-logo">
-    </a>
+	<span class="toggleMenuForMob" (click)="openNav()">&#9776;</span>
+	<a class="logo navbar-brand text-center acex-a-logo">
+		<img src="assets/images/logo.svg" class="acex-main-logo" />
+	</a>
 
+	<div class="acex-m-container">
+		<a
+			class="acex-side-item"
+			routerLink="/dashboard"
+			[routerLinkActive]="['active']"
+		>
+			<span class="Path"></span>
+			<span class="acex-sii"
+				><i class="fa fa-snowflake-o" aria-hidden="true"></i
+			></span>
+			Dashboard
+		</a>
+		<a
+			class="acex-side-item"
+			routerLink="/wallet"
+			[routerLinkActive]="['active']"
+		>
+			<span class="Path"></span>
+			<span class="acex-sii"
+				><i class="fa fa-credit-card" aria-hidden="true"></i
+			></span>
+			My Wallet
+		</a>
+		<a
+			class="acex-side-item"
+			routerLink="/referral"
+			[routerLinkActive]="['active']"
+		>
+			<span class="Path"></span>
+			<span class="acex-sii"
+				><i class="fa fa-user-md" aria-hidden="true"></i
+			></span>
+			Referral
+		</a>
+		<a
+			class="acex-side-item"
+			routerLink="/ticket"
+			[routerLinkActive]="['active']"
+		>
+			<span class="Path"></span>
+			<span class="acex-sii"
+				><i class="fa fa-pagelines" aria-hidden="true"></i
+			></span>
+			Ticket
+		</a>
+		<a
+			class="acex-side-item"
+			routerLink="/settings"
+			[routerLinkActive]="['active']"
+		>
+			<span class="Path"></span>
+			<span class="acex-sii"
+				><i class="fa fa-sliders" aria-hidden="true"></i
+			></span>
+			Settings
+		</a>
 
-  <div class="acex-m-container">
-  <a class="acex-side-item" routerLink="/dashboard" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-snowflake-o" aria-hidden="true"></i></span>
-    Dashboard
-  </a>
-  <a class="acex-side-item" routerLink="/wallet" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
-    My Wallet
-  </a>
-  <a class="acex-side-item" routerLink="/referral" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-user-md" aria-hidden="true"></i></span>
-    Referral
-  </a>
-  <a class="acex-side-item" routerLink="/ticket" [routerLinkActive]="['active']">
-      <span class="Path"></span>
-      <span class="acex-sii"><i class="fa fa-pagelines" aria-hidden="true"></i></span>
-      Ticket
-  </a>
-  <a class="acex-side-item" routerLink="/settings" [routerLinkActive]="['active']">
-    <span class="Path"></span>
-    <span class="acex-sii"><i class="fa fa-sliders" aria-hidden="true"></i></span>
-    Settings
-  </a>
-
-
-    <div class="text-center acex-buytokens">
-        <button type="button" (click)="buyAcexTokens()" class="btn waves-light acex-btn-buy-0" mdbWavesEffect>BUY
-            TOKENS
-        </button>
-    </div>
-</div>
+		<div class="text-center acex-buytokens">
+			<button
+				type="button"
+				(click)="buyAcexTokens()"
+				class="btn waves-light acex-btn-buy-0"
+				mdbWavesEffect
+			>
+				BUY TOKENS
+			</button>
+		</div>
+	</div>
 </div>
 
 <div id="mySidenav" class="m-sidenav">
-    <!-- <a class="logo navbar-brand text-center acex-a-logo">
-        <img src="assets/images/logo.svg" class="acex-main-logo">
-    </a> -->
-    <div class="row acex-a-logo-div">
-        <div class="col-2">
-            <img src="../../../assets/img/acexProfilePic.jpeg" class="acex-profile-pic">
-        </div> 
-        <div class="col-10">
-            <p class="acex-user-name">{{ this.user.msg.name }}</p>
-            <!-- <p class="acex-user-email">{{ this.user.msg.email }}</p> -->
-        </div>
-    </div>
-    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-    <a class="acex-side-item" routerLink="/dashboard" [routerLinkActive]="['active']">
-        <span class="Path"></span>
-        <span class="acex-sii"><i class="fa fa-snowflake-o" aria-hidden="true"></i></span>
-        Dashboard
-    </a>
-    <a class="acex-side-item" routerLink="/wallet" [routerLinkActive]="['active']">
-        <span class="Path"></span>
-        <span class="acex-sii"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
-        My Wallet
-    </a>
-    <a class="acex-side-item" routerLink="/referral" [routerLinkActive]="['active']">
-        <span class="Path"></span>
-        <span class="acex-sii"><i class="fa fa-user-md" aria-hidden="true"></i></span>
-        Referral
-    </a>
-    <a class="acex-side-item" routerLink="/settings" [routerLinkActive]="['active']">
-        <span class="Path"></span>
-        <span class="acex-sii"><i class="fa fa-sliders" aria-hidden="true"></i></span>
-        Settings
-    </a>
-    <a class="acex-side-item" (click)="logout()">
-        <span class="Path"></span>
-        <span class="acex-sii"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
-        Logout
-    </a>
-    <div class="text-center acex-buytokens">
-        <button type="button" (click)="buyAcexTokens();closeNav();" class="btn waves-light acex-btn-buy-0" mdbWavesEffect>BUY
-            TOKENS
-        </button>
-    </div>  
+	<!--
+		<a class="logo navbar-brand text-center acex-a-logo">
+		    <img src="assets/images/logo.svg" class="acex-main-logo">
+		</a>
+	-->
+	<div class="row acex-a-logo-div">
+		<div class="col-2">
+			<img
+				src="../../../assets/img/acexProfilePic.jpeg"
+				class="acex-profile-pic"
+			/>
+		</div>
+		<div class="col-10">
+			<p class="acex-user-name">{{ this.user.msg.name }}</p>
+			<!-- <p class="acex-user-email">{{ this.user.msg.email }}</p> -->
+		</div>
+	</div>
+	<a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+	<a
+		class="acex-side-item"
+		routerLink="/dashboard"
+		[routerLinkActive]="['active']"
+	>
+		<span class="Path"></span>
+		<span class="acex-sii"
+			><i class="fa fa-snowflake-o" aria-hidden="true"></i
+		></span>
+		Dashboard
+	</a>
+	<a
+		class="acex-side-item"
+		routerLink="/wallet"
+		[routerLinkActive]="['active']"
+	>
+		<span class="Path"></span>
+		<span class="acex-sii"
+			><i class="fa fa-credit-card" aria-hidden="true"></i
+		></span>
+		My Wallet
+	</a>
+	<a
+		class="acex-side-item"
+		routerLink="/referral"
+		[routerLinkActive]="['active']"
+	>
+		<span class="Path"></span>
+		<span class="acex-sii"
+			><i class="fa fa-user-md" aria-hidden="true"></i
+		></span>
+		Referral
+	</a>
+	<a
+		class="acex-side-item"
+		routerLink="/settings"
+		[routerLinkActive]="['active']"
+	>
+		<span class="Path"></span>
+		<span class="acex-sii"
+			><i class="fa fa-sliders" aria-hidden="true"></i
+		></span>
+		Settings
+	</a>
+	<a class="acex-side-item" (click)="logout()">
+		<span class="Path"></span>
+		<span class="acex-sii"
+			><i class="fa fa-sign-out" aria-hidden="true"></i
+		></span>
+		Logout
+	</a>
+	<div class="text-center acex-buytokens">
+		<button
+			type="button"
+			(click)="buyAcexTokens(); closeNav()"
+			class="btn waves-light acex-btn-buy-0"
+			mdbWavesEffect
+		>
+			BUY TOKENS
+		</button>
+	</div>
 </div>
 
 <header class="h-100">
-    <mdb-navbar class="acex-home-navbar" SideClass="navbar navbar-expand-lg" [containerInside]="true">
-        <!-- <mdb-navbar-brand>
-            <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
-        </mdb-navbar-brand> -->
-        <links class="acex-links">
-            <ul class="navbar-nav mr-auto acex-uls">
-                <li class="nav-item active waves-light acex-user-profile" mdbWavesEffect>
-                    <!-- <a class="nav-link">Home <span class="sr-only">(current)</span></a> -->
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="../../../assets/img/acexProfilePic.jpeg" class="acex-profile-pic">
-                        </div>
-                        <div class="col-10">
-                            <p class="acex-user-name">{{ this.user.msg.name }}</p>
-                            <p class="acex-user-email">{{ this.user.msg.email }}</p>
-                        </div>
-                    </div>
-                </li>
-                <li *ngIf="balance" class="nav-item waves-light acex-bal-nav" mdbWavesEffect>
-                    <div class="acex-bal-nav-div">
-                        <ul *ngIf="rate" class="mr-auto acex-bal-nav-ul">
-                            <li>
-                                <p class="acex-p-0">&nbsp;<img src="assets/img/bitcoin.svg"
-                                 class="bitcoin"> <span> ${{ rate.btc | number: '1.2-5' }}</span>
-                                </p>
-                            </li>
-                            <li>
-                                <p class="acex-p-0">&nbsp;<img src="assets/img/ethereum.svg"
-                                 class="ethereum">&nbsp;${{ rate.eth | number: '1.2-5' }}&nbsp;</p>
-                            </li>
-                            <li>
-                                <p class="acex-p-0">&nbsp;<img src="assets/img/litecoin.svg"
-                                 class="litecoin">&nbsp;&nbsp;${{ rate.ltc | number: '1.2-5' }}&nbsp;&nbsp;</p>
-                            </li>
-                            <li>
-                                <p class="acex-p-0">&nbsp;<img src="assets/img/ace-x.svg"
-                                 class="ace-x">&nbsp;$0.1&nbsp;
-                                </p>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item waves-light acex-li-profile" mdbWavesEffect>
-                    <div class="row">
-                        <div class="col-8 text-right">
-                            <p class="nav-link logout text-right">Logout&nbsp;&nbsp;</p>
-                        </div>
-                        <div class="col-2 text-left">
-                            <a (click)="logout()"><img src="assets/img/logout.png" class="logouti"></a>
-                        </div>
-                    </div>
-
-                </li>
-            </ul>
-        </links>
-
-    </mdb-navbar>
+	<mdb-navbar
+		class="acex-home-navbar"
+		SideClass="navbar navbar-expand-lg"
+		[containerInside]="true"
+	>
+		<!--
+			<mdb-navbar-brand>
+			    <a class="logo navbar-brand" href="#"><strong>Navbar</strong></a>
+			</mdb-navbar-brand>
+		-->
+		<links class="acex-links">
+			<ul class="navbar-nav mr-auto acex-uls">
+				<li
+					class="nav-item active waves-light acex-user-profile"
+					mdbWavesEffect
+				>
+					<!--
+						<a class="nav-link">Home <span class="sr-only">(current)</span></a>
+					-->
+					<div class="row">
+						<div class="col-2">
+							<img
+								src="../../../assets/img/acexProfilePic.jpeg"
+								class="acex-profile-pic"
+							/>
+						</div>
+						<div class="col-10">
+							<p class="acex-user-name">{{ this.user.msg.name }}</p>
+							<p class="acex-user-email">{{ this.user.msg.email }}</p>
+						</div>
+					</div>
+				</li>
+				<li
+					*ngIf="balance"
+					class="nav-item waves-light acex-bal-nav"
+					mdbWavesEffect
+				>
+					<div class="acex-bal-nav-div">
+						<ul *ngIf="rate" class="mr-auto acex-bal-nav-ul">
+							<li>
+								<p class="acex-p-0">
+									&nbsp;<img src="assets/img/bitcoin.svg" class="bitcoin" />
+									<span> ${{ rate.btc | number: '1.2-5' }}</span>
+								</p>
+							</li>
+							<li>
+								<p class="acex-p-0">
+									&nbsp;<img
+										src="assets/img/ethereum.svg"
+										class="ethereum"
+									/>&nbsp;${{ rate.eth | number: '1.2-5' }}&nbsp;
+								</p>
+							</li>
+							<li>
+								<p class="acex-p-0">
+									&nbsp;<img
+										src="assets/img/litecoin.svg"
+										class="litecoin"
+									/>&nbsp;&nbsp;${{ rate.ltc | number: '1.2-5' }}&nbsp;&nbsp;
+								</p>
+							</li>
+							<li>
+								<p class="acex-p-0">
+									&nbsp;<img
+										src="assets/img/ace-x.svg"
+										class="ace-x"
+									/>&nbsp;$0.1&nbsp;
+								</p>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav-item waves-light acex-li-profile" mdbWavesEffect>
+					<div class="row">
+						<div class="col-8 text-right">
+							<p class="nav-link logout text-right">Logout&nbsp;&nbsp;</p>
+						</div>
+						<div class="col-2 text-left">
+							<a (click)="logout()"
+								><img src="assets/img/logout.png" class="logouti"
+							/></a>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</links>
+	</mdb-navbar>
 </header>
-<app-buy-tokens #buyAcex (successEvent)="recievedMessage($event)"></app-buy-tokens>
+<app-buy-tokens
+	#buyAcex
+	(successEvent)="recievedMessage($event)"
+></app-buy-tokens>
