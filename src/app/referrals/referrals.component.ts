@@ -33,7 +33,7 @@ export class ReferralsComponent implements OnInit {
 		btc: 'BTC',
 		eth: 'ETH',
 		ltc: 'LTC',
-		acex: 'ACEX'
+		ACEX: 'ACEX'
 	};
 
 	// google chart data
@@ -92,9 +92,9 @@ export class ReferralsComponent implements OnInit {
 						for (i = 0; i < this.data.msg.analysis.length; i++) {
 							// this.adata.push(this.data.msg.analysis[i]);
 							console.log(
-								this.data.msg.analysis,
-								this.data.msg.analysis[i].refs,
-								i
+								// this.data.msg.analysis,
+								// this.data.msg.analysis[i].refs,
+								
 							);
 							_locked += this.level >= i ? 0 : this.data.msg.analysis[i].refs;
 							_unlocked += this.level <= i ? this.data.msg.analysis[i].refs : 0;
@@ -103,14 +103,14 @@ export class ReferralsComponent implements OnInit {
 							// console.log(this.data.msg.analysis[i].refs);
 							// console.log("@@@@@@@@@@@@@",_locked, _unlocked);
 							// console.log(this.data.msg.analysis.length);
-						}
+						};
 						this.locked = _locked;
 						this.unlocked = _unlocked;
 						this.totalBonus = _totalBonus;
 						this.totalAmount = _totalAmount;
 						// this.refTree.push(this.data.msg.graph_data[0]);
 
-						// console.log('yo',this.locked);
+						console.log('yo',this.totalBonus);
 					}
 				},
 				error => {
@@ -165,9 +165,8 @@ export class ReferralsComponent implements OnInit {
 					if (this.data.code === 200) {
 						let i: any;
 						for (i = 0; i < this.data.msg.length; i++) {
-							this.txns.push(this.data.msg[i]);
 							if (this.data.msg[i].type === 3) {
-								this.txns[i].currency = 'acex';
+								this.txns.push(this.data.msg[i]);
 							}
 						}
 					}

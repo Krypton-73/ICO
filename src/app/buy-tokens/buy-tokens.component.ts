@@ -59,7 +59,7 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
         this.rate = rate;
         if (this.rate) {
           this.amountOfCurrencyReq = (100 * 0.1) / this.rate.btc;
-          console.log(this.amountOfCurrencyReq);
+          // console.log(this.amountOfCurrencyReq);
         }
       },
       error => {
