@@ -114,7 +114,7 @@
 										<p class="acex-p-0">
 											<img src="assets/img/ace-x.svg" class="ace-x" />&nbsp; ACEX</p>
 										<p *ngIf="balance" class="acex-p-1">
-											{{ balance.acex ? floatToFixed(balance.acex) : '0' }}
+											{{ balance.acex ? floatToFixed(balance.acex) : '0' | number: '1.0-2'}}
 										</p>
 										<hr />
 										<p class="">
@@ -160,10 +160,10 @@
 												<td>{{ txnType[txn.type] }}</td>
 												<th>{{ txn.txid }}</th>
 												<td>{{ currencyType[txn.currency] }}</td>
-												<td>{{ txn.value }}</td>
+												<td>{{ txn.value | number: '1.2-5'}}</td>
 												<td>
 													{{
-														(txn.value * (txn.bonus[0] + txn.bonus[1])) / 100
+														(txn.value * (txn.bonus[0] + txn.bonus[1])) / 100 | number: '1.2-5'
 													}}
 												</td>
 											</tr>

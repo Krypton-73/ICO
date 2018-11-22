@@ -38,10 +38,10 @@ export class ReferralsComponent implements OnInit {
 
 	// google chart data
 
-  dataPromise: any;
-  options: any;
-  onSelect: any;
-  dataMap: any;
+	dataPromise: any;
+	options: any;
+	onSelect: any;
+	dataMap: any;
 
 	constructor(
 		private userService: UserService,
@@ -51,127 +51,130 @@ export class ReferralsComponent implements OnInit {
 	) {
 		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
 		this.refId = this.yolo.msg.user_id;
-
 	}
 
 	ngOnInit() {
 		// chart code
-		this.dataMap = {};
-    let loadData = (_data) => {
-      return new Promise((resolve, reject) => {
-        resolve(_data);
-      });
-    };
 
-		let ORG_DATA = this.refTree ;
-    let ORG_CONFIG = {
-      allowHtml: true
-    };
+		const ORG_DATA = this.refTree;
+		const ORG_CONFIG = {
+			allowHtml: true
+		};
 
-    this.dataMap['ORG_DATA'] = ORG_DATA; // loadData(ORG_DATA); // pass direct array
-    this.dataMap['ORG_OPTIONS'] = ORG_CONFIG;
+		this.dataMap['ORG_DATA'] = ORG_DATA; // loadData(ORG_DATA); // pass direct array
+		this.dataMap['ORG_OPTIONS'] = ORG_CONFIG;
 
 		// const wrapper = this.chart.wrapper;
 		// wrapper.draw(chartData);
 		this.getTxns();
 		this.get_refTree();
 
-		
-			this.userService
-				.get_refTree()
-				.pipe()
-				.subscribe(
-					data => {
-						this.data = data;
-						if(this.data.code === 200){
-							let i: any;
-							this.level = this.data.msg.level;
-							let _locked= 0;
-							let _unlocked= 0;
-							let _totalBonus= 0;
-							let _totalAmount= 0;	
-							// console.log(this.data.msg.analysis[0].refs);
-							for (i=0; i<this.data.msg.analysis.length; i++) {
-								// this.adata.push(this.data.msg.analysis[i]);
-								console.log(this.data.msg.analysis,this.data.msg.analysis[i].refs,i);
-								_locked += this.level >= i ? 0 : this.data.msg.analysis[i].refs;
-								_unlocked += this.level <= i ? this.data.msg.analysis[i].refs : 0;
-								_totalBonus += this.data.msg.analysis[i].refs;
-								_totalAmount += this.data.msg.analysis[i].raised;
-								// console.log(this.data.msg.analysis[i].refs);
-								// console.log("@@@@@@@@@@@@@",_locked, _unlocked);
-								// console.log(this.data.msg.analysis.length);
-							}
-							this.locked = _locked;
-							this.unlocked = _unlocked;
-							this.totalBonus = _totalBonus;
-							this.totalAmount = _totalAmount;
-							// this.refTree.push(this.data.msg.graph_data[0]);
-							
-							// console.log('yo',this.locked);
-							
-							
+		this.userService
+			.get_refTree()
+			.pipe()
+			.subscribe(
+				data => {
+					this.data = data;
+					if (this.data.code === 200) {
+						let i: any;
+						this.level = this.data.msg.level;
+						let _locked = 0;
+						let _unlocked = 0;
+						let _totalBonus = 0;
+						let _totalAmount = 0;
+						// console.log(this.data.msg.analysis[0].refs);
+						for (i = 0; i < this.data.msg.analysis.length; i++) {
+							// this.adata.push(this.data.msg.analysis[i]);
+							console.log(
+								this.data.msg.analysis,
+								this.data.msg.analysis[i].refs,
+								i
+							);
+							_locked += this.level >= i ? 0 : this.data.msg.analysis[i].refs;
+							_unlocked += this.level <= i ? this.data.msg.analysis[i].refs : 0;
+							_totalBonus += this.data.msg.analysis[i].refs;
+							_totalAmount += this.data.msg.analysis[i].raised;
+							// console.log(this.data.msg.analysis[i].refs);
+							// console.log("@@@@@@@@@@@@@",_locked, _unlocked);
+							// console.log(this.data.msg.analysis.length);
 						}
-					},
-					error => {
-						this.data = error.error;
-						console.log(this.data);
+						this.locked = _locked;
+						this.unlocked = _unlocked;
+						this.totalBonus = _totalBonus;
+						this.totalAmount = _totalAmount;
+						// this.refTree.push(this.data.msg.graph_data[0]);
+
+						// console.log('yo',this.locked);
 					}
-				);
-		
+				},
+				error => {
+					this.data = error.error;
+					console.log(this.data);
+				}
+			);
 	}
 
+	prefixNosByFix(no: any) {
+    try {
+      if (no !== 0) {
+        return Number.parseFloat(no).toFixed(8);
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      return 0;
+    }
+	}
+	
 	get_refTree() {
 		this.userService
-      .get_refTree()
-      .pipe()
-      .subscribe(
-        data => {
+			.get_refTree()
+			.pipe()
+			.subscribe(
+				data => {
 					this.data = data;
-					if(this.data.code === 200){
+					if (this.data.code === 200) {
 						// console.log(this.data.msg.graph_data);
 						let i: any;
-						for (i=0; i<this.data.msg.graph_data.length; i++) {
+						for (i = 0; i < this.data.msg.graph_data.length; i++) {
 							this.refTree.push(this.data.msg.graph_data[i]);
 						}
 						// console.log(this.refTree);
 					}
-        },
-        error => {
-          this.data = error.error;
-          console.log(this.data);
-        }
-      );
+				},
+				error => {
+					this.data = error.error;
+					console.log(this.data);
+				}
+			);
 	}
 
-	
-
 	getTxns() {
-    this.userService
-      .getTxns()
-      .pipe()
-      .subscribe(
-        data => {
-          this.data = data;
-          if (this.data.code === 200) {
-            let i: any;
-            for (i = 0; i < this.data.msg.length; i++) {
-              this.txns.push(this.data.msg[i]);
-              if (this.data.msg[i].type === 3) {
-                this.txns[i].currency = 'acex';
-              }
-            }
-          }
-        },
-        error => {
-          this.error = error.error;
-          if (this.error.code === 401) {
-            return this.logout();
-          }
-          this.toastr.error('Error connecting to server');
-        }
-      );
-  }
+		this.userService
+			.getTxns()
+			.pipe()
+			.subscribe(
+				data => {
+					this.data = data;
+					if (this.data.code === 200) {
+						let i: any;
+						for (i = 0; i < this.data.msg.length; i++) {
+							this.txns.push(this.data.msg[i]);
+							if (this.data.msg[i].type === 3) {
+								this.txns[i].currency = 'acex';
+							}
+						}
+					}
+				},
+				error => {
+					this.error = error.error;
+					if (this.error.code === 401) {
+						return this.logout();
+					}
+					this.toastr.error('Error connecting to server');
+				}
+			);
+	}
 
 	ref() {
 		this.refLink = `http://ico.acex.trade/#/auth/referral/${this.refId}`;

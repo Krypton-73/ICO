@@ -77,7 +77,7 @@
 												</td>
 												<td>{{ txn.txid }}</td>
 												<td>{{ currencyType[txn.currency] }}</td>
-												<td>{{ txn.value }}</td>
+												<td>{{ txn.value ? prefixNosByFix(txn.value) : '0'}}</td>
 											</tr>
 										</tbody>
 									</table>

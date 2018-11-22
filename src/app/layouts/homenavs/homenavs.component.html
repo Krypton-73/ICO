@@ -197,34 +197,16 @@
 					<div class="acex-bal-nav-div">
 						<ul *ngIf="rate" class="mr-auto acex-bal-nav-ul">
 							<li>
-								<p class="acex-p-0">
-									&nbsp;<img src="assets/img/bitcoin.svg" class="bitcoin" />
-									<span> ${{ rate.btc | number: '1.2-5' }}</span>
-								</p>
+								<b>BTC:</b>  ${{ rate.btc | number: '1.0-2' }}
 							</li>
 							<li>
-								<p class="acex-p-0">
-									&nbsp;<img
-										src="assets/img/ethereum.svg"
-										class="ethereum"
-									/>&nbsp;${{ rate.eth | number: '1.2-5' }}&nbsp;
-								</p>
+								<b>ETH:</b>  ${{ rate.eth | number: '1.0-2' }}
 							</li>
 							<li>
-								<p class="acex-p-0">
-									&nbsp;<img
-										src="assets/img/litecoin.svg"
-										class="litecoin"
-									/>&nbsp;&nbsp;${{ rate.ltc | number: '1.2-5' }}&nbsp;&nbsp;
-								</p>
+								<b>LTC:</b>  ${{ rate.ltc | number: '1.0-2' }}
 							</li>
 							<li>
-								<p class="acex-p-0">
-									&nbsp;<img
-										src="assets/img/ace-x.svg"
-										class="ace-x"
-									/>&nbsp;$0.1&nbsp;
-								</p>
+								<b>ACEX:</b>  $0.1
 							</li>
 						</ul>
 					</div>

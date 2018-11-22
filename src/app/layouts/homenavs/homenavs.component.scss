@@ -352,17 +352,16 @@ li.nav-item.waves-light.acex-li-profile {
 
 //
 ul.acex-bal-nav-ul {
-  list-style: none none;
+	list-style: none none;
+	padding-inline-start: 1rem;
+	padding-inline-end: 1rem;
 }
 
 ul.acex-bal-nav-ul li {
-  display: inline-block;
+	display: inline-block;
+	padding-inline-start: 1rem;
 }
 
-p.acex-p-0 img {
-  width: 16px;
-  margin-top: -2px;
-}
 
 .acex-bal-nav {
   margin-left: 0;
