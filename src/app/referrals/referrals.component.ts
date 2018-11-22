@@ -55,9 +55,15 @@ export class ReferralsComponent implements OnInit {
 
 	ngOnInit() {
 		// chart code
+		this.dataMap = {};
+    let loadData = (_data) => {
+      return new Promise((resolve, reject) => {
+        resolve(_data);
+      });
+		};
 
-		const ORG_DATA = this.refTree;
-		const ORG_CONFIG = {
+		let ORG_DATA = this.refTree;
+		let ORG_CONFIG = {
 			allowHtml: true
 		};
 
@@ -125,7 +131,7 @@ export class ReferralsComponent implements OnInit {
       return 0;
     }
 	}
-	
+
 	get_refTree() {
 		this.userService
 			.get_refTree()
