@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 // import { DialogService } from "ng2-bootstrap-modal";
-
+import { routerTransition } from '../router.animations';
 // import { DepositModalComponent } from '../deposit-modal/deposit-modal.component';
 import { UserService } from '../services/user.service';
 import { AuthenticationService } from '../services/authenticationService';
@@ -15,9 +15,11 @@ import { Balance } from '../_models/balance';
 @Component({
   selector: 'app-wallet',
   templateUrl: './mywallet.component.html',
-  styleUrls: ['./mywallet.component.scss']
+  styleUrls: ['./mywallet.component.scss'],
+  animations: [routerTransition()]
 })
 export class MywalletComponent implements OnInit {
+  p: number = 1;
   address: any;
   txns: Txn[] = [];
   txnType: any = {
@@ -72,7 +74,7 @@ export class MywalletComponent implements OnInit {
               // }
             }
           }
-          console.log(this.txns);
+          // console.log(this.txns);
         },
         error => {
           this.error = error.error;
@@ -155,8 +157,8 @@ export class MywalletComponent implements OnInit {
       );
   }
 
-  withdraw(currency: string) {
-    this.withdrawModal.showWithdraw(currency);
+  withdraw(currency: string, amount: number) {
+    this.withdrawModal.showWithdraw(currency, amount);
   }
 
   logout() {

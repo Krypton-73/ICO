@@ -155,7 +155,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr *ngFor="let txn of txns">
+											<tr *ngFor="let txn of txns | paginate: { itemsPerPage: 5, currentPage: p }">
 												<td>{{ txn.createdAt | date: 'yyyy-MM-dd HH:mm' }}</td>
 												<td>{{ txnType[txn.type] }}</td>
 												<th>{{ txn.txid }}</th>
@@ -167,6 +167,8 @@
 													}}
 												</td>
 											</tr>
+											<pagination-controls responsive="true" directionLinks="true" (pageChange)="p = $event"> </pagination-controls>
+
 										</tbody>
 									</table>
 								</div>

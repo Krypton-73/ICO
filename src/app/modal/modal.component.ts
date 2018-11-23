@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'angular-bootstrap-md';
 import { ToastrService } from 'ngx-toastr';
-
+import { UserService } from '../services/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -10,6 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ModalComponent implements OnInit {
   @ViewChild('depositModal') depositModal: ModalDirective;
   @ViewChild('withdrawModal') withdrawModal: ModalDirective;
+  
+  buyForm: FormGroup;
+  data: any;
+  error: any;
   currency: string;
   address: string;
   destAddress: string;
@@ -22,9 +28,26 @@ export class ModalComponent implements OnInit {
     acex: 'ACEX'
   };
 
-  constructor(public toastr: ToastrService) {}
+  @Output() successEvent = new EventEmitter<boolean>();
 
-  ngOnInit() {}
+  constructor(
+    public toastr: ToastrService,
+    private userService: UserService,
+    private formBuilder: FormBuilder,
+    private router: Router
+    ) {}
+
+  ngOnInit() {
+    this.buyForm = this.formBuilder.group({
+      currency: ['', Validators.required],
+      amount: ['', Validators.required]
+    });
+  }
+
+  get f() {
+    return this.buyForm.controls;
+  }
+
 
   show(currency: string, address: string) {
     this.currency = currency;
@@ -38,13 +61,36 @@ export class ModalComponent implements OnInit {
     this.depositModal.hide();
   }
 
-  showWithdraw(currecy: string) {
-    this.currency = currecy;
+  showWithdraw(currency: string, amount: number) {
+    this.currency = currency;
+    this.amount = amount;
     this.withdrawModal.show();
   }
 
 
   hideWithdraw() {
+    this.userService
+    .withdraw(this.f.currency.value, this.f.amount.value)
+    .pipe()
+    .subscribe(
+      data => {
+        this.data = data;
+        if (this.data.code === 200) {
+          this.toastr.success('Withdrawal Successful');
+          this.router.navigate(['/wallet']);
+        }
+        this.withdrawModal.hide();
+        this.successEvent.emit(true);
+      },
+      error => {
+        this.error = error.error;
+        if (this.error.code === 401) {
+          this.toastr.info('Unable to connect to server. Please retry login.');
+          // return this.logout();
+        }
+        this.toastr.error('Error');
+      }
+    );
     this.withdrawModal.hide();
   }
 

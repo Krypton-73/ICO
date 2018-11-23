@@ -53,6 +53,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MaintenanceComponent } from './layouts/maintenance/maintenance.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { TicketModalComponent } from './ticket/ticket-modal/ticket-modal.compone
     TicketModalComponent
   ],
   imports: [
+    NgxPaginationModule,
 		BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

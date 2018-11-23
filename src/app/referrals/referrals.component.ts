@@ -97,10 +97,10 @@ export class ReferralsComponent implements OnInit {
 								
 							);
 							_locked += this.level >= i ? 0 : this.data.msg.analysis[i].refs;
-							_unlocked += this.level <= i ? this.data.msg.analysis[i].refs : 0;
+							_unlocked += this.level >= i ? this.data.msg.analysis[i].refs : 0;
 							_totalBonus += this.data.msg.analysis[i].refs;
 							_totalAmount += this.data.msg.analysis[i].raised;
-							// console.log(this.data.msg.analysis[i].refs);
+							console.log(this.level <= i);
 							// console.log("@@@@@@@@@@@@@",_locked, _unlocked);
 							// console.log(this.data.msg.analysis.length);
 						};
@@ -110,7 +110,7 @@ export class ReferralsComponent implements OnInit {
 						this.totalAmount = _totalAmount;
 						// this.refTree.push(this.data.msg.graph_data[0]);
 
-						console.log('yo',this.totalBonus);
+						// console.log('yo',this.totalBonus);
 					}
 				},
 				error => {

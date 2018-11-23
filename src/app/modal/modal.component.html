@@ -41,12 +41,12 @@
         </div>
         <div class="md-form">
           <input [(ngModel)]="amount" mdbInputDirective type="text" id="amount" class="form-control" required>
-          <label for="amount" class="">Amount </label>
+          <label for="amount" class="">Amount {{ amount }} </label>
         </div>
       </div>
       <div class="modal-footer">
         <div class="text-center">
-          <button type="button"  (click)="withdrawModal.hide()" class="btn btn-primary waves-light" mdbWavesEffect>Send</button>
+          <button type="button"  (click)="hideWithdraw()" class="btn btn-primary waves-light" mdbWavesEffect>Send</button>
         </div>
       </div>
     </div>
