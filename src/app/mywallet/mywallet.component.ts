@@ -157,8 +157,8 @@ export class MywalletComponent implements OnInit {
       );
   }
 
-  withdraw(currency: string, amount: number) {
-    this.withdrawModal.showWithdraw(currency, amount);
+  withdraw(currency: string) {
+    this.withdrawModal.showWithdraw(currency);
   }
 
   logout() {

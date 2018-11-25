@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
   error: any;
   currency: string;
   address: string;
-  destAddress: string;
+  to_address: string;
   amount: number;
   QRaddress = '';
   currencyType: any = {
@@ -38,15 +38,15 @@ export class ModalComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.buyForm = this.formBuilder.group({
-      currency: ['', Validators.required],
-      amount: ['', Validators.required]
-    });
+    // this.buyForm = this.formBuilder.group({
+    //   currency: ['', Validators.required],
+    //   amount: ['', Validators.required]
+    // });
   }
 
-  get f() {
-    return this.buyForm.controls;
-  }
+  // get f() {
+  //   return this.buyForm.controls;
+  // }
 
 
   show(currency: string, address: string) {
@@ -61,16 +61,15 @@ export class ModalComponent implements OnInit {
     this.depositModal.hide();
   }
 
-  showWithdraw(currency: string, amount: number) {
+  showWithdraw(currency: string) {
     this.currency = currency;
-    this.amount = amount;
     this.withdrawModal.show();
   }
 
 
   hideWithdraw() {
     this.userService
-    .withdraw(this.f.currency.value, this.f.amount.value)
+    .withdraw(this.currency, this.amount, this.to_address)
     .pipe()
     .subscribe(
       data => {
@@ -91,7 +90,7 @@ export class ModalComponent implements OnInit {
         this.toastr.error('Error');
       }
     );
-    this.withdrawModal.hide();
+    // this.withdrawModal.hide();
   }
 
   depositClip() {

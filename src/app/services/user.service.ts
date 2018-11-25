@@ -82,7 +82,7 @@ export class UserService {
       );
   }
 
-  withdraw(currency: string, amount: number) {
+  withdraw(currency, amount, address) {
       this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
       this.httpOptions = {
         headers: new HttpHeaders({
@@ -91,8 +91,17 @@ export class UserService {
       };
       return this.http.post(
         `${baseUrl}/withdraw`,
-        { email: this.yolo.msg.email, currency: currency, amount: amount },
+        { email: this.yolo.msg.email, currency: currency, amount: amount, to_address: address },
         this.httpOptions
+      )
+      .pipe(
+        map(data => {
+          this.data = data;
+          if (this.data.code === 200) {
+            sessionStorage.setItem(currency, JSON.stringify(this.data.msg));
+          }
+          return data;
+        })
       );
     
   }
@@ -107,7 +116,7 @@ export class UserService {
     return this.http.post(`${baseUrl}/get_rate`, { email: this.yolo.msg.email }, this.httpOptions);
   }
 
-  buyAcex(currency: string, amount: number) {
+  buyAcex(currency, amount) {
     this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
     this.httpOptions = {
       headers: new HttpHeaders({
