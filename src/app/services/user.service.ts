@@ -94,15 +94,15 @@ export class UserService {
         { email: this.yolo.msg.email, currency: currency, amount: amount, to_address: address },
         this.httpOptions
       )
-      .pipe(
-        map(data => {
-          this.data = data;
-          if (this.data.code === 200) {
-            sessionStorage.setItem(currency, JSON.stringify(this.data.msg));
-          }
-          return data;
-        })
-      );
+      // .pipe(
+      //   map(data => {
+      //     this.data = data;
+      //     if (this.data.code === 200) {
+      //       sessionStorage.setItem(currency, JSON.stringify(this.data.msg));
+      //     }
+      //     return data;
+      //   })
+      // );
     
   }
 

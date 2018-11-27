@@ -83,11 +83,13 @@ export class ModalComponent implements OnInit {
       },
       error => {
         this.error = error.error;
-        if (this.error.code === 401) {
-          this.toastr.info('Unable to connect to server. Please retry login.');
+        if (this.error.code === 500) {
+          this.toastr.info('Invalid Address. Please retry.');
           // return this.logout();
+        }else
+        {
+          this.toastr.error('Error');
         }
-        this.toastr.error('Error');
       }
     );
     // this.withdrawModal.hide();
