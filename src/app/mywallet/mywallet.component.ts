@@ -68,10 +68,10 @@ export class MywalletComponent implements OnInit {
           if (this.data.code === 200) {
             let i: any;
             for (i = 0; i < this.data.msg.length; i++) {
-              
-              // if (this.data.msg[i].type === 2) {
-                this.txns.push(this.data.msg[i]);
-              // }
+              this.txns.push(this.data.msg[i]);
+              if (this.data.msg[i].type === 2) {
+                this.txns[i].currency = 'ACEX';
+              }
             }
           }
           // console.log(this.txns);
