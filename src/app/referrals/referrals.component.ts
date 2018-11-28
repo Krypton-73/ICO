@@ -33,7 +33,7 @@ export class ReferralsComponent implements OnInit {
 		btc: 'BTC',
 		eth: 'ETH',
 		ltc: 'LTC',
-		ACEX: 'ACEX'
+		acex: 'ACEX'
 	};
 
 	// google chart data
@@ -88,34 +88,20 @@ export class ReferralsComponent implements OnInit {
 						let _unlocked = 0;
 						let _totalBonus = 0;
 						let _totalAmount = 0;
-						// console.log(this.data.msg.analysis[0].refs);
 						for (i = 0; i < this.data.msg.analysis.length; i++) {
-							// this.adata.push(this.data.msg.analysis[i]);
-							console.log(
-								// this.data.msg.analysis,
-								// this.data.msg.analysis[i].refs,
-								
-							);
 							_locked += this.level >= i ? 0 : this.data.msg.analysis[i].refs;
 							_unlocked += this.level >= i ? this.data.msg.analysis[i].refs : 0;
 							_totalBonus += this.data.msg.analysis[i].refs;
 							_totalAmount += this.data.msg.analysis[i].raised;
-							// console.log(this.level <= i);
-							// console.log("@@@@@@@@@@@@@",_locked, _unlocked);
-							// console.log(this.data.msg.analysis.length);
 						};
-						this.locked = _locked;
-						this.unlocked = _unlocked;
-						this.totalBonus = _totalBonus;
-						this.totalAmount = _totalAmount;
-						// this.refTree.push(this.data.msg.graph_data[0]);
-
-						// console.log('yo',this.totalBonus);
+							this.locked = _locked;
+							this.unlocked = _unlocked;
+							this.totalBonus = _totalBonus;
+							this.totalAmount = _totalAmount;
 					}
 				},
 				error => {
 					this.data = error.error;
-					// console.log(this.data);
 				}
 			);
 	}
@@ -133,6 +119,7 @@ export class ReferralsComponent implements OnInit {
 	}
 
 	get_refTree() {
+		 {
 		this.userService
 			.get_refTree()
 			.pipe()
@@ -140,21 +127,18 @@ export class ReferralsComponent implements OnInit {
 				data => {
 					this.data = data;
 					if (this.data.code === 200) {
-						
-						// console.log(this.data.msg.graph_data);
 						let i: any;
 						for (i = 0; i < this.data.msg.graph_data.length; i++) {
 							this.refTree.push(this.data.msg.graph_data[i]);
 						}
-						// console.log(this.refTree);
 					}
 				},
 				error => {
 					this.data = error.error;
-					// console.log(this.data);
 				}
 			);
 			
+		}
 	}
 
 	getTxns() {

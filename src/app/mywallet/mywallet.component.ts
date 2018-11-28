@@ -33,7 +33,7 @@ export class MywalletComponent implements OnInit {
     btc: 'BTC',
     eth: 'ETH',
     ltc: 'LTC',
-    ACEX: 'ACEX'
+    acex: 'ACEX'
   };
   data: any;
   error: any;
@@ -70,11 +70,10 @@ export class MywalletComponent implements OnInit {
             for (i = 0; i < this.data.msg.length; i++) {
               this.txns.push(this.data.msg[i]);
               if (this.data.msg[i].type === 2) {
-                this.txns[i].currency = 'ACEX';
+                this.txns[i].currency = 'acex';
               }
             }
           }
-          // console.log(this.txns);
         },
         error => {
           this.error = error.error;

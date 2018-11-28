@@ -29,6 +29,7 @@ export class TicketModalComponent implements OnInit {
     bank_details_change: 'Bank Details Change',
     kyc: 'KYC',
     email_change: 'Email Change',
+    name_change: 'Name Change',
     mobile_number_change: 'Mobile Number Change',
     recovery_password: 'Recovery Password',
     suggestions: 'Suggestions',

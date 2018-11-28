@@ -70,7 +70,7 @@ export class ModalComponent implements OnInit {
 
   hideWithdraw() {
     if(!this.withdrawForm.valid) {
-      this.toastr.error('Invalid form fields');
+      this.toastr.error('Invalid Inputs');
     }
     else {
     this.userService
@@ -87,13 +87,13 @@ export class ModalComponent implements OnInit {
         this.successEvent.emit(true);
       },
       error => {
-        this.error = error.error;
+        this.error = error;
         if (this.error.code === 500) {
           this.toastr.info(error);
-          // return this.logout();
         }else
         {
-          this.toastr.error('Error');
+          this.toastr.error(this.error.error.msg);
+          console.log('yo', this.error.error.msg);
         }
       }
     );
