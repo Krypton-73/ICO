@@ -51,6 +51,10 @@ export class ReferralsComponent implements OnInit {
 	) {
 		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
 		this.refId = this.yolo.msg.user_id;
+		if (sessionStorage.getItem('graphData')) {
+		    let	graphTree = JSON.parse(sessionStorage.getItem('graphData'));
+			this.refTree = graphTree.graph_data;
+		}
 	}
 
 	ngOnInit() {
@@ -86,8 +90,8 @@ export class ReferralsComponent implements OnInit {
 						let _totalBonus = 0;
 						let _totalAmount = 0;
 						for (i = 0; i < this.data.msg.analysis.length; i++) {
-							_locked += this.level >= i ? 0 : this.data.msg.analysis[i].refs;
-							_unlocked += this.level >= i ? this.data.msg.analysis[i].refs : 0;
+							_locked += this.level >= i-1 ? 0 : this.data.msg.analysis[i].refs;
+							_unlocked += this.level >= i-1 ? this.data.msg.analysis[i].refs : 0;
 							_totalBonus += this.data.msg.analysis[i].refs;
 							_totalAmount += this.data.msg.analysis[i].raised;
 						};
@@ -116,8 +120,9 @@ export class ReferralsComponent implements OnInit {
 	}
 
 	get_refTree() {
-		 {
-		this.userService
+		
+	 {
+			this.userService
 			.get_refTree()
 			.pipe()
 			.subscribe(
@@ -125,9 +130,11 @@ export class ReferralsComponent implements OnInit {
 					this.data = data;
 					if (this.data.code === 200) {
 						let i: any;
+						sessionStorage.setItem('graphData', JSON.stringify(this.data.msg));
 						for (i = 0; i < this.data.msg.graph_data.length; i++) {
 							this.refTree.push(this.data.msg.graph_data[i]);
 						}
+						// console.log(this.refTree);
 					}
 				},
 				error => {
