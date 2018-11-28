@@ -56,13 +56,10 @@ export class ReferralsComponent implements OnInit {
 	ngOnInit() {
 		// chart code
 		this.dataMap = {};
-    let loadData = (_data) => {
-      return new Promise((resolve, reject) => {
-        resolve(_data);
-      });
-		};
 
+		// tslint:disable-next-line:prefer-const
 		let ORG_DATA = this.refTree;
+		// tslint:disable-next-line:prefer-const
 		let ORG_CONFIG = {
 			allowHtml: true
 		};
@@ -94,7 +91,7 @@ export class ReferralsComponent implements OnInit {
 							console.log(
 								// this.data.msg.analysis,
 								// this.data.msg.analysis[i].refs,
-								
+
 							);
 							_locked += this.level >= i ? 0 : this.data.msg.analysis[i].refs;
 							_unlocked += this.level >= i ? this.data.msg.analysis[i].refs : 0;
@@ -173,9 +170,9 @@ export class ReferralsComponent implements OnInit {
 				},
 				error => {
 					this.error = error.error;
-					if (this.error.code === 401) {
-						return this.logout();
-					}
+					// if (this.error.code === 401) {
+					// 	return this.logout();
+					// }
 					this.toastr.error('Error connecting to server');
 				}
 			);
