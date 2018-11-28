@@ -34,13 +34,13 @@
         </button>
         <h4 class="modal-title w-100" id="myModalLabel">Withdraw {{ currencyType[currency] }}</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" [formGroup]="withdrawForm">
         <div class="md-form">
-          <input [(ngModel)]="to_address" mdbInputDirective type="text" id="to_address" class="form-control" required>
+          <input  mdbInputDirective type="text" id="to_address" formControlName="to_address" class="form-control" required>
           <label for="to_address" class="">Destination Address {{ to_address }}</label>
         </div>
         <div class="md-form">
-          <input [(ngModel)]="amount" mdbInputDirective type="text" id="amount" class="form-control" required>
+          <input  mdbInputDirective type="number" id="amount" formControlName="amount" class="form-control" required>
           <label for="amount" class="">Amount {{ amount }} </label>
         </div>
       </div>

@@ -97,7 +97,7 @@ export class ReferralsComponent implements OnInit {
 							_unlocked += this.level >= i ? this.data.msg.analysis[i].refs : 0;
 							_totalBonus += this.data.msg.analysis[i].refs;
 							_totalAmount += this.data.msg.analysis[i].raised;
-							console.log(this.level <= i);
+							// console.log(this.level <= i);
 							// console.log("@@@@@@@@@@@@@",_locked, _unlocked);
 							// console.log(this.data.msg.analysis.length);
 						};
@@ -112,7 +112,7 @@ export class ReferralsComponent implements OnInit {
 				},
 				error => {
 					this.data = error.error;
-					console.log(this.data);
+					// console.log(this.data);
 				}
 			);
 	}
@@ -137,6 +137,7 @@ export class ReferralsComponent implements OnInit {
 				data => {
 					this.data = data;
 					if (this.data.code === 200) {
+						
 						// console.log(this.data.msg.graph_data);
 						let i: any;
 						for (i = 0; i < this.data.msg.graph_data.length; i++) {
@@ -147,9 +148,10 @@ export class ReferralsComponent implements OnInit {
 				},
 				error => {
 					this.data = error.error;
-					console.log(this.data);
+					// console.log(this.data);
 				}
 			);
+			
 	}
 
 	getTxns() {

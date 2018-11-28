@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -13,7 +14,7 @@ export class ModalComponent implements OnInit {
   @ViewChild('depositModal') depositModal: ModalDirective;
   @ViewChild('withdrawModal') withdrawModal: ModalDirective;
   
-  buyForm: FormGroup;
+  withdrawForm: FormGroup;
   data: any;
   error: any;
   currency: string;
@@ -38,15 +39,15 @@ export class ModalComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    // this.buyForm = this.formBuilder.group({
-    //   currency: ['', Validators.required],
-    //   amount: ['', Validators.required]
-    // });
+    this.withdrawForm = this.formBuilder.group({
+      amount: ['', Validators.required],
+      to_address: ['', Validators.required]
+    });
   }
 
-  // get f() {
-  //   return this.buyForm.controls;
-  // }
+  get f() {
+    return this.withdrawForm.controls;
+  }
 
 
   show(currency: string, address: string) {
@@ -68,8 +69,12 @@ export class ModalComponent implements OnInit {
 
 
   hideWithdraw() {
+    if(!this.withdrawForm.valid) {
+      this.toastr.error('Invalid form fields');
+    }
+    else {
     this.userService
-    .withdraw(this.currency, this.amount, this.to_address)
+    .withdraw(this.currency , this.f.amount.value , this.f.to_address.value)
     .pipe()
     .subscribe(
       data => {
@@ -83,14 +88,17 @@ export class ModalComponent implements OnInit {
       },
       error => {
         this.error = error.error;
-        if (this.error.code === 401) {
-          this.toastr.info('Unable to connect to server. Please retry login.');
+        if (this.error.code === 500) {
+          this.toastr.info(error);
           // return this.logout();
+        }else
+        {
+          this.toastr.error('Error');
         }
-        this.toastr.error('Error');
       }
     );
     // this.withdrawModal.hide();
+    }
   }
 
   depositClip() {
