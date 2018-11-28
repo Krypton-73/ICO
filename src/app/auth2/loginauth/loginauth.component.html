@@ -1,15 +1,15 @@
 <div class="container">
-  
+
   <div class="row justify-content-md-center acex-auth-row">
     <div class="col col-md-5">
       <div class="card">
         <div class="card-body">
-          
+
           <ngb-tabset [activeId]="tab" [justify]="currentJustify">
             <ngb-tab id="login"  [formGroup]="loginForm">
               <ng-template ngbTabTitle class="acex-tab-title"><b class="acex-login-text">SIGN IN</b></ng-template>
               <ng-template ngbTabContent>
-                
+
                 <div class="md-form">
                   <input mdbInputDirective type="text" id="email" class="form-control" formControlName="email">
                   <label for="email" class="">Email</label>
@@ -30,31 +30,23 @@
                 <div class="text-center" *ngIf="verified">
                   <a (click)="resendVerifyEmail()" class="forgot-user">Resend Verification Email!</a>
                 </div>
-                
+
               </ng-template>
             </ngb-tab>
             <ngb-tab id="register" [formGroup]="registerForm">
               <ng-template ngbTabTitle class="acex-tab-title"><b class="acex-login-text">SIGN UP</b></ng-template>
               <ng-template ngbTabContent>
-                
+
                 <div class="row">
                   <div class="col">
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupfname" class="form-control" 
-                      formControlName="name" pattern="^[a-zA-Z\s]{2,}$" [successMessage]="' '" 
+                      <input mdbInputDirective type="text" id="signupfname" class="form-control"
+                      formControlName="name" pattern="^[a-zA-Z\s]{2,}$" [successMessage]="' '"
                       [errorMessage]="registerForm.get('name').invalid ? 'Please enter valid name.':' '">
                       <label for="signupfname" class="">Full Name</label>
                     </div>
-
-                    <!-- <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupmobno" class="form-control" 
-                      formControlName="mobile" pattern="^[0-9]+$"
-                      [successMessage]="' '"
-                      [errorMessage]="registerForm.get('mobile').invalid ? 'Mobile no must be number' : 'Required'">
-                      <label for="mobile" class="">Mobile Number</label>
-                    </div> -->
                     <div class="md-form">
-                      <input type="phone-select" class="form-control intl" 
+                      <input type="phone-select" class="form-control intl"
                       formControlName="mobile"
                       #phoneSelect="ngx-phone-select"
                       placeholder="Mobile Number"
@@ -65,9 +57,9 @@
                        ngxPhoneSelect
                        mdbInputDirective>
                     </div>
-    
+
                     <div class="md-form">
-                      <input mdbInputDirective type="password" id="signuppassword" class="form-control" 
+                      <input mdbInputDirective type="password" id="signuppassword" class="form-control"
                       formControlName="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"
                       [successMessage]="' '" [errorMessage]="registerForm.get('password').invalid ? 'Min. 8 characters with a number & Spl Char(!-*)' : '' ">
                       <label for="signuppassword" class="">Password</label>
@@ -76,14 +68,14 @@
                   </div>
                   <div class="col">
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signuprefId" [attr.disabled]="refId ? true : null" 
+                      <input mdbInputDirective type="text" id="signuprefId" [attr.disabled]="refId ? true : null"
                       class="form-control" formControlName="refId" pattern="^[0-9]{7}$" [successMessage]="' '"
                       [errorMessage]="registerForm.get('refId').invalid ? 'Must be 7 digits.' : ' '">
                       <label for="signuprefId" class="">Referral ID</label>
                     </div>
-    
+
                     <div class="md-form">
-                      <input mdbInputDirective type="text" id="signupemail" class="form-control" 
+                      <input mdbInputDirective type="text" id="signupemail" class="form-control"
                       formControlName="email" [successMessage]="' '" [errroMessage]="' '">
                       <label for="signupemail" class="">Email</label>
                     </div>
@@ -96,25 +88,1470 @@
 
                   </div>
                 </div>
-                
-                <div class="md-form text-center">
-                    <input class="form-check-input" type="checkbox" id="checkbox11" checked="checked" formControlName="agree" required>
-                    I agree with <a href="#">terms of use and privacy</a>
+
+                <div class="md-form text-center" style="display: inline-flex;">
+										<input class="form-check-input" type="checkbox" id="checkbox11" checked="checked" formControlName="agree" required>
+									<span style="padding-left: 5px;">I agree with <button type="button" mdbBtn color="link" class="relative waves-light" style="padding: 0; margin: 0; padding-left: 5px" (click)="tncModal.show()" mdbWavesEffect>terms of use and privacy</button></span>
                 </div>
 
                 <div class="text-center">
                   <button [disabled]="checked" type="submit" (click)="auth('signup')" class="btn waves-light acex-btn-signin" mdbWavesEffect>SIGN UP</button>
                 </div>
-                
+
               </ng-template>
             </ngb-tab>
           </ngb-tabset>
-          
-          <!-- <a href="#" class="btn btn-primary waves-light" mdbWavesEffect>Button</a> -->
         </div>
       </div>
     </div>
   </div>
-  
 
+
+</div>
+
+<div
+	mdbModal
+	#tncModal="mdbModal"
+	class="modal fade"
+	style="overflow-y: auto"
+	tabindex="-1"
+	role="dialog"
+	aria-labelledby="mytncModalLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-fluid" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<b class="text-center acex-login-text"
+					>ACEX SDN. BHD. TOKEN SALE TERMS AND CONDITIONS</b
+				>
+				<button
+					type="button"
+					class="close pull-right"
+					aria-label="Close"
+					(click)="tncModal.hide()"
+				>
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>
+					The following <strong>Terms and Conditions</strong> ("
+					<strong>Terms</strong>") govern your (“ <strong>you</strong>” or the “
+					<strong>Purchaser</strong>”) purchase of cryptographic tokens ("ACEX")
+					from ACEX SDN. BHD., an exempted company registered in Malaysia (the
+					“Company”). Each of you and the Company is a “Party​” and, together,
+					the “Parties​” to these Terms. This document is not a solicitation for
+					investment and does not pertain in any way to an offering of
+					securities in any jurisdiction. This document describes the ACEX token
+					sale.
+				</p>
+				<br />
+				<p>
+					IF YOU DO NOT AGREE TO THESE TERMS, DO NOT PURCHASE ACEX FROM THE
+					COMPANY. BY PURCHASING ACEX FROM THE COMPANY, YOU WILL BE BOUND BY
+					THESE TERMS AND ANY TERMS INCORPORATED BY REFERENCE. IF YOU HAVE ANY
+					QUESTIONS REGARDING THESE TERMS, PLEASE CONTACT THE COMPANY AT
+					<a href="mailto:support@acextrade.com">support@acextrade.com</a>. By
+					purchasing ACEX, and to the extent permitted by law, you are agreeing
+					not to hold any of the the Company and its respective past, present
+					and future employees, officers, directors, contractors, consultants,
+					equity holders, suppliers, vendors, service providers, parent
+					companies, subsidiaries, affiliates, agents, representatives,
+					predecessors, successors and assigns (the “ACEX SDN. BHD. Team​”)
+					liable for any losses or any special, incidental, or consequential
+					damages arising from, or in any way connected, to the sale of ACEX,
+					including losses associated with the terms set forth below.
+				</p>
+				<br />
+				<p>
+					DO NOT PURCHASE ACEX IF YOU ARE NOT AN EXPERT IN DEALING WITH
+					CRYPTOGRAPHIC TOKENS AND BLOCKCHAIN-BASED SOFTWARE SYSTEMS. PRIOR TO
+					PURCHASING ACEX, YOU SHOULD CAREFULLY CONSIDER THE TERMS LISTED BELOW
+					AND, TO THE EXTENT NECESSARY, CONSULT AN APPROPRIATE LAWYER,
+					ACCOUNTANT, OR TAX PROFESSIONAL. IF ANY OF THE FOLLOWING TERMS ARE
+					UNACCEPTABLE TO YOU, YOU SHOULD NOT PURCHASE ACEX.
+				</p>
+				<br />
+				<p>
+					PURCHASES OF ACEX SHOULD BE UNDERTAKEN ONLY BY INDIVIDUALS, ENTITIES,
+					OR COMPANIES THAT HAVE SIGNIFICANT EXPERIENCE WITH, AND UNDERSTANDING
+					OF, THE USAGE AND INTRICACIES OF CRYPTOGRAPHIC TOKENS, INCLUDING
+					ETHEREUM TOKENS, AND BLOCKCHAIN BASED SOFTWARE SYSTEMS. PURCHASERS
+					SHOULD HAVE A FUNCTIONAL UNDERSTANDING OF STORAGE AND TRANSMISSION
+					MECHANISMS ASSOCIATED WITH OTHER CRYPTOGRAPHIC TOKENS. WHILE THE
+					COMPANY WILL BE AVAILABLE TO ASSIST PURCHASERS OF ACEX DURING THE
+					SALE, THE COMPANY WILL NOT BE RESPONSIBLE IN ANY WAY FOR LOSS OF BTC,
+					ETH OR ACEX RESULTING FROM ACTIONS TAKEN BY, OR OMITTED BY PURCHASERS.
+					IF YOU DO NOT HAVE SUCH EXPERIENCE OR EXPERTISE, THEN YOU SHOULD NOT
+					PURCHASE ACEX OR PARTICIPATE IN THE SALE OF ACEX. YOUR PARTICIPATION
+					IN ACEX SALE IS DEEMED TO BE YOUR UNDERTAKING THAT YOU SATISFY THE
+					REQUIREMENTS MENTIONED IN THIS PARAGRAPH.
+				</p>
+				<br />
+				<p>
+					PURCHASER AGREES TO BUY, AND COMPANY AGREES TO SELL, THE ACEX TOKENS
+					IN ACCORDANCE WITH THE FOLLOWING TERMS:
+				</p>
+				<br />
+				<h3 style="text-align:center">1. Conditions to ACEX token sale</h3>
+				<br />
+				<p>
+					YOU MAY NOT MAKE A ACQUIRE A ACEX TOKEN IF YOU ARE A CITIZEN, RESIDENT
+					(TAX OR OTHERWISE) OR GREEN CARD HOLDER OF THE UNITED STATES OF
+					AMERICA, OR A CITIZEN OR RESIDENT OF THE REPUBLIC OF SOUTH AFRICA, OR
+					Malaysia.
+				</p>
+				<p>
+					When you purchase, or otherwise receive, a ACEX token, you may only do
+					so by accepting the following conditions and, by doing so, you warrant
+					and represent that the following are a true and accurate reflection of
+					the basis on which you are acquiring the ACEX tokens:
+				</p>
+				<ul>
+					<li>
+						neither the Company nor any of the ACEX SDN. BHD. Team has provided
+						you with any advice regarding whether ACEX is a suitable investment
+						for you;
+					</li>
+					<li>
+						you have sufficient understanding of the functionality, usage,
+						storage, transmission mechanisms and intricacies associated with
+						cryptographic tokens, such as Bitcoin and Ether, as well as
+						blockchain-based software systems generally;
+					</li>
+					<li>
+						you are legally permitted to receive and hold and make use of ACEX
+						in your and any other relevant jurisdiction;
+					</li>
+					<li>
+						you will supply us with all information, documentation or copy
+						documentation that we require in order to allow us to accept your
+						purchase of ACEX and allocate ACEX to you;
+					</li>
+					<li>
+						you have not supplied us with information relating to your
+						acquisition of ACEX or otherwise which is inaccurate or misleading;
+					</li>
+					<li>
+						you will provide us with any additional information which may be
+						reasonably required in order that we can fulfil our legal,
+						regulatory and contractual obligations, including but not limited to
+						any anti-money laundering obligation;
+					</li>
+					<li>
+						you will notify us promptly of any change to the information
+						supplied by you to us;
+					</li>
+					<li>
+						you are of a sufficient age (if an individual) to legally obtain
+						ACEX, and you are not aware of any other legal reason to prevent you
+						from obtaining ACEX;
+					</li>
+					<li>
+						you take sole responsibility for any restrictions and risks
+						associated with receiving and holding ACEX, including but not
+						limited to these set out in Annex A;
+					</li>
+					<li>
+						by acquiring ACEX, you are not making a regulated investment, as
+						this term may be interpreted by the regulator in your jurisdiction;
+					</li>
+					<li>
+						you are not obtaining or using ACEX for any illegal purpose, and
+						will not use ACEX for any illegal purpose;
+					</li>
+					<li>
+						you waive any right you may have / obtain to participate in a class
+						action lawsuit or a class wide arbitration against any entity or
+						individual involved with the sale of ACEX;
+					</li>
+					<li>
+						your acquisition of ACEX not involve your purchase or receipt of
+						shares, ownership or any equivalent in any existing or future public
+						or private company, corporation or other entity in any jurisdiction;
+					</li>
+					<li>
+						to the extent permitted by law and provided we act in good faith,
+						the Company makes no warranty whatsoever, either expressed or
+						implied, regarding the future success of ACEX and/or the Ethereum
+						Network;
+					</li>
+					<li>
+						you accept that ACEX is created and you obtain ACEX on an “as is”
+						and “under development” basis. Therefore, provided the Company acts
+						in good faith, you accept that the Company is providing ACEX without
+						being able to provide any warranties in relation to ACEX, including,
+						but not limited to, title, merchantability or fitness for a
+						particular purpose;
+					</li>
+					<li>
+						you accept that you bear sole responsibility for determining if (i)
+						the acquisition, the allocation, use or ownership of ACEX (ii) the
+						potential appreciation or depreciation in the value of ACEX over
+						time, if any, (iii) the sale and purchase of ACEX; and/or (iv) any
+						other action or transaction related to ACEX has tax implications.
+					</li>
+				</ul>
+				<h3 style="text-align:center">2. Overview of ACEX sale</h3>
+				<br />
+				<p>
+					ACEX is required for proper operation and comprehensive utilization of
+					ACEX SDN. BHD. (as defined in the white paper (the “White Paper”)
+					provided at <a href=" https://acex.trade">https://acex.trade</a> (the
+					“Website”) as of the date the Purchaser acquires ACEX token). After
+					the ACEX sale, each ACEX is backed by the purchase of the underlying
+					assets, as described in the White Paper. To the extent they do not
+					contradict these Terms, the rights connected to ACEX are subject to
+					the limitations set out in the White Paper, but this should in no case
+					create obligations for the Company in addition to the ones contained
+					in these Terms. The Company reserves the right to circumvent the
+					algorithm used to select the underlying assets if it believes, in its
+					sole discretion, that such selected underlying assets could adversely
+					affect the Company or ACEX from a regulatory or legal perspective. The
+					Company shall have the right to sell any such underlying assets (if
+					already part of ACEX portfolio) and block their acquisition.
+				</p>
+				<br />
+				<p>
+					The maximum total amount of ACEXs to be issued is 863,000,000 (roughly
+					equivalent to US$25,000,000). ACEXs are generated as Purchasers buy
+					them and the total supply of ACEXs will be fixed after the end of the
+					ACEX sale. No more ACEXs will be sold after the end of the ACEX sale,
+					as described in the preceding paragraph. Ownership of ACEX during the
+					ACEX token sale carries no rights express or implied. Purchases of
+					ACEX are non-refundable.
+				</p>
+				<br />
+				<h3 style="text-align:center;">3. ACEX Price</h3>
+				<br />
+				<p>
+					Purchasers in the ACEX token sale will be allocated their ACEX tokens
+					in exchange for ETH at the following rate:
+				</p>
+				<ul>
+					<li>all ACEX tokens: US$ 0.10 per ACEX token;</li>
+					<p>
+						The US Dollars to ETH exchange rate is used to dynamically set the
+						ETH to ACEX rate. As a result, for the duration of the ACEX sale,
+						the price to purchase a ACEX will be set as an amount in ETH.
+					</p>
+					<p>
+						Purchaser must have an Ethereum wallet that supports the ERC-20
+						token standard in order to receive any ACEX purchased from the
+						Company.
+					</p>
+					<h3 style="text-align:center">4. Timing of ACEX Token Sale</h3>
+					<br />
+					<p>
+						The general public will be able to see the total number of ACEX
+						tokens currently sold, as well as the distribution of all ACEX
+						tokens between the participating Ethereum accounts. In the spirit of
+						openness, the Company will constantly update on the Website the
+						number of tokens sold as well as the share of ACEX tokens allocated
+						to the shareholders of Company. Furthermore, the Ethereum accounts
+						used to store ETH during the ACEX sale duration will publically
+						available and their balances will also be made available on the
+						Website.
+					</p>
+					<h3 style="text-align:center">5. After the ACEX Token Sale</h3>
+					<br />
+					<p>
+						The Purchasers should have no expectation of influence over
+						governance of the Company.
+					</p>
+					<p>
+						Upon the conclusion of a successful ACEX sale, the digital assets
+						backing each ACEX token will be transparently purchased.
+					</p>
+					<p>
+						The Company will provide you with an official and regular audit
+						conducted on the existence of the digital assets backing each ACEX
+						token. Through this audit, you can track and confirm that the
+						digital assets backing your ACEX have been received and acquired.
+						Access to the audit results does not constitute a ACEX purchase
+						receipt or indicate in any way that the party possessing such access
+						has rights to or ownership of the purchased ACEX tokens.
+					</p>
+					<p>
+						Prior to a Purchaser selling ACEX after the ACEX token sale
+						completion, such Purchaser shall ensure that the buyer of any such
+						ACEX undertakes to comply with all the provisions of these Terms as
+						if such person were a Purchaser in the ACEX token sale.
+					</p>
+					<h3 style="text-align:center">
+						6. The Company Will Not Purchase ACEX During the ACEX Sale
+					</h3>
+					<br />
+					<p>
+						The Company warrants that neither it nor its shareholders will
+						purchase ACEX during the ACEX sale. Furthermore, the Company
+						warrants that neither it nor its shareholders will purchase ACEX
+						from any third party during the period of the ACEX sale.
+					</p>
+					<h3 style="text-align:center">7. All purchases of ACEX are final</h3>
+					<br />
+					<p>
+						ALL PURCHASES OF ACEX ARE FINAL. PURCHASES OF ACEX ARE
+						NON-REFUNDABLE. BY PURCHASING ACEX, THE PURCHASER ACKNOWLEDGES THAT
+						NEITHER THE COMPANY NOR ANY OF ITS AFFILIATES, DIRECTORS OR
+						SHAREHODELRS ARE REQUIRED TO PROVIDE A REFUND FOR ANY REASON.
+					</p>
+					<p>
+						IF THE COMPANY BELIEVES, IN ITS SOLE DISCRETION, THAT ANY
+						INDIVIDUALS OR ENTITIES OWNING ACEX CREATES MATERIAL REGULATORY OR
+						OTHER LEGAL RISKS OR ADVERSE EFFECTS FOR THE COMPANY AND/OR ACEX,
+						THE COMPANY RESERVES THE RIGHT TO: (A) BUY ALL ACEX FROM SUCH ACEX
+						OWNERS AT THE THEN-EXISTING MARKET PRICE AND/OR (B) SELL ALL
+						CRYPTOCURRENCY ASSETS OF THE COMPANY.
+					</p>
+					<h3 style="text-align:center">
+						8. Taxation of ACEX and Taxation Related to the ICO
+					</h3>
+					<br />
+					<p>
+						The Purchaser bears the sole responsibility to determine if the
+						purchase of ACEX with BTC, LTC, ETH or the potential appreciation or
+						depreciation in the value of ACEX over time has tax implications for
+						the Purchaser in the Purchaser's home jurisdiction. By purchasing
+						ACEX, and to the extent permitted by law, the Purchaser agrees not
+						to hold any of the Company, its affiliates, shareholders, director,
+						or advisors liable for any tax liability associated with or arising
+						from the purchase of ACEX.
+					</p>
+					<h3 style="text-align:center">9. Privacy</h3>
+					<br />
+					<p>
+						The Purchasers may be contacted by email by the Company. Such emails
+						will be informational only. The Company will not request any
+						information from Purchasers in an email. See our Privacy Policy
+						available on the Website for additional information
+					</p>
+					<h3 style="text-align:center">10. Force Majeure</h3>
+					<br />
+					<p>
+						The ACEX SDN. BHD. Team is not liable for failure to perform solely
+						caused by:
+					</p>
+					<ul>
+						<li>unavoidable casualty,</li>
+						<li>delays in delivery of materials,</li>
+						<li>embargoes,</li>
+						<li>government orders,</li>
+						<li>acts of civil or military authorities,</li>
+						<li>acts by common carriers,</li>
+						<li>emergency conditions (including weather conditions),</li>
+						<li>security issues arising from the technology used,</li>
+					</ul>
+					<p>
+						or any similar unforeseen event that renders performance
+						commercially implausible. If an event of force majeure occurs, the
+						party injured by the other's inability to perform may elect to
+						suspend the Terms, in whole or part, for the duration of the force
+						majeure circumstances. The party experiencing the force majeure
+						circumstances shall cooperate with and assist the injured party in
+						all reasonable ways to minimize the impact of force majeure on the
+						injured party.
+					</p>
+					<h3 style="text-align:center">11. Disclaimer of Warranties</h3>
+					<br />
+					<p>
+						THE PURCHASER EXPRESSLY AGREES THAT THE PURCHASER IS PURCHASING ACEX
+						AT THE PURCHASER'S SOLE RISK AND THAT ACEX IS PROVIDED ON AN "AS IS"
+						BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED,
+						INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF TITLE OR IMPLIED
+						WARRANTIES, MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE
+						(EXCEPT ONLY TO THE EXTENT PROHIBITED UNDER APPLICABLE LAW WITH ANY
+						LEGALLY REQUIRED WARRANTY PERIOD TO THE SHORTER OF THIRTY DAYS FROM
+						FIRST USE OR THE MINIMUM PERIOD REQUIRED). WITHOUT LIMITING THE
+						FOREGOING, NONE OF THE ACEX SDN. BHD. TEAM WARRANTS THAT THE PROCESS
+						FOR PURCHASING ACEX WILL BE UNINTERRUPTED OR ERROR-FREE.
+					</p>
+					<h3 style="text-align:center">12. Limitations Waiver of Liability</h3>
+					<br />
+					<p>
+						THE PURCHASER ACKNOWLEDGES AND AGREES THAT, TO THE FULLEST EXTENT
+						PERMITTED BY ANY APPLICABLE LAW, THE DISCLAIMERS OF LIABILITY
+						CONTAINED HEREIN APPLY TO ANY AND ALL DAMAGES OR INJURY WHATSOEVER
+						CAUSED BY OR RELATED TO (i) USE OF, OR INABILITY TO USE, ACEX OR
+						(ii) THE ACEX SDN. BHD. TEAM UNDER ANY CAUSE OR ACTION WHATSOEVER OF
+						ANY KIND IN ANY JURISDICTION, INCLUDING, WITHOUT LIMITATION, ACTIONS
+						FOR BREACH OF WARRANTY, BREACH OF CONTRACT OR TORT (INCLUDING
+						NEGLIGENCE) AND THAT NONE OF THE ACEX SDN. BHD. TEAM SHALL BE LIABLE
+						FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY OR CONSEQUENTIAL
+						DAMAGES, INCLUDING FOR LOSS OF PROFITS, GOODWILL OR DATA, IN ANY WAY
+						WHATSOEVER ARISING OUT OF THE USE OF, OR INABILITY TO USE, OR
+						PURCHASE OF, OR INABILITY TO PURCHASE, ACEX, OR ARISING OUT OF ANY
+						INTERACTION WITH THE SMART CONTRACT IMPLEMENTED IN RELATION TO ACEX.
+						THE PURCHASER FURTHER SPECIFICALLY ACKNOWLEDGES THAT THE ACEX SDN.
+						BHD. TEAM IS NOT LIABLE FOR THE CONDUCT OF THIRD PARTIES, INCLUDING
+						OTHER PURCHASERS OF ACEX, AND THAT THE RISK OF PURCHASING AND USING
+						ACEX RESTS ENTIRELY WITH THE PURCHASER. TO THE EXTENT PERMISSIBLE
+						UNDER APPLICABLE LAWS, UNDER NO CIRCUMSTANCES WILL ANY OF THE ACEX
+						SDN. BHD. TEAM BE LIABLE TO ANY PURCHASER FOR MORE THAN THE AMOUNT
+						THE PURCHASER HAVE PAID TO THE COMPANY FOR THE PURCHASE OF ACEX.
+						SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES
+						OR THE LIMITATION OR EXCLUSION OF LIABILITY FOR CERTAIN TYPES OF
+						DAMAGES. THEREFORE, SOME OF THE ABOVE LIMITATIONS IN THIS SECTION
+						AND ELSEWHERE IN THE TERMS MAY NOT APPLY TO A PURCHASER. IN
+						PARTICULAR, NOTHING IN THESE TERMS SHALL AFFECT THE STATUTORY RIGHTS
+						OF ANY PURCHASER OR EXCLUDE INJURY ARISING FROM ANY WILFUL
+						MISCONDUCT OR FRAUD OF THE ACEX SDN. BHD. TEAM.
+					</p>
+					<h3 style="text-align:center">13. Complete Agreement</h3>
+					<br />
+					<p>
+						These Terms set forth the entire understanding between the Purchaser
+						and the Company with respect to the purchase and sale of ACEX. For
+						facts relating to the sale and purchase, the Purchaser agrees to
+						rely only on the Terms in determining purchase decisions and
+						understands that the Terms govern the sale of ACEX and supersede any
+						public statements about the ACEX token sale made by third parties or
+						by the ACEX SDN. BHD. Team or individuals associated with any of the
+						ACEX SDN. BHD. Team, past and present and during the ACEX token
+						sale.
+					</p>
+					<h3 style="text-align:center">14. Severability</h3>
+					<br />
+					<p>
+						The Purchaser and the Company agree that if any portion of these
+						Terms is found illegal or unenforceable, in whole or in part, such
+						provision shall, as to such jurisdiction, be ineffective solely to
+						the extent of such determination of invalidity or unenforceability
+						without affecting the validity or enforceability thereof in any
+						other manner or jurisdiction and without affecting the remaining
+						provisions of the Terms, which shall continue to be in full force
+						and effect.
+					</p>
+					<h3 style="text-align:center">15. No Waiver</h3>
+					<br />
+					<p>
+						The failure of the Company to require or enforce strict performance
+						by the Purchaser of any provision of these Terms or the Company’s
+						failure to exercise any right under these Terms shall not be
+						construed as a waiver or relinquishment of the Company's right to
+						assert or rely upon any such provision or right in that or any other
+						instance. The express waiver by the Company of any provision,
+						condition, or requirement of these Terms shall not constitute a
+						waiver of any future obligation to comply with such provision,
+						condition or requirement. Except as expressly and specifically set
+						forth in these Terms, no representations, statements, consents,
+						waivers, or other acts or omissions by the ACEX SDN. BHD. Team shall
+						be deemed a modification of these Terms nor be legally binding.
+					</p>
+					<h3 style="text-align:center">16. Updates to the Terms</h3>
+					<br />
+					<p>
+						The Company reserves the right, at its sole discretion, to change,
+						modify, add, or remove portions of the Terms at any time during the
+						sale by posting the amended Terms on the Website. Any Purchaser will
+						be deemed to have accepted such changes by purchasing ACEX. The
+						Terms may not be otherwise amended except by express consent of both
+						the Purchaser and the Company.
+					</p>
+					<h3 style="text-align:center">
+						17. Cooperation with Legal Authorities
+					</h3>
+					<br />
+					<p>
+						The Company will cooperate with all law enforcement enquiries,
+						subpoenas, or requests provided they are fully supported and
+						documented by the law in the relevant jurisdictions.
+					</p>
+					<h3 style="text-align:center">18. Indemnification</h3>
+					<br />
+					<p>
+						To the fullest extent permitted by applicable law, you will
+						indemnify, defend and hold harmless the ACEX SDN. BHD. Team from and
+						against all claims, demands, actions, damages, losses, costs and
+						expenses (including attorneys’ fees) that arise from or relate to:
+						(i) your purchase or use of ACEX; (ii) your responsibilities or
+						obligations under these Terms; (iii) your violation of these Terms;
+						or (iv) your violation of any rights of any other person or entity.
+					</p>
+					<br />
+					<p>
+						The Company reserves the right to exercise sole control over the
+						defense, at your expense, of any claim subject to indemnification
+						under this Section 18. This indemnity is in addition to, and not in
+						lieu of, any other indemnities set forth in a written agreement
+						between you and the Company.
+					</p>
+					<h3 style="text-align:center">19. Security</h3>
+					<br />
+					<p>
+						You are responsible for implementing reasonable measures for
+						securing the wallet, vault or other storage mechanism you use to
+						receive and hold ACEX purchased from the Company, including any
+						requisite private key(s) or other credentials necessary to access
+						such storage mechanism(s). If your private key(s) or other access
+						credentials are lost, you may lose access to your Tokens. The
+						Company is not responsible for any losses, costs or expenses
+						relating to lost access credentials.
+					</p>
+					<h3 style="text-align:center">20. Language</h3>
+					<br />
+					<p>
+						Currently, only English versions of any ACEX SDN. BHD.'s
+						communications is considered official. The English version shall
+						prevail in case of differences in translation.
+					</p>
+					<h3 style="text-align:center">21. Governing Law</h3>
+					<br />
+					<p>
+						The Terms, the arbitration clause contained in them, and all
+						non-contractual obligations arising in any way whatsoever out of or
+						in connection with these Terms are governed by, construed, and take
+						effect in accordance with English law.
+					</p>
+					<h3 style="text-align:center">22. Arbitration</h3>
+					<br />
+					<p>
+						Any dispute or difference arising out of or in connection with these
+						Terms or the legal relationships established by these Terms,
+						including any question regarding its existence, validity or
+						termination (“Dispute”), shall be referred to and finally resolved
+						by arbitration under the LCIA Rules which will be deemed to be
+						incorporated by reference into this clause, save for any waiver of
+						any rights the parties would otherwise have to any form of appeal or
+						recourse to a court of law or other judicial authority, which rights
+						are expressly reserved. The number of arbitrators shall be three.
+						The seat of the arbitration shall be London. The language of the
+						arbitration shall be English.
+					</p>
+					<p>
+						A dispute arising out of or related to these Terms is personal to
+						you and the Company and will be resolved solely through individual
+						arbitration and will not be brought as a class arbitration, class
+						action or any other type of representative proceeding. There will be
+						no class arbitration or arbitration in which an individual attempts
+						to resolve a Dispute as a representative of another individual or
+						group of individuals. Further, a Dispute cannot be brought as a
+						class or other type of representative action, whether within or
+						outside of arbitration, or on behalf of any other individual or
+						group of individuals.
+					</p>
+					<br />
+					<h4 style="text-align:center;">
+						<strong>ANNEX A</strong>
+					</h4>
+					<h4 style="text-align:center;">ACEX Risks</h4>
+					<p>
+						By purchasing, owning, and using ACEX, you expressly acknowledge and
+						assume the following risks:
+					</p>
+					<p>
+						<strong
+							>1. Risk​ ​of​ ​Losing​ ​Access​ ​to​ ​ACEX​ ​Due​ ​to​ ​Loss​
+							​of​ ​Private​ ​Key(s),​ ​Custodial​ ​Error​ ​or​ ​Purchaser
+							Error</strong
+						>
+					</p>
+					<p>
+						A private key, or a combination of private keys, is necessary to
+						control and dispose of ACEX stored in your digital wallet or vault.
+						Accordingly, loss of requisite private key(s) associated with your
+						digital wallet or vault storing ACEX will result in loss of such
+						ACEX. Moreover, any third party that gains access to such private
+						key(s), including by gaining access to login credentials of a hosted
+						wallet service you use, may be able to misappropriate your ACEX. Any
+						errors or malfunctions caused by or otherwise related to the digital
+						wallet or vault you choose to receive and store ACEX in, including
+						your own failure to properly maintain or use such digital wallet or
+						vault, may also result in the loss of your ACEX. Additionally, your
+						failure to follow precisely the procedures set forth in for buying
+						and receiving Tokens, including, for instance, if you provide the
+						wrong address for the receiving ACEX, or provides an address that is
+						not ERC-20 compatible, may result in the loss of your Tokens.
+					</p>
+					<p>
+						<strong
+							>2. Risks​ ​Associated​ ​with​ ​the​ ​Ethereum​ ​Protocol</strong
+						>
+					</p>
+					<p>
+						Because ACEX and the ACEX SDN. BHD. platform are based on the
+						Ethereum protocol, any malfunction, breakdown or abandonment of the
+						Ethereum protocol may have a material adverse effect on the platform
+						or ACEX. Moreover, advances in cryptography, or technical advances
+						such as the development of quantum computing, could present risks to
+						the ACEX and the platform, including the utility of the ACEX for
+						obtaining services, by rendering ineffective the cryptographic
+						consensus mechanism that underpins the Ethereum protocol.
+					</p>
+					<p><strong>3. Risk​ ​of​ ​Mining​ ​Attacks</strong></p>
+					<p>
+						As with other decentralized cryptographic tokens based on the
+						Ethereum protocol, ACEX are susceptible to attacks by miners in the
+						course of validating ACEX transactions on the Ethereum blockchain,
+						including, but not limited, to double-spend attacks, majority mining
+						power attacks, and selfish-mining attacks. Any successful attacks
+						present a risk to the platform and ACEX, including, but not limited
+						to, accurate execution and recording of transactions involving ACEX.
+					</p>
+					<p>
+						<strong
+							>4. Risk​ ​of​ ​Hacking​ ​and​ ​Security​ ​Weaknesses</strong
+						>
+					</p>
+					<p>
+						Hackers or other malicious groups or organizations may attempt to
+						interfere with the platform or ACEX in a variety of ways, including,
+						but not limited to, malware attacks, denial of service attacks,
+						consensus-based attacks, Sybil attacks, smurfing, and spoofing.
+						Furthermore, because the platform is based on open-source software,
+						there is a risk that a third party or a member of the Company team
+						may intentionally or unintentionally introduce weaknesses into the
+						core infrastructure of the platform, which could negatively affect
+						the platform and ACEX, including the utility of ACEX for obtaining
+						services.
+					</p>
+					<p>
+						<strong>5. Risks​ ​Associated​ ​with​ ​Markets​ ​for​ ​ACEX</strong>
+					</p>
+					<p>
+						If secondary trading of Tokens is facilitated by third party
+						exchanges, such exchanges may be relatively new and subject to
+						little or no regulatory oversight, making them more susceptible to
+						fraud or manipulation. Furthermore, to the extent that third-parties
+						do ascribe an external exchange value to ACEX (e.g., as denominated
+						in a digital or fiat currency), such value may be extremely
+						volatile.
+					</p>
+					<p><strong>6. Risk​ ​of​ ​Uninsured​ ​Losses</strong></p>
+					<p>
+						Unlike bank accounts or accounts at some other financial
+						institutions, ACEX are uninsured unless you specifically obtain
+						private insurance to insure them. Thus, in the event of loss or loss
+						of utility value, there is no public insurer or private insurance
+						arranged by Company, to offer recourse to you.
+					</p>
+					<p>
+						<strong
+							>7. Risks​ ​Associated​ ​with​ ​Uncertain​ ​Regulations​ ​and​
+							​Enforcement​ ​Actions</strong
+						>
+					</p>
+					<p>
+						The regulatory status of ACEX and distributed ledger technology is
+						unclear or unsettled in many jurisdictions. It is difficult to
+						predict how or whether regulatory agencies may apply existing
+						regulation with respect to such technology and its applications,
+						including the ACEX SDN. BHD. platform and ACEX. It is likewise
+						difficult to predict how or whether legislatures or regulatory
+						agencies may implement changes to law and regulation affecting
+						distributed ledger technology and its applications, including the
+						platform and ACEX. Regulatory actions could negatively impact the
+						platform and ACEX in various ways, including, for purposes of
+						illustration only, through a determination that the purchase, sale
+						and delivery of ACEX constitutes unlawful activity or that ACEX are
+						a regulated instrument that require registration or licensing of
+						those instruments or some or all of the parties involved in the
+						purchase, sale and delivery thereof. The Company may cease
+						operations in a jurisdiction in the event that regulatory actions,
+						or changes to law or regulation, make it illegal to operate in such
+						jurisdiction, or commercially undesirable to obtain the necessary
+						regulatory approval(s) to operate in such jurisdiction.
+					</p>
+					<p><strong>8. Risks​ ​Arising​ ​from​ ​Taxation</strong></p>
+					<p>
+						The tax characterization of ACEX is uncertain. You must seek your
+						own tax advice in connection with purchasing ACEX, which may result
+						in adverse tax consequences to you, including withholding taxes,
+						income taxes and tax reporting requirements.
+					</p>
+					<p><strong>9. Risk​ ​of​ ​Competing​ ​platforms</strong></p>
+					<p>
+						It is possible that alternative platforms could be established that
+						utilize the same open source code and protocol underlying the
+						platform and attempt to facilitate services that are materially
+						similar to the ACEX SDN. BHD. services.
+					</p>
+					<p>
+						<strong
+							>10. Risks​ ​Arising​ ​from​ ​Lack​ ​of​ ​Governance​
+							​Rights</strong
+						>
+					</p>
+					<p>
+						Because ACEX confer no governance rights of any kind with respect to
+						the ACEX SDN. BHD. platform or the Company, all decisions involving
+						the Company’s products or services within the platform or the
+						Company itself will be made by the Company at its sole discretion.
+						These decisions could adversely affect the platform and the utility
+						of any ACEX you own, including their utility for obtaining services.
+					</p>
+					<p><strong>11. Unanticipated​ ​Risks</strong></p>
+					<p>
+						Cryptographic tokens such as ACEX are a new and untested technology.
+						In addition to the risks included in this Annex A of these Terms,
+						there are other risks associated with your purchase, possession and
+						use of ACEX, including unanticipated risks. Such risks may further
+						materialize as unanticipated variations or combinations of the risks
+						discussed in this Annex A of these Terms.
+					</p>
+					<h3 style="text-align:center">Further Information</h3>
+					<p style="text-align:center;">
+						For further information regarding the ACEX sale, please contact
+						<a href="mailto:support@acextrade.com">support@acextrade.com.</a>
+						<br />
+						<br />
+						<br />
+						<br />
+					</p>
+					<h1 id="privacy" style="padding-bottom:2%">PRIVACY POLICY</h1>
+					<p>
+						ACEX SDN. BHD., an exempted company registered under the laws of
+						Malaysia (”We”) are committed to protecting and respecting your
+						privacy.
+					</p>
+					<p>
+						This policy (together with our terms of use available at
+						https://acex.trade/tnc/ (“Website”) and any other documents referred
+						to on it) sets out the basis on which any personal data we collect
+						from you, or that you provide to us, will be processed by us. Please
+						read the following carefully to understand our views and practices
+						regarding your personal data and how we will treat it. By visiting
+						the Website you are accepting and consenting to the practices
+						described in this policy.
+					</p>
+					<h3 style="text-align:center">INFORMATION WE COLLECT FROM YOU</h3>
+					<br />
+					<p>We will collect and process the following data about you:</p>
+					<ul>
+						<li>
+							<strong>Information you give us.</strong> This is information
+							about you that you give us by filling in forms on the Website
+							(https://acex.trade) or by corresponding with us by phone, e-mail
+							or otherwise. The information you give us may include your name,
+							address, e-mail address and phone number, financial and credit
+							card information, personal description and photograph
+						</li>
+						<li>
+							<strong>Information we collect about you.</strong> With regard to
+							each of your visits to our site we will automatically collect the
+							following information:
+							<ul>
+								<li>
+									technical information, including the Internet protocol (IP)
+									address used to connect your computer to the Internet, your
+									login information, browser type and version, time zone
+									setting, browser plug-in types and versions, operating system
+									and platform;
+								</li>
+								<li>
+									information about your visit, including the full Uniform
+									Resource Locators (URL), clickstream to, through and from our
+									site (including date and time), products you viewed or
+									searched for, page response times, download errors, length of
+									visits to certain pages, page interaction information (such as
+									scrolling, clicks, and mouse-overs), methods used to browse
+									away from the page, and any phone number used to call our
+									customer service number.
+								</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Information we receive from other sources.</strong> We are
+							working closely with third parties (including, for example,
+							business partners, sub-contractors in technical, payment and
+							delivery services, advertising networks, analytics providers,
+							search information providers, credit reference agencies) who may
+							provide us information about you.
+						</li>
+					</ul>
+					<h3 style="text-align:center">COOKIES</h3>
+					<br />
+					<p>
+						Our website uses cookies to distinguish you from other users of our
+						website. This helps us to provide you with a good experience when
+						you browse our website and also allows us to improve our site.
+					</p>
+					<h3 style="text-align:center">USES MADE OF THE INFORMATION</h3>
+					<br />
+					<p>We use information held about you in the following ways:</p>
+					<ul>
+						<li>
+							<strong>Information you give to us.</strong> We will use this
+							information:
+							<ul>
+								<li>
+									to carry out our obligations arising from any contracts
+									entered into between you and us and to provide you with the
+									information, products and services that you request from us;
+								</li>
+								<li>to comply with applicable laws and legislation;</li>
+								<li>
+									to provide you with information about other goods and services
+									we offer that are similar to those that you have already
+									purchased or enquired about;
+								</li>
+								<li>to notify you about changes to our service;</li>
+								<li>
+									to ensure that content from our site is presented in the most
+									effective manner for you and for your computer.
+								</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Information we collect about you.</strong> We will use
+							this information:
+							<ul>
+								<li>
+									to administer our site and for internal operations, including
+									troubleshooting, data analysis, testing, research, statistical
+									and survey purposes;
+								</li>
+								<li>to comply with applicable laws and legislation;</li>
+								<li>
+									to improve our site to ensure that content is presented in the
+									most effective manner for you and for your computer;
+								</li>
+								<li>
+									to allow you to participate in interactive features of our
+									service, when you choose to do so;
+								</li>
+								<li>
+									as part of our efforts to keep our site safe and secure;
+								</li>
+								<li>
+									to measure or understand the effectiveness of advertising we
+									serve to you and others, and to deliver relevant advertising
+									to you;
+								</li>
+								<li>
+									to make suggestions and recommendations to you and other users
+									of our site about goods or services that may interest you or
+									them.
+								</li>
+							</ul>
+						</li>
+						<li>
+							<strong>Information we receive from other sources.</strong> We
+							will combine this information with information you give to us and
+							information we collect about you. We will use this information and
+							the combined information for the purposes set out above (depending
+							on the types of information we receive).
+						</li>
+					</ul>
+					<h3 style="text-align:center">DISCLOSURE OF YOUR INFORMATION</h3>
+					<br />
+					<p>
+						You agree that we have the right to share your personal information
+						with:
+					</p>
+					<ul>
+						<li>
+							Any member of our group, which means respective past, present and
+							future employees, officers, directors, contractors, consultants,
+							equity holders, suppliers, vendors, service providers, parent
+							companies, subsidiaries, affiliates, agents, representatives,
+							predecessors, successors, and assigns (“ACEX SDN. BHD. Team”).
+						</li>
+						<li>
+							Selected third parties including business partners, suppliers, and
+							sub-contractors for the performance of any contract we enter into
+							with them or you;
+						</li>
+					</ul>
+					<p>We will disclose your personal information to third parties:</p>
+					<ul>
+						<li>
+							In the event that we sell or buy any business or assets, in which
+							case we will disclose your personal data to the prospective seller
+							or buyer of such business or assets.
+						</li>
+						<li>
+							If ACEX SDN. BHD. or substantially all of its assets are acquired
+							by a third party, in which case personal data held by it about its
+							customers will be one of the transferred assets.
+						</li>
+						<li>
+							If we are under a duty to disclose or share your personal data in
+							order to comply with any legal obligation, or in order to enforce
+							or apply our terms of use of the Website and other agreements; or
+							to protect the rights, property, or safety of ACEX SDN. BHD. or
+							ACEX SDN. BHD. Team, our customers, or others. This includes
+							exchanging information with other companies and organisations for
+							the purposes of fraud protection and credit risk reduction.
+						</li>
+					</ul>
+					<p>
+						Unfortunately, the transmission of information via the internet is
+						not completely secure. Although we will do our best to protect your
+						personal data, we cannot guarantee the security of your data
+						transmitted to our site; any transmission is at your own risk. Once
+						we have received your information, we will use strict procedures and
+						security features to try to prevent unauthorised access.
+					</p>
+					<h3 style="text-align:center">YOUR RIGHTS</h3>
+					<br />
+					<p>
+						You have the right to ask us not to process your personal data for
+						marketing purposes. You can also exercise the right at any time by
+						contacting us at support@acextrade.com.
+					</p>
+					<p>
+						Our site may, from time to time, contain links to and from the
+						websites of our partner networks, advertisers and affiliates. If you
+						follow a link to any of these websites, please note that these
+						websites have their own privacy policies and that we do not accept
+						any responsibility or liability for these policies. Please check
+						these policies before you submit any personal data to these
+						websites.
+					</p>
+					<h3 style="text-align:center">CHANGES TO OUR PRIVACY POLICY</h3>
+					<br />
+					<p>
+						Any changes we make to our privacy policy in the future will be
+						posted on this page. Please check back frequently to see any updates
+						or changes to our privacy policy.
+					</p>
+					<h3 style="text-align:center">CONTACT</h3>
+					<br />
+					<p>
+						Questions, comments and requests regarding this privacy policy are
+						welcomed and should be addressed to
+						<a href="mailto:support@acextrade.com">support@acextrade.com.</a>
+					</p>
+					<h1 style="text-align:center">ACEX SALE APPLICATION</h1>
+					<div style="text-align: left">
+						<ol>
+							<li>
+								<strong>Confidentiality</strong>
+								<ol>
+									<li>
+										I will keep confidential and will not disclose to third
+										parties (other than my tax or other financial advisors under
+										like conditions of confidentiality) any and all information
+										regarding ACEX SDN. BHD., an exempted company, registered
+										under the laws of Malaysia, (“ACEX SDN. BHD.”) or (“Smart
+										Contract Supporter”) provided, however, that this
+										confidential treatment shall not apply to the tax treatment
+										and tax structure of an acquisition of ACEX tokens and all
+										materials of any kind (including opinions or other tax
+										analyses) that are provided to me relating to such tax
+										treatment and tax structure.
+									</li>
+								</ol>
+							</li>
+							<li>
+								<strong>Authorization and Indemnification</strong>
+								<ol>
+									<li>
+										I hereby authorize and instruct each of ACEX SDN. BHD. and
+										Smart Contract Supporter to accept and execute any
+										instructions given in relation to any ACEX acquired for by
+										me. I agree to keep each of them indemnified against any
+										loss of any nature whatsoever arising to any of them as a
+										result of any of them acting upon such instructions and they
+										may each rely conclusively upon and shall incur no liability
+										in respect of any action taken upon any notice, consent,
+										request, instructions or other instrument believed in good
+										faith to be genuine or to be signed by properly authorized
+										persons.
+									</li>
+									<li>
+										I indemnify and hold harmless each of ACEX SDN. BHD., Smart
+										Contract Supporter against any loss of any nature whatsoever
+										arising to any of them as a result of any of them acting
+										upon instructions given in relation to any ACEX token
+										purchased by me.
+									</li>
+									<li>
+										I indemnify and hold harmless ACEX SDN. BHD. and the Smart
+										Contract Supporter and their respective directors, members,
+										partners, shareholders, officers, employees, agents, and
+										affiliates (collectively, the
+										<strong>Indemnified Parties</strong>) from and against any
+										and all losses, liabilities, damages, penalties, costs, fees
+										and expenses (including legal fees and disbursements) that
+										may result, directly or indirectly, from any inaccuracy in
+										or breach of any representation, warranty, covenant or
+										Application set forth in this Application or in any other
+										document I deliver to ACEX SDN. BHD. and the Smart Contract
+										Supporter, or from my assertion of my proper authorization
+										to act.
+									</li>
+									<li>
+										I indemnify and hold harmless ACEX SDN. BHD. and the Smart
+										Contract Supporter and each of its agents and delegates and
+										each of their respective principals, members, managers,
+										officers, directors, stockholders, employees, and agents
+										(each a FATCA Indemnified Party) and hold them harmless from
+										and against any withholding and any FATCA (or other
+										withholding or information reporting) related liability,
+										action, proceeding, claim, demand, costs, damages, expenses
+										(including legal expenses) penalties or taxes whatsoever
+										which a FATCA Indemnified Party may suffer or incur as a
+										result of any action or inaction on my part (or on the part
+										of any person related to me). This indemnification shall
+										survive my death or the disposition of my ACEX token(s).
+									</li>
+									<li>
+										I indemnify and hold harmless the ACEX SDN. BHD. and the
+										Smart Contract Supporter against any loss arising as a
+										result of a delay or failure to process this application or
+										a redemption request if I have failed to provide such
+										evidence as is required by such parties to satisfy
+										applicable anti-money laundering rules.
+									</li>
+									<li>
+										I understand, acknowledge and agree that:
+										<ol>
+											<li type="a">
+												any Indemnified Party, FATCA Indemnified Party or other
+												identifiable person who is not a party to this
+												Application may enforce any rights granted to it
+												pursuant to this Application in its own right as if it
+												was a party to this Application. Except as expressly
+												provided in the foregoing sentence, a person who is not
+												a party to this Application shall not have any rights
+												under the Contracts (Rights of Third Parties) Law, 2014
+												(as amended) to enforce any term of this Application.
+												Notwithstanding any term of this Application, the
+												consent of or notice to any person who is not a party to
+												this Application shall not be required for any
+												termination, rescission or Application to any variation,
+												waiver, assignment, novation, release or settlement
+												under this Application at any time;
+											</li>
+											<li type="a">
+												ACEX SDN. BHD. and the Smart Contract Supporter may rely
+												conclusively upon and shall incur no liability in
+												respect of any action taken upon any notice, consent,
+												request, instructions or other instrument believed in
+												good faith to be genuine, howsoever given; and
+											</li>
+											<li type="a">
+												ACEX SDN. BHD. and the Smart Contract Supporter will
+												protect and indemnify its agents, delegates, service
+												providers, officers, directors and other representatives
+												against liability.
+											</li>
+										</ol>
+									</li>
+								</ol>
+							</li>
+							<li>
+								<strong>Acknowledgments</strong>
+								<p>I understand, acknowledge and agree as follows:</p>
+								<ol>
+									<p>Interpretation</p>
+									<li>
+										Terms not defined herein will be as defined in the White
+										Paper and Terms and Conditions (collectively, the Token Sale
+										Terms) located at
+										<a href="https://acex.trade">https://acex.trade</a> (the
+										Website).
+									</li>
+									<li>
+										References to Token Sale Terms and the Articles are to those
+										documents as they may be amended from time to time.
+									</li>
+									<br />
+									<p>White Paper and/or Terms and Conditions</p>
+									<li>
+										I have received and reviewed: (i) the Token Sale Terms and
+										have taken appropriate legal and tax advice with respect to
+										the same.
+									</li>
+									<li>
+										I understand that ACEX tokens do not represent nor do they
+										entitle the holder, in any way whatever, to a:
+										<ol>
+											<li type="a">Depository Account;</li>
+											<li type="a">Custodial Account;</li>
+											<li type="a">Cash Value Insurance Contract;</li>
+											<li type="a">Annuity Contract; or</li>
+											<li type="a">
+												Equity and/or Debt Interest in ACEX SDN. BHD.;
+											</li>
+											<li type="a">
+												as such terms are defined in the Tax Information
+												Authority (International Tax Compliance) (Common
+												Reporting Standard) Regulations, 2015, BTLG1-8265751-5.
+											</li>
+										</ol>
+									</li>
+									<br />
+									<p>Terms of Tokens</p>
+									<li>
+										ACEX tokens are held subject to the terms and conditions of
+										the Token Sale Terms and this Application (this
+										<strong>Application</strong>).
+									</li>
+									<li>
+										No certificate will be issued to in relation to my ACEX
+										tokens and my personal ACEX token holding will not be
+										reflected, recognized or recorded in any account or ledger
+										maintained by ACEX SDN. BHD..
+									</li>
+									<br />
+									<p>Acquisition and Reversion</p>
+									<li>
+										I understand that Acquisitions and Reversions will be
+										processed by ACEX SDN. BHD. as per its Token Sale Terms. For
+										the purposes of this Application, a "Reversion" means a
+										transaction directly between ACEX SDN. BHD. and you whereby
+										ACEX token registered on your public key revert back to a
+										public key owned or controlled by ACEX SDN. BHD. or its
+										affiliates in accordance with the Terms and Conditions.
+									</li>
+									<li>
+										I understand that, prior to any purchase of ACEX tokens, I
+										must pay cash or Digital Currency (Contributed Amount) to
+										ACEX SDN. BHD. in accordance with the Token Sale Terms to
+										the cryptocurrency address indicated by ACEX SDN. BHD..
+									</li>
+									<li>
+										Upon acceptance of my request to buy ACEX tokens, the
+										Contributed Amount will be converted for ACEX tokens in
+										accordance with the Token Sale Terms.
+									</li>
+									<li>
+										Any Reversion proceeds realized and due to me following a
+										Reversion of ACEX tokens held by me at the point of
+										Reversion ( <strong>Reversion Proceeds</strong>) in
+										accordance with Token Sale Terms shall be paid to me as soon
+										as practicable in the manner set forth in the Token Sale
+										Terms. Contributed Amount or Reversion Proceeds shall be
+										transferred and/or reflected on the same Digital Currency
+										address from which the Contributed Amount was originally
+										remitted unless such account or Digital Currency address has
+										been changed and notified to ACEX SDN. BHD. and all relevant
+										anti-money laundering and other verification procedures have
+										been complied with prior to withdrawal. No Contributed
+										Amount or Reversion Proceeds shall be paid to any Third
+										Party account in respect of ACEX tokens held by me and
+										reverted.
+									</li>
+									<li>
+										I acknowledge and understand that, for so long as any
+										Reversion Proceeds are held as assets of ACEX SDN. BHD., I
+										shall accept the risk that a creditor of ACEX SDN. BHD. may
+										seek to and may be successful in securing discharge of a
+										liability of ACEX SDN. BHD. out of ACEX SDN. BHD. assets,
+										thereby materially adversely affecting the value of my
+										Contributed Amount and/or Reversion Proceeds and potentially
+										reducing one or both to zero. Furthermore, I acknowledge
+										that any interest accruing with respect to such Contributed
+										Amount and/or Reversion Proceeds held in this manner shall
+										be for the benefit of ACEX SDN. BHD. only.
+									</li>
+									<br />
+									<p>Anti-Money Laundering</p>
+									<li>
+										ACEX SDN. BHD. (and/or its delegate) may request such
+										evidence as is necessary to verify the identity and source
+										of funds of a prospective token purchaser and to confirm the
+										AML status of any redeeming ACEX token holder. ACEX SDN.
+										BHD. shall not accept or repay any Contributed Amount and/or
+										application for ACEX tokens and shall not pay any Reversion
+										Proceeds until all information required for verification
+										purposes has been provided.
+									</li>
+									<li>
+										If, as a result of any information or other matter which
+										comes to his attention, any person resident in Malaysia
+										knows or suspects or has reasonable grounds for knowing or
+										suspecting that another person is engaged in criminal
+										conduct or is involved with terrorism or terrorist property
+										and the information for that knowledge or suspicion came to
+										their attention in the course of business in the regulated
+										sector, or other trade, profession, business or employment,
+										the person will be required to report such knowledge or
+										suspicion to: (i) the Financial Reporting Authority of
+										Malaysia, pursuant to the Proceeds of Crime Law (Revised) of
+										Malaysia if the disclosure relates to criminal conduct or
+										money laundering; or (ii) a police constable not below the
+										rank of inspector, or the Financial Reporting Authority,
+										pursuant to the Terrorism Law (Revised) of Malaysia, if the
+										disclosure relates to involvement with terrorism or
+										terrorist financing and property. Such a report shall not be
+										treated as a breach of confidence or of any restriction upon
+										the disclosure of information imposed by any enactment or
+										otherwise.
+									</li>
+									<li>
+										ACEX SDN. BHD. prohibits acceptance of funds by any persons
+										or entities that are acting, directly or indirectly: (i) in
+										contravention of any U.S. or international laws and
+										regulations, including anti-money laundering regulations or
+										conventions; (ii) on behalf of terrorists or terrorist
+										organizations, including those persons or entities that are
+										included on the List of Specially Designated Nationals and
+										Blocked Persons maintained by the U.S. Treasury Department’s
+										Office of Foreign Assets Control [1] (“OFAC”), as such list
+										may be amended from time to time; (iii) for a senior foreign
+										political [2] figure, any member of a senior foreign
+										political figure’s immediate family or any close associate
+										of a senior foreign political, unless the ACEX SDN. BHD.,
+										after being specifically notified in writing that the
+										Purchaser is such a person, conducts further due diligence,
+										and determines that such acquisition shall be permitted; or
+										(iv) for a foreign shell bank [3] (such persons or entities
+										in (i) – (iv) are collectively referred to as “Prohibited
+										Persons”).
+									</li>
+									<br />
+									<p>Tax Information Exchange Obligations</p>
+									<li>
+										I acknowledge that ACEX SDN. BHD. may be subject to certain
+										obligations (the
+										<strong>Tax Information Exchange Obligations</strong>) to
+										gather and disclose to the competent authorities information
+										relating to purchasers of ACEX token under: (i) the United
+										States Foreign Account Tax Compliance Act provisions enacted
+										under the United States Hiring Incentives to Restore
+										Employment Act and any guidance, or regulations relating
+										thereto ( <strong>FATCA</strong>); (ii) any other
+										legislation, regulations or guidance enacted in any
+										jurisdiction which seeks to implement similar tax reporting,
+										tax information exchange, reporting and/or withholding tax
+										regimes (including the OECD Common Reporting Standard on the
+										automatic exchange of financial account information); (iii)
+										any intergovernmental Application between Malaysia (or
+										Malaysia government body) and the U.S., the U.K. or any
+										other jurisdiction (including any government bodies in any
+										other such jurisdiction), entered into, in order to comply
+										with, facilitate, supplement or implement the legislation,
+										regulations or guidance described in (i) and (ii), including
+										the OECD Multilateral Competent Authority Application; and
+										(iv) any legislation, regulations or guidance in Malaysia
+										that give effect to the foregoing.
+									</li>
+									<li>
+										I shall execute properly and provide to ACEX SDN. BHD. in a
+										timely manner any documentation or other information that
+										ACEX SDN. BHD. or its agents may request in writing from
+										time to time in connection with the Tax Information
+										Obligations. I waive any provision under the laws and
+										regulations of any jurisdiction that would, absent a waiver,
+										prevent or inhibit ACEX SDN. BHD.'s compliance with
+										applicable law as described in this paragraph, including but
+										not limited to by preventing either (i) the Purchaser from
+										providing any requested information or documentation, or
+										(ii) the disclosure by ACEX SDN. BHD. and its agents of the
+										provided information or documentation to applicable
+										regulatory authorities.
+									</li>
+									<li>
+										Without limitation, I shall provide any documentation or
+										other information regarding myself and my beneficial owners
+										requested by ACEX SDN. BHD. or its agents in connection with
+										the Tax Information Exchange Obligations.
+									</li>
+									<li>
+										If I provide information and/or documentation that is in
+										anyway misleading, or I fail to provide ACEX SDN. BHD. or
+										its agents or delegates with the information and
+										documentation that has been requested, (whether or not such
+										action or inaction leads to compliance failures by ACEX SDN.
+										BHD., or a risk of ACEX SDN. BHD. or its token holders being
+										subject to withholding tax or other penalties), ACEX SDN.
+										BHD. reserves the right:
+										<ol>
+											<li type="a">
+												to take any action and/or pursue all remedies at ACEX
+												SDN. BHD.'s disposal including, without limitation,
+												compulsory Reversion of my ACEX tokens in full or in
+												part; and
+											</li>
+											<li type="a">
+												to hold back from any Reversion proceeds in respect of
+												the Tokens so reverted, any liabilities, costs, expenses
+												or taxes arising (directly or indirectly) from such
+												action or inaction.
+											</li>
+											<br />
+											<p>
+												Further, I shall have no claim against ACEX SDN. BHD. or
+												Smart Contract Supporter, or either of their agents or
+												delegates, for any form of damages or liability as a
+												result of actions taken or remedies pursued by or on
+												behalf of ACEX SDN. BHD. or Smart Contract Supporter in
+												order to comply with the Tax Information Exchange
+												Obligations.
+											</p>
+										</ol>
+									</li>
+									<br />
+									<p>
+										Electronic Delivery of Reports and Other Communications.
+									</p>
+									<li>
+										I accept that such electronic communications are not secure
+										and may contain computer viruses or other defects, may not
+										be accurately replicated on other systems, or may be
+										intercepted, deleted or interfered with or without the
+										knowledge of the sender or the intended recipient. ACEX SDN.
+										BHD. and Smart Contract Supporter make no warranties in
+										relation to these matters. Each of ACEX SDN. BHD. and Smart
+										Contract Supporter reserve the right to intercept, monitor,
+										and retain e-mail messages to and from their systems as
+										permitted by applicable law. If I have any doubts about the
+										authenticity of an electronic communication purportedly sent
+										by ACEX SDN. BHD. or Smart Contract Supporter I am required
+										to contact the purported sender immediately. ACEX SDN.
+										BHD.'s acceptance of my ACEX token purchase is not
+										conditioned on my giving consent to electronic delivery of
+										ACEX SDN. BHD. related information. If I do not have
+										reliable access to the internet or e-mail, I shall not
+										acquire Tokens. I shall not be entitled to receive any
+										information from ACEX SDN. BHD. in paper format.
+									</li>
+								</ol>
+							</li>
+							<br />
+							<li>
+								<strong>Representations and Warranties</strong>
+								<p>
+									In consideration of the ACEX SDN. BHD.'s acceptance of my
+									offer to purchase ACEX tokens and recognizing its reliance
+									thereon, I agree, represent, and warrant to ACEX SDN. BHD.
+									that:
+								</p>
+								<ol>
+									<li>I am fully in compliance with the Token Sale Terms.</li>
+									<li>
+										I am acquiring the ACEX tokens solely for my own account and
+										not as nominee or custodian for another person or entity.
+									</li>
+									<li>
+										I am not:
+										<ol>
+											<li type="a">a “U.S. Person” [4]</li>
+											<li type="a">
+												a member of the public in Malaysia or a resident or
+												citizen of the Republic of South Africa
+											</li>
+											<li type="a">
+												acquiring ACEX tokens as nominee or custodian for
+												another person or entity [5]
+											</li>
+											<li type="a">
+												executing this Application within the United States; or
+											</li>
+											<li type="a">
+												acting on behalf of a trust which has any beneficiaries
+												or trustees that are U.S. Persons
+											</li>
+										</ol>
+									</li>
+								</ol>
+								4.4 I did not acquire and will not transfer any ACEX tokens
+								within the United States of America, its territories or
+								possessions (hereinafter collectively referred to as the “United
+								States”). <br />
+								4.5 I did not engage (except as specifically authorized by the
+								ACEX SDN. BHD.) and will not engage in any activity relating to
+								the sale of ACEXtokens in the United States; <br />
+								4.6 I will not transfer directly or indirectly any of my ACEX
+								tokens or any interest therein (including without limitation any
+								right to receive dividends or other distributions) without the
+								consent of the directors of the ACEX SDN. BHD. and further, I
+								shall not transfer directly or indirectly any of my ACEX tokens
+								or any interest therein (including without limitation any right
+								to receive dividends or other distributions) to a U.S. Person or
+								to any other person or entity unless the proposed transferee has
+								made the same representations and warranties as set out herein.
+								<br />
+								4.7 I did not acquire and will not transfer any ACEX tokens
+								within [the Republic South Africa, its territories or
+								possessions (hereinafter collectively referred to as the
+								“Restricted Territory”). <br />
+								4.8 I did not engage (except as specifically authorized by the
+								ACEX SDN. BHD.) and will not engage in any activity relating to
+								the sale of the ACEX tokens in the Restricted Territory; <br />
+								<br />No solicitation <br />
+								4.9 I am not aware of and am in no way relying on, and did not
+								become aware of the sale of ACEX tokens through or as a result
+								of, from or in any of the United StatesMalaysia or Republic of
+								South Africa: any form of general solicitation or general
+								advertising including, without limitation, any article, notice,
+								advertisement or other communication published in any newspaper,
+								magazine or similar media or broadcast over television or radio,
+								or electronic mail over the internet, in connection with the
+								offering and sale of ACEX tokens and I am not purchasing ACEX
+								tokens and did not become aware of the offering of ACEX tokens
+								through or as a result of, in any of the United StatesMalaysia
+								or Republic of South Africa, any seminar or meeting to which I
+								was invited by, or any solicitation of a subscription by, a
+								person not previously known to me in connection with investments
+								in securities generally. <br />
+								<br />Capacity and experience <br />
+								4.10 I am responsible for the decision to acquire ACEX tokens
+								and I have legal competence and capacity to execute this
+								Application. <br />
+								4.11 I have the knowledge, expertise, and experience in
+								financial matters to evaluate the risks of acquiring ACEX token,
+								I am aware of the risks inherent in acquiring and the method by
+								which the assets of the ACEX SDN. BHD. are held and/or traded
+								and I can bear the risk of loss of my entire token acquisition.
+								<br />
+								4.12 I am qualified and authorized to make such acquisition
+								decision and, to the extent deemed necessary, I have consulted
+								my own advisors and legal counsel regarding acquisition of ACEX
+								tokens. In making the decision to acquire ACEX tokens, I have
+								not relied on any advice or recommendation from the ACEX SDN.
+								BHD., Smart Contract Supporter nor any placement agent
+								associated with the ACEX SDN. BHD., or any of their affiliates.
+								<br />
+								4.13 To the extent that I am acting on behalf of an entity, I
+								have the full power and authority under such entity's governing
+								instruments to do so and that entity has the full power and
+								authority under its governing instruments to acquire ACEX
+								tokens. <br />
+								<br />Binding Application and extent of representations and
+								warranties <br />
+								4.14 This Application constitutes a valid and binding
+								Application and is enforceable against me in accordance with its
+								terms. <br />
+								4.15 I have read and understand the ACEX SDN. BHD.'s privacy
+								policy. <br />
+								4.16 (i) I am not, nor is any person or entity controlling,
+								controlled by or under common control with me, a Prohibited
+								Person, (ii) the funds paid for ACEX tokens on my own behalf of
+								any of my beneficial owner(s), were not and are not derived from
+								activities that may contravene any U.S. or international laws
+								and regulations, including anti-money laundering laws and
+								regulations and (iii) to the extent I have any beneficial
+								owners, (A) I have carried out thorough due diligence to
+								establish the identities of such beneficial owners, (B) based on
+								such due diligence, the I reasonably believe that no such
+								beneficial owners are Prohibited Persons, (C) I hold the
+								evidence of such identities and status and will maintain all
+								such evidence for at least five years from the date of my
+								complete redemption from ACEX SDN. BHD., and (D) I will make
+								available such information and any additional information that
+								ACEX SDN. BHD. may require upon request in accordance with
+								applicable regulations. If any of the representations,
+								warranties or covenants in this section cease to be true or if
+								ACEX SDN. BHD. no longer reasonably believes that it has
+								satisfactory evidence as to their truth, notwithstanding any
+								other agreement to the contrary, ACEX SDN. BHD. may, in
+								accordance with applicable regulations, be obligated to freeze
+								my token rights, either by prohibiting additional acquisition,
+								declining or suspending any redemption requests, or my ACEX may
+								immediately be involuntarily redeemed by ACEX SDN. BHD., and
+								ACEX SDN. BHD. may also be required to report such action and to
+								disclose my identity to OFAC or other authority. In the event
+								that ACEX SDN. BHD. is required to take any of the foregoing
+								actions, I understand and agree that it shall have no claim
+								against ACEX SDN. BHD. and its respective affiliates, directors,
+								members, partners, shareholders, officers, employees and agents
+								for any form of damages as a result of any of the aforementioned
+								actions. <br />
+								4.17 Having reviewed the Token Sale Terms, I hereby agree with
+								ACEX SDN. BHD., subject to ACEX SDN. BHD.'s provisional
+								acceptance, to acquire for as many of the ACEX tokens as the
+								Contributed Amount shall purchase. <br />
+							</li>
+						</ol>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
