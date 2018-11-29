@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 	styleUrls: ['./referrals.component.scss']
 })
 export class ReferralsComponent implements OnInit {
+	p: number = 1;
 	txns: Txn[] = [];
 	refTree = [];
 	level: number;

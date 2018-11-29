@@ -11,11 +11,12 @@
 								<p class="body-title referral">REFERRAL SCHEME</p>
 								<hr class="acex-hr" />
 								<p class="body-desc">
-									Current Rank: {{ currentRank[level] }}
+									Current Rank:   <strong>{{ currentRank[level] }}</strong>
 									<br>
-									Referral Bonus: Locked- {{ locked }} Unlocked- {{ unlocked }}
+									Referral Bonus: <strong>Locked- {{ locked | number : '1.0-2' }} USD 
+										<br>Unlocked- {{ unlocked | number : '1.0-2'}} USD</strong>
 									<br>
-									Outreach: {{ totalAmount }}
+									Outreach: <strong>{{ totalAmount }} USD </strong>
 								</p>
 
 								<div *ngIf="refId" class="md-form col col-md-12">
@@ -71,7 +72,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr *ngFor="let txn of txns">
+											<tr *ngFor="let txn of txns  | paginate: { itemsPerPage: 5, currentPage: p }">
 												<td>
 													{{ txn.createdAt | date: 'yyyy-MM-dd HH:mm' }}
 												</td>
@@ -79,6 +80,7 @@
 												<td>{{ currencyType[txn.currency] }}</td>
 												<td>{{ txn.value ? prefixNosByFix(txn.value) : '0'}}</td>
 											</tr>
+											<pagination-controls responsive="true" directionLinks="true" (pageChange)="p = $event"> </pagination-controls>
 										</tbody>
 									</table>
 								</div>

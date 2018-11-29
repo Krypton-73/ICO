@@ -40,9 +40,16 @@
           <label for="to_address" class="">Destination Address {{ to_address }}</label>
         </div>
         <div class="md-form">
-          <input  mdbInputDirective type="number" id="amount" formControlName="amount" class="form-control" required>
-          <label for="amount" class="">Amount {{ amount }} </label>
+          <!-- <input  mdbInputDirective type="number" id="amount" formControlName="amount" class="form-control" required> -->
+          <label for="amount" class="">Amount </label>
+          <input mdbInputDirective class="form-control" (input)="amountOfCurrency($event.target.value)" type="number" id="amount"
+            formControlName="amount" [successMessage]="' '" [errorMessage]="'Invalid Input'"/>
         </div>
+        <div>
+            <p><em>Amount in USD: {{ this.amountUSD | number: '1.0-2' }}$</em></p>
+            <p><em>Max Currency that can be withdawn: {{ this.currencyBalance | number: '1.0-8'}} </em></p>
+            <p><em>*Mininum Withdrawal 0.001$.</em></p>
+          </div>
       </div>
       <div class="modal-footer">
         <div class="text-center">

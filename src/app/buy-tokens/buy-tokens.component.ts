@@ -114,7 +114,6 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
         break;
     }
     this.maxAcexTokens = Math.floor(this.balanceUsd / 0.1);
-    console.log(this.balanceUsd, this.maxAcexTokens);
   }
 
   amountOfCurrency(amount: number) {
@@ -132,7 +131,6 @@ export class BuyTokensComponent implements OnInit, OnDestroy {
         break;
     }
     this.amountOfCurrencyReq = valueUsd / rateOfPurchase;
-    console.log(this.amountOfCurrencyReq);
   }
 
   buyAcexTokens() {

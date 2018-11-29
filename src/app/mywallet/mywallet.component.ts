@@ -86,6 +86,7 @@ export class MywalletComponent implements OnInit {
     this.dataService.currentBalance.subscribe(balance => {
       this.balance = balance;
     });
+    // console.log(this.balance);
   }
 
   floatToFixed(no: any) {

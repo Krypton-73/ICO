@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from '@app/services/data.service';
+import { Balance } from '../_models/balance';
+import { Rate } from '../_models/rate';
 
 @Component({
   selector: 'app-modal',
@@ -18,9 +21,13 @@ export class ModalComponent implements OnInit {
   data: any;
   error: any;
   currency: string;
+  balance: Balance;
+  rate: Rate;
   address: string;
   to_address: string;
   amount: number;
+  amountUSD: number;
+  currencyBalance: number;
   QRaddress = '';
   currencyType: any = {
     btc: 'BTC',
@@ -35,18 +42,40 @@ export class ModalComponent implements OnInit {
     public toastr: ToastrService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dataService: DataService
     ) {}
 
   ngOnInit() {
     this.withdrawForm = this.formBuilder.group({
-      amount: ['', Validators.required],
+      amount: [0.001, [Validators.required,  Validators.min(0.001), Validators.pattern]],
       to_address: ['', Validators.required]
     });
+
+    this.dataService.currentBalance.subscribe(balance => {
+      this.balance = balance;
+    });
+
+    this.dataService.currentRate.subscribe(
+      rate => {
+        this.rate = rate;
+      });
   }
 
   get f() {
     return this.withdrawForm.controls;
+  }
+
+  prefixNosByFix(no: any) {
+    try {
+      if (no !== 0.001) {
+        return Number.parseFloat(no).toFixed(2);
+      } else {
+        return 0.001;
+      }
+    } catch (e) {
+      return 0.001;
+    }
   }
 
 
@@ -93,7 +122,6 @@ export class ModalComponent implements OnInit {
         }else
         {
           this.toastr.error(this.error.error.msg);
-          console.log('yo', this.error.error.msg);
         }
       }
     );
@@ -101,6 +129,28 @@ export class ModalComponent implements OnInit {
     }
   }
 
+  amountOfCurrency(amount: number) {
+    let rateOfPurchase: number;
+    let currencyBalance: number;
+    switch (this.currency) {
+      case 'btc':
+        rateOfPurchase = this.rate.btc;
+        currencyBalance = this.balance.btc;
+        break;
+      case 'eth':
+        rateOfPurchase = this.rate.eth;
+        currencyBalance = this.balance.eth;
+        break;
+      case 'ltc':
+        rateOfPurchase = this.rate.ltc;
+        currencyBalance = this.balance.ltc;
+        break;
+    }
+    this.amountUSD = amount * rateOfPurchase;
+    this.currencyBalance = currencyBalance;
+  }
+
+  
   depositClip() {
     this.toastr.info('Copied to Clipboard');
   }
