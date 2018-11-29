@@ -46,8 +46,8 @@
             formControlName="amount" [successMessage]="' '" [errorMessage]="'Invalid Input'"/>
         </div>
         <div>
-            <p><em>Amount in USD: {{ this.amountUSD | number: '1.0-2' }}$</em></p>
-            <p><em>Max Currency that can be withdawn: {{ this.currencyBalance | number: '1.0-8'}} </em></p>
+            <p><em>Amount in USD: {{ this.amountUSD | number: '0.001-2' }}$</em></p>
+            <p><em>Max Currency that can be withdawn: {{ this.currencyBalance | number: '1.0-8'}} {{ currencyType[currency] | uppercase }} </em></p>
             <p><em>*Mininum Withdrawal 0.001$.</em></p>
           </div>
       </div>
