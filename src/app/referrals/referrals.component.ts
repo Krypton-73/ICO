@@ -50,12 +50,12 @@ export class ReferralsComponent implements OnInit {
 		private toastr: ToastrService,
 		private router: Router
 	) {
-		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
-		this.refId = this.yolo.msg.user_id;
-		if (sessionStorage.getItem('graphData')) {
-		    let	graphTree = JSON.parse(sessionStorage.getItem('graphData'));
-			this.refTree = graphTree.graph_data;
-		}
+		// this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+		// this.refId = this.yolo.msg.user_id;
+		// if (sessionStorage.getItem('graphData')) {
+		//     let	graphTree = JSON.parse(sessionStorage.getItem('graphData'));
+		// 	this.refTree = graphTree.graph_data;
+		// }
 	}
 
 	ngOnInit() {
@@ -76,6 +76,14 @@ export class ReferralsComponent implements OnInit {
 		// wrapper.draw(chartData);
 		this.getTxns();
 		this.get_refTree();
+
+		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+		this.refId = this.yolo.msg.user_id;
+		if (sessionStorage.getItem('graphData')) {
+		    let	graphTree = JSON.parse(sessionStorage.getItem('graphData'));
+			this.refTree = graphTree.graph_data;
+		}
+
 
 		this.userService
 			.get_refTree()
