@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
 import { LoaderService } from '../layouts/loading/loading.service';
-
+import { UserService } from '../services/user.service';
 import { BuyTokensComponent } from '../buy-tokens/buy-tokens.component';
 import BigNumber from 'bignumber.js';
 import { Balance } from '../_models/balance';
@@ -16,10 +16,14 @@ import { DataService } from '../services/data.service';
 export class DashboardComponent implements OnInit {
   data: any;
   balance: Balance;
+  
 
   @ViewChild('buyAcex') buyAcex: BuyTokensComponent;
 
-  constructor(public dataService: DataService) {}
+  constructor(
+    public dataService: DataService,
+    public userService: UserService
+    ) {}
 
   ngOnInit() {
     this.dataService.currentBalance.subscribe(balance => {
@@ -71,4 +75,29 @@ export class DashboardComponent implements OnInit {
   recievedMessage($event) {
     console.log($event);
   }
+
+  get_refTree() {
+		if (sessionStorage.getItem('graphData')) {
+			console.log('yo');
+		}
+	 		else{
+			this.userService
+			.get_refTree()
+			.pipe()
+			.subscribe(
+				data => {
+					this.data = data;
+					if (this.data.code === 200) {
+						let i: any;
+						sessionStorage.setItem('graphData', JSON.stringify(this.data.msg));
+						// console.log(this.refTree);
+					}
+				},
+				error => {
+					this.data = error.error;
+				}
+			);
+			
+		}
+	}
 }

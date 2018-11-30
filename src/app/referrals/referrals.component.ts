@@ -14,6 +14,7 @@ export class ReferralsComponent implements OnInit {
 	p: number = 1;
 	txns: Txn[] = [];
 	refTree = [];
+	graphTree: any;
 	level: number;
 	locked: any;
 	unlocked: any;
@@ -50,15 +51,17 @@ export class ReferralsComponent implements OnInit {
 		private toastr: ToastrService,
 		private router: Router
 	) {
-		// this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
-		// this.refId = this.yolo.msg.user_id;
-		// if (sessionStorage.getItem('graphData')) {
-		//     let	graphTree = JSON.parse(sessionStorage.getItem('graphData'));
-		// 	this.refTree = graphTree.graph_data;
-		// }
+		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
+		this.refId = this.yolo.msg.user_id;
+		
 	}
 
 	ngOnInit() {
+		this.getTxns();
+		this.get_refTree();
+		this.get_analysis();
+
+
 		// chart code
 		this.dataMap = {};
 
@@ -74,17 +77,22 @@ export class ReferralsComponent implements OnInit {
 
 		// const wrapper = this.chart.wrapper;
 		// wrapper.draw(chartData);
-		this.getTxns();
-		this.get_refTree();
+		
+	}
 
-		this.yolo = JSON.parse(sessionStorage.getItem('currentUser'));
-		this.refId = this.yolo.msg.user_id;
-		if (sessionStorage.getItem('graphData')) {
-		    let	graphTree = JSON.parse(sessionStorage.getItem('graphData'));
-			this.refTree = graphTree.graph_data;
-		}
+	prefixNosByFix(no: any) {
+    try {
+      if (no !== 0) {
+        return Number.parseFloat(no).toFixed(8);
+      } else {
+        return 0;
+      }
+    } catch (e) {
+      return 0;
+    }
+	}
 
-
+	get_analysis(){
 		this.userService
 			.get_refTree()
 			.pipe()
@@ -116,21 +124,15 @@ export class ReferralsComponent implements OnInit {
 			);
 	}
 
-	prefixNosByFix(no: any) {
-    try {
-      if (no !== 0) {
-        return Number.parseFloat(no).toFixed(8);
-      } else {
-        return 0;
-      }
-    } catch (e) {
-      return 0;
-    }
-	}
-
 	get_refTree() {
-		
-	 {
+		if (sessionStorage.getItem('graphData')) {
+			let i: any;
+		    this.graphTree = JSON.parse(sessionStorage.getItem('graphData'));
+			for (i = 0; i < this.graphTree.graph_data.length; i++) {
+				this.refTree.push(this.graphTree.graph_data[i]);
+			}
+		}
+	 		else{
 			this.userService
 			.get_refTree()
 			.pipe()
@@ -139,6 +141,7 @@ export class ReferralsComponent implements OnInit {
 					this.data = data;
 					if (this.data.code === 200) {
 						let i: any;
+						
 						sessionStorage.setItem('graphData', JSON.stringify(this.data.msg));
 						for (i = 0; i < this.data.msg.graph_data.length; i++) {
 							this.refTree.push(this.data.msg.graph_data[i]);

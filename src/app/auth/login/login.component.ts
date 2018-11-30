@@ -49,6 +49,12 @@ export class LoginComponent implements OnInit {
       this.toastr.error('Invalid form fields', null, { timeOut: 4000 });
     } else {
       this.load.show();
+
+
+
+
+
+      
       const data = {
         email: this.loginForm.value.loginFormEmail,
         password: this.loginForm.value.loginFormPassword
