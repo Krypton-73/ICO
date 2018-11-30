@@ -79,10 +79,6 @@ export class DashboardComponent implements OnInit {
   }
 
   get_refTree() {
-		if (sessionStorage.getItem('graphData')) {
-			console.log('yo');
-		}
-	 		else{
 			this.userService
 			.get_refTree()
 			.pipe()
@@ -100,6 +96,6 @@ export class DashboardComponent implements OnInit {
 				}
 			);
 			
-		}
+		
 	}
 }
