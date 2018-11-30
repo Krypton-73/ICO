@@ -29,6 +29,8 @@ export class DashboardComponent implements OnInit {
     this.dataService.currentBalance.subscribe(balance => {
       this.balance = balance;
     });
+
+    this.get_refTree();
   }
 
   prefixNosByFix(no: any) {
