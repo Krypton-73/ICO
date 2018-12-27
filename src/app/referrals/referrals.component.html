@@ -13,8 +13,7 @@
 								<p class="body-desc">
 									 <strong>Current Rank:  {{ currentRank[level] }}</strong>
 									<br>
-									<strong>Referral Bonus: Locked- {{ locked | number : '1.0-2' }} USD 
-														<br>Unlocked- {{ unlocked | number : '1.0-2'}} USD
+									<strong>Referral Bonus: Locked- {{ locked + unlocked | number : '1.0-2' }} USD
 									</strong>
 									<br>
 									<strong>Outreach: {{ totalAmount }} USD </strong>
