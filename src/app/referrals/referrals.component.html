@@ -11,12 +11,12 @@
 								<p class="body-title referral">REFERRAL SCHEME</p>
 								<hr class="acex-hr" />
 								<p class="body-desc">
-									 <strong>Current Rank:  {{ currentRank[level] }}</strong>
+									 <strong>Current Rank: {{ currentRank[level] }}</strong>
 									<br>
-									<strong>Referral Bonus: Locked- {{ locked + unlocked | number : '1.0-2' }} USD
+									<strong>Referral Bonus: {{ locked + unlocked | number : '1.0-2' }} USD
 									</strong>
 									<br>
-									<strong>Outreach: {{ totalAmount }} USD </strong>
+									<strong>Outreach: {{ totalAmount | number : '1.0-2' }} USD </strong>
 								</p>
 
 								<div *ngIf="refId" class="md-form col col-md-12">
